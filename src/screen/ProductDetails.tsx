@@ -15,6 +15,7 @@ const ProductDetails = ({route}: any) => {
   const {barcode} = route.params;
   const [data, setData] = useState<Data | null>(null);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const getData = async () => {
     try {
       const res = await fetch(
@@ -66,8 +67,8 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   image: {
-    width: 100, // Adjust the width based on your design
-    height: 100, // Adjust the height based on your design
+    width: 100,
+    height: 100,
   },
 });
 
