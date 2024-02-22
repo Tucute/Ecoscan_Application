@@ -59,32 +59,29 @@ const Login = ({navigation}: any) => {
                   onBlur={handleBlur('email')}
                   value={values.email}
                 />
-                {errors.email && touched.email ? (
-                  <Text style={styles.errorText}>* {errors.email}</Text>
-                ) : null}
+                <Text style={styles.errorText}>
+                  {errors.email && touched.email
+                    ? errors.email
+                    : null}
+                </Text>
                 <TextInput
                   ref={passwordRef}
                   style={styles.input}
                   placeholder="Enter Password"
                   placeholderTextColor={'black'}
                   enterKeyHint={'done'}
-                  onSubmitEditing={() => passwordRef.current?.clear()}
+                  onSubmitEditing={() => passwordRef.current?.focus()}
                   onChangeText={handleChange('password')}
                   onBlur={handleBlur('password')}
                   value={values.password}
                 />
-                {errors.password && touched.password ? (
-                  <Text style={styles.errorText}>* {errors.password}</Text>
-                ) : null}
+                <Text style={styles.errorText}>
+                  {errors.password && touched.password
+                    ? errors.password
+                    : null}
+                </Text>
                 <Text style={styles.otherOption}>Or Login With</Text>
                 <View style={styles.viewAsocia}>
-                  <View style={styles.viewIcon}>
-                    <Image
-                      style={styles.iconFacebook}
-                      source={require('../../assets/iconAuth/iconFacebook.png')}
-                    />
-                    <Text style={styles.textIcon}>Facebook</Text>
-                  </View>
                   <View style={styles.viewIcon}>
                     <Image
                       style={styles.iconFacebook}
@@ -93,21 +90,21 @@ const Login = ({navigation}: any) => {
                     <Text style={styles.textIcon}>Google</Text>
                   </View>
                 </View>
-              </View>
-              <View style={styles.viewFooter}>
-                <TouchableOpacity
-                  style={styles.btnLogin}
-                  onPress={handleSubmit}>
-                  <Text style={styles.textStartBtn}>Login</Text>
-                </TouchableOpacity>
-                <Text style={styles.textTransfor}>
-                  Don't have an account?{' '}
-                  <Text
-                    style={styles.textSignup}
-                    onPress={() => navigation.navigate('Register')}>
-                    Signup
+                <View style={styles.viewFooter}>
+                  <TouchableOpacity
+                    style={styles.btnLogin}
+                    onPress={handleSubmit}>
+                    <Text style={styles.textStartBtn}>Login</Text>
+                  </TouchableOpacity>
+                  <Text style={styles.textTransfor}>
+                    Don't have an account?{' '}
+                    <Text
+                      style={styles.textSignup}
+                      onPress={() => navigation.navigate('Register')}>
+                      Signup
+                    </Text>
                   </Text>
-                </Text>
+                </View>
               </View>
             </ImageBackground>
           </TouchableWithoutFeedback>
@@ -122,7 +119,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   viewLogo: {
-    flex: 2,
+    flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
@@ -137,13 +134,11 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   viewFooter: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: 40,
   },
   btnLogin: {
-    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
     width: 170,
@@ -181,12 +176,11 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.23,
     shadowRadius: 2.62,
-
     elevation: 4,
   },
   textInput: {
-    flex: 1,
-    gap: 10,
+    flex: 1.2,
+    gap: 4,
     marginTop: 20,
     marginHorizontal: 30,
   },
@@ -214,8 +208,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 140,
-    height: 57,
+    width: 200,
+    height: 50,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
