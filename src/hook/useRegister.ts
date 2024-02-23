@@ -12,10 +12,8 @@ interface Register {
 const useRegister = ({navigation}: any) => {
   const mutationRegister = useMutation({
     mutationFn: async (data: Register) => {
-      console.log(data);
-      const newData = JSON.stringify(data);
       axios
-        .post(`${Url}/user/sign-up`, newData)
+        .post(`${Url}/user/sign-up`, data)
         .then(res => {
           if (res.status === 200) {
             Alert.alert('Success', 'Register successfully', [
@@ -26,7 +24,7 @@ const useRegister = ({navigation}: any) => {
           }
         })
         .catch(e => {
-          console.log('Error content: ', e.response.data);
+          Alert.alert(e.response.data.message);
         });
     },
   });
