@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {
   ImageBackground,
   StyleSheet,
@@ -15,10 +15,32 @@ import {
 import {Formik} from 'formik';
 import {LoginSchema} from './LoginValidation';
 import useLogin from '../../hook/useLogin';
+import auth from '@react-native-firebase/auth';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const Login = ({navigation}: any) => {
   const passwordRef: any = useRef();
   const {handleLogin} = useLogin({navigation});
+
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId: '377604278725-dk405forvubt46ncr0bh4iddsmpfhgd2.apps.googleusercontent.com',
+    });
+  });
+
+  async function onGoogleButtonPress() {
+    // Check if your device supports Google Play
+    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+    // Get the users ID token
+    const { idToken } = await GoogleSignin.signIn();
+    console.log(idToken);
+    
+    // Create a Google credential with the token
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+    // Sign-in the user with the credential
+    return auth().signInWithCredential(googleCredential);
+  }
+
   return (
     <Formik
       initialValues={{email: '', password: ''}}
@@ -60,9 +82,7 @@ const Login = ({navigation}: any) => {
                   value={values.email}
                 />
                 <Text style={styles.errorText}>
-                  {errors.email && touched.email
-                    ? errors.email
-                    : null}
+                  {errors.email && touched.email ? errors.email : null}
                 </Text>
                 <TextInput
                   ref={passwordRef}
@@ -76,19 +96,17 @@ const Login = ({navigation}: any) => {
                   value={values.password}
                 />
                 <Text style={styles.errorText}>
-                  {errors.password && touched.password
-                    ? errors.password
-                    : null}
+                  {errors.password && touched.password ? errors.password : null}
                 </Text>
                 <Text style={styles.otherOption}>Or Login With</Text>
                 <View style={styles.viewAsocia}>
-                  <View style={styles.viewIcon}>
+                  <TouchableOpacity style={styles.viewIcon} onPress={onGoogleButtonPress}>
                     <Image
                       style={styles.iconFacebook}
                       source={require('../../assets/iconAuth/iconGoogle.png')}
                     />
                     <Text style={styles.textIcon}>Google</Text>
-                  </View>
+                  </TouchableOpacity>
                 </View>
                 <View style={styles.viewFooter}>
                   <TouchableOpacity
@@ -231,3 +249,8 @@ const styles = StyleSheet.create({
   },
 });
 export default Login;
+function setState(arg0: {
+  userInfo: import('@react-native-google-signin/google-signin').User;
+}) {
+  throw new Error('Function not implemented.');
+}

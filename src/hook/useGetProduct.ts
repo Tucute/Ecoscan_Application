@@ -1,14 +1,31 @@
-import { useQuery } from '@tanstack/react-query';
+import {useMutation, useQuery} from '@tanstack/react-query';
 import axios from 'axios';
+import {Url} from '../url/Url';
 
-const useGetUser = () => {
-    const {data} = useQuery({
-        queryKey: ['getPrduct'],
-        queryFn: () => {
-            axios.get('https://6471cfab6a9370d5a41ab469.mockapi.io/products')
-        }
-    })
-    return {data}
+interface Code {
+  barcodeNumber: number;
+}
+const useGetProduct = ({navigation}: any) => {
+  const mutationProduct = useMutation({
+    mutationFn: async (Barcode: Code) => {
+      axios
+        .post(`${Url}/product/getProductByBarcode`, Barcode)
+        .then(async res => {
+          if (res.status === 200) {
+            const data = res.data;
+            console.log(data);
+            navigation.navigate('DetailProduct', {data});
+          }
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+  });
+  const handleBarcode = (data: Code) => {
+    mutationProduct.mutate(data);
+  };
+  return {handleBarcode};
 };
 
-export default useGetUser;
+export default useGetProduct;

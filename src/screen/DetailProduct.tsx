@@ -11,61 +11,36 @@ import {
 import Carousel from 'react-native-snap-carousel';
 
 interface Item {
-  name: string;
+  _id: string;
   image: string;
+  barcode_number: number;
+  price: 5;
+  ingredient: string;
+  name: string;
+  subCategoryId: string;
+  origin: string;
 }
+
+interface Data {
+  data: Item;
+  relatedProduct: Item[];
+}
+interface PropData {
+  data: Data;
+}
+
 const {width} = Dimensions.get('window');
 
-const DetailProduct = () => {
-  const data = [
-    {
-      name: 'vinamilk',
-      image:
-        'https://www.moby.com.vn/data/bt6/sua-tuoi-tiet-trung-vinamilk-100-co-duong-hop-giay-1l-1630061314.jpg',
-    },
-    {
-      name: 'youmost',
-      image:
-        'https://www.lottemart.vn/media/catalog/product/cache/0x0/8/9/8934841902846.jpg.webp',
-    },
-  ];
-
-  const listItem = [
-    {
-      id: 1,
-      name: 'vinamilk',
-      origin: 'Hà Lan',
-      price: 20000,
-      image: require('../assets/image/vinamilk.png'),
-    },
-    {
-      id: 2,
-      name: 'youmost',
-      origin: 'Viet Nam',
-      price: 18000,
-      image: require('../assets/image/vinamilk.png'),
-    },
-    {
-      id: 3,
-      name: 'vinamilk',
-      origin: 'Hà Lan',
-      price: 12000,
-      image: require('../assets/image/vinamilk.png'),
-    },
-    {
-      id: 4,
-      name: 'youmost',
-      origin: 'Viet Nam',
-      price: 18000,
-      image: require('../assets/image/vinamilk.png'),
-    },
-  ];
+const DetailProduct = ({navigaiton, route}: any) => {
+  const {data}: PropData = route.param;
+  const item = data.data;
+  const listItem = data.relatedProduct;
   const carouselRef = useRef<Carousel<Item>>(null);
 
   return (
     <View style={styles.container}>
       <Carousel
-        data={data}
+        data={item.image}
         renderItem={({item}) => (
           <View style={styles.viewImage}>
             <Image
@@ -134,7 +109,7 @@ const DetailProduct = () => {
           contentContainerStyle={styles.listSimilarProduct}
           numColumns={2}
           data={listItem}
-          keyExtractor={item => item.id.toString()}
+          keyExtractor={item => item._id}
           renderItem={({item}) => (
             <View style={styles.item}>
               <TouchableOpacity style={styles.btnCompare}>
