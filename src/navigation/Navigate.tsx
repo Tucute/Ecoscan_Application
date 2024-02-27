@@ -6,12 +6,18 @@ import Home from '../screen/Home';
 import LandingPage from '../screen/auth/LandingPage';
 import Login from '../screen/auth/Login';
 import Register from '../screen/auth/Register';
+import UploadImage from '../screen/UploadImage';
 const Stack = createNativeStackNavigator();
 
 const Navigate = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName='uploadImage'>
+      <Stack.Screen
+          name="uploadImage"
+          component={UploadImage}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="Home"
           component={Home}
