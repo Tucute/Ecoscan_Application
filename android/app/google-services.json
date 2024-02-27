@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "377604278725",
+    "project_id": "ecoscan-159e8",
+    "storage_bucket": "ecoscan-159e8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377604278725:android:427ee56edaa2758377e3ac",
+        "android_client_info": {
+          "package_name": "com.ecoscan_application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "377604278725-eb48gldgfdrs5tpgfhd4ocs780lmfidl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ecoscan_application",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "377604278725-dk405forvubt46ncr0bh4iddsmpfhgd2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABz98fr_rCGWyssxm2n5EPj8XoPPFa3Hg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "377604278725-dk405forvubt46ncr0bh4iddsmpfhgd2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

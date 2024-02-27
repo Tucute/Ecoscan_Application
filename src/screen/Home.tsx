@@ -6,19 +6,29 @@ import {
   View,
   Image,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import QRCodeScanner from 'react-native-qrcode-scanner';
-// import {RNCamera} from 'react-native-camera';
+import {RNCamera} from 'react-native-camera';
+import useGetProduct from '../hook/useGetProduct';
 
 const Home = ({navigation}: any) => {
+  const [flashMode, setFlashMode] = useState<boolean>(false);
+  const {handleBarcode} = useGetProduct({navigation});
+
+  const setFlash = () => {
+    setFlashMode(!flashMode);
+  };
   const onSuccess = (e: any) => {
-    navigation.navigate('productDetail', {barcode: e.data});
+    const barcode = e.data.toString();
+    const data = {barcodeNumber: barcode};
+    setFlashMode(false);
+    handleBarcode(data);
   };
 
   return (
     <QRCodeScanner
       onRead={onSuccess}
-      // flashMode={RNCamera.Constants.FlashMode.torch}
+      flashMode={flashMode ? RNCamera.Constants.FlashMode.torch : null}
       topContent={
         <View style={styles.topContent}>
           <TouchableOpacity>
@@ -33,7 +43,7 @@ const Home = ({navigation}: any) => {
               source={require('../assets/iconScanScreen/library.png')}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={setFlash}>
             <Image
               style={styles.icon}
               source={require('../assets/iconScanScreen/switchCam.png')}
@@ -41,31 +51,31 @@ const Home = ({navigation}: any) => {
           </TouchableOpacity>
         </View>
       }
-      cameraStyle={{marginHorizontal: 20}}
+      // cameraStyle={{marginHorizontal: 20}}
       bottomContent={
         <View style={{}}>
-        <TouchableOpacity style={styles.tbQrCode}>
+          <TouchableOpacity style={styles.tbQrCode}>
             <Image
               style={styles.iconQrCode}
               source={require('../assets/iconScanScreen/QrCode.png')}
             />
           </TouchableOpacity>
-        <View style={styles.bottomContent}>
-          <TouchableOpacity>
-            <Image
-              style={styles.iconBottom}
-              source={require('../assets/iconScanScreen/generate.png')}
-            />
-            <Text style={styles.text}>Generate</Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image
-              style={styles.iconBottom}
-              source={require('../assets/iconScanScreen/history.png')}
-            />
-            <Text style={styles.text}>History</Text>
-          </TouchableOpacity>
-        </View>
+          <View style={styles.bottomContent}>
+            <TouchableOpacity>
+              <Image
+                style={styles.iconBottom}
+                source={require('../assets/iconScanScreen/generate.png')}
+              />
+              <Text style={styles.text}>Generate</Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Image
+                style={styles.iconBottom}
+                source={require('../assets/iconScanScreen/history.png')}
+              />
+              <Text style={styles.text}>History</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       }
     />
