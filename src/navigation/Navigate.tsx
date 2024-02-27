@@ -7,6 +7,7 @@ import LandingPage from '../screen/auth/LandingPage';
 import Login from '../screen/auth/Login';
 import Register from '../screen/auth/Register';
 import DetailProduct from '../screen/DetailProduct';
+import Test from '../test';
 const Stack = createNativeStackNavigator();
 
 const Navigate = () => {
@@ -38,6 +39,12 @@ const Navigate = () => {
           component={DetailProduct}
           options={{headerShown: false}}
         />
+        <Stack.Screen
+          name="test"
+          component={Test}
+          options={{headerShown: false}}
+        />
+
         {/* <Stack.Screen name="productDetail" component={ProductDetails} /> */}
       </Stack.Navigator>
     </NavigationContainer>

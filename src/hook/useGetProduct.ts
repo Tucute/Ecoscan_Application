@@ -13,7 +13,6 @@ const useGetProduct = ({navigation}: any) => {
         .then(async res => {
           if (res.status === 200) {
             const data = res.data;
-            console.log(data);
             navigation.navigate('DetailProduct', {data});
           }
         })

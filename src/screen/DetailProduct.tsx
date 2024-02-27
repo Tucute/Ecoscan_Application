@@ -1,4 +1,5 @@
-import React, {useRef} from 'react';
+import { formToJSON } from 'axios';
+import React, {useRef, useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -12,15 +13,18 @@ import Carousel from 'react-native-snap-carousel';
 
 interface Item {
   _id: string;
-  image: string;
   barcode_number: number;
+  image: Image[];
   price: 5;
   ingredient: string;
   name: string;
   subCategoryId: string;
   origin: string;
 }
-
+interface Image {
+  id: string;
+  url: string;
+}
 interface Data {
   data: Item;
   relatedProduct: Item[];
@@ -32,19 +36,19 @@ interface PropData {
 const {width} = Dimensions.get('window');
 
 const DetailProduct = ({navigaiton, route}: any) => {
-  const {data}: PropData = route.param;
-  const item = data.data;
-  const listItem = data.relatedProduct;
+  const [item, setItem] = useState(route.params);
+  const itemImage = item.data.data.image;
+  const listItem = item.data.relatedProduct;
   const carouselRef = useRef<Carousel<Item>>(null);
 
   return (
     <View style={styles.container}>
       <Carousel
-        data={item.image}
+        data={itemImage}
         renderItem={({item}) => (
           <View style={styles.viewImage}>
             <Image
-              source={{uri: item.image}}
+              source={{uri: item.url}}
               style={styles.imgProduct}
               resizeMode="cover"
             />
@@ -56,13 +60,11 @@ const DetailProduct = ({navigaiton, route}: any) => {
         enableSnap
       />
       <View style={styles.viewDetail}>
-        <Text style={styles.nameProduct}>Sữa tươi vinamilk</Text>
+        <Text style={styles.nameProduct}>{item.data.data.name}</Text>
         <Text style={styles.ingredient}>
-          Thành phần: Sữa tươi nguyên chất: 95,9% Đường tinh luyện: 3,8% Chất ổn
-          định (471, 460(i), 407, 466) Vitamin (natri ascorbat, A, D3) Khoáng
-          chất (natri selenit)
+          {item.data.data.ingredient}
         </Text>
-        <Text style={styles.price}>32.000 đ</Text>
+        <Text style={styles.price}>{item.data.data.price} đ</Text>
       </View>
       <View style={styles.viewSimilarProduct}>
         <View style={styles.titleList}>
@@ -75,36 +77,6 @@ const DetailProduct = ({navigaiton, route}: any) => {
             />
           </View>
         </View>
-        {/* <View style={styles.listSimilarProduct}>
-          <View style={styles.item}>
-            <TouchableOpacity style={styles.btnCompare}>
-              <Text style={styles.textBtn}>Compare</Text>
-            </TouchableOpacity>
-            <Image
-              style={styles.imageItem}
-              source={require('../assets/image/vinamilk.png')}
-            />
-            <View style={styles.viewInfoItem}>
-              <Text style={styles.nameItem}>Vinamilk</Text>
-              <Text style={styles.originItem}>Origin: Viet Nam</Text>
-              <Text style={styles.priceItem}>20000 VND</Text>
-            </View>
-          </View>
-          <View style={styles.item}>
-            <TouchableOpacity style={styles.btnCompare}>
-              <Text style={styles.textBtn}>Compare</Text>
-            </TouchableOpacity>
-            <Image
-              style={styles.imageItem}
-              source={require('../assets/image/vinamilk.png')}
-            />
-            <View style={styles.viewInfoItem}>
-              <Text style={styles.nameItem}>Vinamilk</Text>
-              <Text style={styles.originItem}>Origin: Hà Lan</Text>
-              <Text style={styles.priceItem}>20000 VND</Text>
-            </View>
-          </View>
-        </View> */}
         <FlatList
           contentContainerStyle={styles.listSimilarProduct}
           numColumns={2}
@@ -115,10 +87,10 @@ const DetailProduct = ({navigaiton, route}: any) => {
               <TouchableOpacity style={styles.btnCompare}>
                 <Text style={styles.textBtn}>Compare</Text>
               </TouchableOpacity>
-              <Image style={styles.imageItem} source={item.image} />
+              <Image style={styles.imageItem} source={{uri: 'https://donchicken.vn/pub/media/catalog/product/cache/8872124951f387c8ded3f228faa55bea/a/q/aquafina_500ml.png'}} />
               <View style={styles.viewInfoItem}>
                 <Text style={styles.nameItem}>{item.name}</Text>
-                <Text style={styles.originItem}>Origin: {item.origin}</Text>
+                <Text style={styles.originItem}>{item.ingredient}</Text>
                 <Text style={styles.priceItem}>{item.price} VND</Text>
               </View>
             </View>
@@ -202,7 +174,7 @@ const styles = StyleSheet.create({
     padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1,
+    // flex: 1,
     marginHorizontal: 10,
   },
   imageItem: {

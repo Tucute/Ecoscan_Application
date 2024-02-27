@@ -51,7 +51,7 @@ const Home = ({navigation}: any) => {
           </TouchableOpacity>
         </View>
       }
-      cameraStyle={{marginHorizontal: 20}}
+      // cameraStyle={{marginHorizontal: 20}}
       bottomContent={
         <View style={{}}>
           <TouchableOpacity style={styles.tbQrCode}>

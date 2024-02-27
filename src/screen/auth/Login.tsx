@@ -11,35 +11,17 @@ import {
   TouchableWithoutFeedback,
   Platform,
   Keyboard,
+  Alert,
 } from 'react-native';
 import {Formik} from 'formik';
 import {LoginSchema} from './LoginValidation';
 import useLogin from '../../hook/useLogin';
-import auth from '@react-native-firebase/auth';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import useGoogleSignin from '../../hook/useGoogleSignin';
 
 const Login = ({navigation}: any) => {
   const passwordRef: any = useRef();
   const {handleLogin} = useLogin({navigation});
-
-  useEffect(() => {
-    GoogleSignin.configure({
-      webClientId: '377604278725-dk405forvubt46ncr0bh4iddsmpfhgd2.apps.googleusercontent.com',
-    });
-  });
-
-  async function onGoogleButtonPress() {
-    // Check if your device supports Google Play
-    await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
-    // Get the users ID token
-    const { idToken } = await GoogleSignin.signIn();
-    console.log(idToken);
-    
-    // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-    // Sign-in the user with the credential
-    return auth().signInWithCredential(googleCredential);
-  }
+  const {onGoogleButtonPress} = useGoogleSignin({navigation});
 
   return (
     <Formik
@@ -100,7 +82,9 @@ const Login = ({navigation}: any) => {
                 </Text>
                 <Text style={styles.otherOption}>Or Login With</Text>
                 <View style={styles.viewAsocia}>
-                  <TouchableOpacity style={styles.viewIcon} onPress={onGoogleButtonPress}>
+                  <TouchableOpacity
+                    style={styles.viewIcon}
+                    onPress={onGoogleButtonPress}>
                     <Image
                       style={styles.iconFacebook}
                       source={require('../../assets/iconAuth/iconGoogle.png')}
