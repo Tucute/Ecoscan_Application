@@ -7,6 +7,8 @@ import LandingPage from '../screen/auth/LandingPage';
 import Login from '../screen/auth/Login';
 import Register from '../screen/auth/Register';
 import UploadImage from '../screen/UploadImage';
+import DetailProduct from '../screen/DetailProduct';
+import Test from '../test';
 const Stack = createNativeStackNavigator();
 
 const Navigate = () => {
@@ -16,11 +18,6 @@ const Navigate = () => {
       <Stack.Screen
           name="uploadImage"
           component={UploadImage}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Home"
-          component={Home}
           options={{headerShown: false}}
         />
         <Stack.Screen
@@ -38,7 +35,23 @@ const Navigate = () => {
           component={Register}
           options={{headerShown: false}}
         />
-        <Stack.Screen name="productDetail" component={ProductDetails} />
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="DetailProduct"
+          component={DetailProduct}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="test"
+          component={Test}
+          options={{headerShown: false}}
+        />
+
+        {/* <Stack.Screen name="productDetail" component={ProductDetails} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -13,7 +13,7 @@ import {
   Keyboard,
 } from 'react-native';
 import {Formik} from 'formik';
-import { RegisterSchema } from './RegisterValidation';
+import {RegisterSchema} from './RegisterValidation';
 import useRegister from '../../hook/useRegister';
 
 const Register = ({navigation}: any) => {
@@ -24,15 +24,17 @@ const Register = ({navigation}: any) => {
       initialValues={{
         username: '',
         email: '',
-        password: '',
+        newPassword: '',
+        confirmPassword: '',
       }}
       validationSchema={RegisterSchema}
       onSubmit={values => {
         setTimeout(() => {
           let account = {
-            userName: values.username,
+            username: values.username,
             email: values.email,
-            password: values.password,
+            newPassword: values.newPassword,
+            confirmPassword: values.confirmPassword,
           };
           mutationRegister.mutate(account);
         }, 100);
@@ -65,11 +67,10 @@ const Register = ({navigation}: any) => {
                   onBlur={handleBlur('username')}
                   value={values.username}
                 />
-                {errors.username && touched.username ? (
-                  <Text style={styles.errorText}>* {errors.username}</Text>
-                ) : null}
+                <Text style={styles.errorText}>
+                  {errors.username && touched.username ? errors.username : null}
+                </Text>
                 <TextInput
-                  
                   style={styles.input}
                   placeholder="Enter Email"
                   placeholderTextColor={'black'}
@@ -79,35 +80,53 @@ const Register = ({navigation}: any) => {
                   onBlur={handleBlur('email')}
                   value={values.email}
                 />
-                {errors.email && touched.email ? (
-                  <Text style={styles.errorText}>* {errors.email}</Text>
-                ) : null}
+                <Text style={styles.errorText}>
+                  {errors.email && touched.email ? errors.email : null}
+                </Text>
                 <TextInput
-                ref={inputRef}
+                  ref={inputRef}
                   style={styles.input}
                   placeholder="Enter Password"
                   placeholderTextColor={'black'}
+                  enterKeyHint={'next'}
+                  onSubmitEditing={() => inputRef.current?.focus()}
+                  onChangeText={handleChange('newPassword')}
+                  onBlur={handleBlur('newPassword')}
+                  value={values.newPassword}
+                />
+                <Text style={styles.errorText}>
+                  {errors.newPassword && touched.newPassword
+                    ? errors.newPassword
+                    : null}
+                </Text>
+                <TextInput
+                  ref={inputRef}
+                  style={styles.input}
+                  placeholder="Confirm Password"
+                  placeholderTextColor={'black'}
                   enterKeyHint={'done'}
                   onSubmitEditing={() => inputRef.current?.focus()}
-                  onChangeText={handleChange('password')}
-                  onBlur={handleBlur('password')}
-                  value={values.password}
+                  onChangeText={handleChange('confirmPassword')}
+                  onBlur={handleBlur('confirmPassword')}
+                  value={values.confirmPassword}
                 />
-                {errors.password && touched.password ? (
-                  <Text style={styles.errorText}>* {errors.password}</Text>
-                ) : null}
-              </View>
-              <View style={styles.viewFooter}>
-                <TouchableOpacity
-                  style={styles.btnLogin}
-                  onPress={handleSubmit}>
-                  <Text style={styles.textStartBtn}>Sign up</Text>
-                </TouchableOpacity>
-                <Text
-                  style={styles.textTransfor}
-                  onPress={() => navigation.navigate('Login')}>
-                  Already have an account?
+                <Text style={styles.errorText}>
+                  {errors.confirmPassword && touched.confirmPassword
+                    ? errors.confirmPassword
+                    : null}
                 </Text>
+                <View style={styles.viewFooter}>
+                  <TouchableOpacity
+                    style={styles.btnLogin}
+                    onPress={handleSubmit}>
+                    <Text style={styles.textStartBtn}>Sign up</Text>
+                  </TouchableOpacity>
+                  <Text
+                    style={styles.textTransfor}
+                    onPress={() => navigation.navigate('Login')}>
+                    Already have an account?
+                  </Text>
+                </View>
               </View>
             </ImageBackground>
           </TouchableWithoutFeedback>
@@ -122,7 +141,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   viewLogo: {
-    flex: 2,
+    flex: 1.2,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
@@ -137,10 +156,9 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   viewFooter: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: 40,
   },
   btnLogin: {
     flexDirection: 'row',
@@ -186,8 +204,8 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   textInput: {
-    flex: 1,
-    gap: 10,
+    flex: 2,
+    gap: 4,
     marginTop: 20,
     marginHorizontal: 30,
   },

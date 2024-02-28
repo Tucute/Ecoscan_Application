@@ -1,20 +1,21 @@
 import axios from 'axios';
 import {useMutation} from '@tanstack/react-query';
 import {Alert} from 'react-native';
-import { Url } from '../url/Url';
+import {Url} from '../url/Url';
 
 interface Register {
-  userName: string;
+  username: string;
   email: string;
-  password: string;
+  newPassword: string;
+  confirmPassword: string;
 }
 const useRegister = ({navigation}: any) => {
   const mutationRegister = useMutation({
     mutationFn: async (data: Register) => {
       axios
-        .post(`${Url}/user`, data)
+        .post(`${Url}/user/sign-up`, data)
         .then(res => {
-          if (res.status === 201) {
+          if (res.status === 200) {
             Alert.alert('Success', 'Register successfully', [
               {text: 'OK', onPress: () => navigation.navigate('Login')},
             ]);
@@ -23,7 +24,7 @@ const useRegister = ({navigation}: any) => {
           }
         })
         .catch(e => {
-          console.log(e);
+          Alert.alert(e.response.data.message);
         });
     },
   });
