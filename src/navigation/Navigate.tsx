@@ -8,13 +8,21 @@ import Login from '../screen/auth/Login';
 import Register from '../screen/auth/Register';
 import DetailProduct from '../screen/DetailProduct';
 import Test from '../test';
+import History from '../screen/History';
+import BottomTab from './BottomTab';
 import CompareInterface from '../screen/CompareInterface';
+
 const Stack = createNativeStackNavigator();
 
 const Navigate = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+      <Stack.Screen
+          name="BottomTab"
+          component={BottomTab}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="LandingPage"
           component={LandingPage}
@@ -22,7 +30,7 @@ const Navigate = () => {
         />
         <Stack.Screen
           name="Login"
-          component={CompareInterface}
+          component={Login}
           options={{headerShown: false}}
         />
         <Stack.Screen
@@ -38,6 +46,11 @@ const Navigate = () => {
         <Stack.Screen
           name="DetailProduct"
           component={DetailProduct}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Compare"
+          component={CompareInterface}
           options={{headerShown: false}}
         />
         <Stack.Screen

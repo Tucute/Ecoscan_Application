@@ -1,8 +1,6 @@
 import {
   StyleSheet,
-  Text,
   TouchableOpacity,
-  Linking,
   View,
   Image,
 } from 'react-native';
@@ -51,33 +49,6 @@ const Home = ({navigation}: any) => {
           </TouchableOpacity>
         </View>
       }
-      // cameraStyle={{marginHorizontal: 20}}
-      bottomContent={
-        <View style={{}}>
-          <TouchableOpacity style={styles.tbQrCode}>
-            <Image
-              style={styles.iconQrCode}
-              source={require('../assets/iconScanScreen/QrCode.png')}
-            />
-          </TouchableOpacity>
-          <View style={styles.bottomContent}>
-            <TouchableOpacity>
-              <Image
-                style={styles.iconBottom}
-                source={require('../assets/iconScanScreen/generate.png')}
-              />
-              <Text style={styles.text}>Generate</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Image
-                style={styles.iconBottom}
-                source={require('../assets/iconScanScreen/history.png')}
-              />
-              <Text style={styles.text}>History</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      }
     />
   );
 };
@@ -123,49 +94,7 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
   },
-  bottomContent: {
-    flexDirection: 'row',
-    width: '90%',
-    padding: 20,
-    marginTop: 60,
-    borderRadius: 15,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-    backgroundColor: '#333333',
-  },
-  iconBottom: {
-    marginHorizontal: 20,
-    width: 30,
-    height: 30,
-  },
-  tbQrCode: {
-    position: 'absolute',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '90%',
-    zIndex: 1000,
-  },
-  iconQrCode: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-  },
-  text: {
-    color: '#fff',
-    textAlign: 'center',
-  },
+  
 });
 
 export default Home;
