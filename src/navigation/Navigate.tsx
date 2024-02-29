@@ -10,6 +10,8 @@ import DetailProduct from '../screen/DetailProduct';
 import Test from '../test';
 import History from '../screen/History';
 import BottomTab from './BottomTab';
+import CompareInterface from '../screen/CompareInterface';
+
 const Stack = createNativeStackNavigator();
 
 const Navigate = () => {
@@ -44,6 +46,11 @@ const Navigate = () => {
         <Stack.Screen
           name="DetailProduct"
           component={DetailProduct}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Compare"
+          component={CompareInterface}
           options={{headerShown: false}}
         />
         <Stack.Screen
