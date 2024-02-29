@@ -12,6 +12,11 @@ const useGetProduct = ({navigation}: any) => {
         .post(`${Url}/product/getProductByBarcode`, Barcode)
         .then(async res => {
           if (res.status === 200) {
+            const history = {
+              userId: '65d6b7a042ef2f2889ee3637',
+              barcodeNumber: Barcode,
+            };
+            axios.post(`${Url}/history/postHistory`, history);
             const data = res.data;
             navigation.navigate('DetailProduct', {data});
           }

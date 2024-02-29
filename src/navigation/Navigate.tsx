@@ -8,12 +8,19 @@ import Login from '../screen/auth/Login';
 import Register from '../screen/auth/Register';
 import DetailProduct from '../screen/DetailProduct';
 import Test from '../test';
+import History from '../screen/History';
+import BottomTab from './BottomTab';
 const Stack = createNativeStackNavigator();
 
 const Navigate = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+      <Stack.Screen
+          name="BottomTab"
+          component={BottomTab}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="LandingPage"
           component={LandingPage}
