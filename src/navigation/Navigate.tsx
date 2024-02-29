@@ -8,6 +8,7 @@ import Login from '../screen/auth/Login';
 import Register from '../screen/auth/Register';
 import DetailProduct from '../screen/DetailProduct';
 import Test from '../test';
+import CompareInterface from '../screen/CompareInterface';
 const Stack = createNativeStackNavigator();
 
 const Navigate = () => {
@@ -21,7 +22,7 @@ const Navigate = () => {
         />
         <Stack.Screen
           name="Login"
-          component={Login}
+          component={CompareInterface}
           options={{headerShown: false}}
         />
         <Stack.Screen
