@@ -1,4 +1,3 @@
-import { formToJSON } from 'axios';
 import React, {useRef, useState} from 'react';
 import {
   StyleSheet,
@@ -21,7 +20,7 @@ interface Item {
   subCategoryId: string;
   origin: string;
 }
-interface Image {
+interface ItemImage {
   id: string;
   url: string;
 }
@@ -39,7 +38,7 @@ const DetailProduct = ({navigaiton, route}: any) => {
   const [item, setItem] = useState(route.params);
   const itemImage = item.data.data.image;
   const listItem = item.data.relatedProduct;
-  const carouselRef = useRef<Carousel<Item>>(null);
+  const carouselRef = useRef<Carousel<ItemImage>>(null);
 
   return (
     <View style={styles.container}>

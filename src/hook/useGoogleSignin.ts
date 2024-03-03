@@ -16,10 +16,10 @@ const useGoogleSignin = ({navigation}: any) => {
     await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
     const {idToken} = await GoogleSignin.signIn();
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+    await auth().signInWithCredential(googleCredential);
     Alert.alert('Success', 'Login successfully', [
       {text: 'OK', onPress: () => navigation.navigate('Home')},
     ]);
-    return auth().signInWithCredential(googleCredential);
   }
     return {onGoogleButtonPress};
 };

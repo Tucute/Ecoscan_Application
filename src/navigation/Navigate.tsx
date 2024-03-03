@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import ProductDetails from '../screen/ProductDetails';
 import Home from '../screen/Home';
 import LandingPage from '../screen/auth/LandingPage';
 import Login from '../screen/auth/Login';
@@ -18,7 +17,7 @@ const Navigate = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen
+        <Stack.Screen
           name="BottomTab"
           component={BottomTab}
           options={{headerShown: false}}
@@ -58,8 +57,6 @@ const Navigate = () => {
           component={Test}
           options={{headerShown: false}}
         />
-
-        {/* <Stack.Screen name="productDetail" component={ProductDetails} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

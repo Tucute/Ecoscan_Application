@@ -1,29 +1,29 @@
-import {useMutation, useQuery} from '@tanstack/react-query';
+import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
 import {Url} from '../url/Url';
 
 const useGetHistory = () => {
-  const idUser = '65d6b7a042ef2f2889ee3637';
+  const userId = '65d6b7a042ef2f2889ee3637';
 
-  const mutationHistory = useMutation({
-    mutationFn: async () => {
-      axios.post(`${Url}/history/getHistorybyId`, idUser)
-      .then(res => {
-        if (res.status === 200) {
-            console.log('data get:', res.data);
-            return res.data.data;
+  const {data, isLoading, isError} = useQuery({
+    queryKey: ['getHistory'],
+    queryFn: async () => {
+      try {
+        const response = await axios.get(
+          `${Url}/history/getHistorybyId/${userId}`,
+        );
+        if (response.status === 200) {
+          return response.data;
+        } else {
+          throw new Error("Failed to fetch data");
         }
-      })
-      .catch(e => {
-        console.log(e.response.data.message);
-      });
+      } catch (error) {
+        console.error('Lỗi: ', error);
+        throw new Error("Lỗi rồi");
+      }
     },
   });
-
-  mutationHistory.mutate();
-  console.log('history', history);
-  return {history};
+  return {data, isLoading, isError};
 };
-
 
 export default useGetHistory;

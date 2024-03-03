@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   ImageBackground,
   StyleSheet,
@@ -19,6 +19,7 @@ import useLogin from '../../hook/useLogin';
 import useGoogleSignin from '../../hook/useGoogleSignin';
 
 const Login = ({navigation}: any) => {
+  const [textEntry, setTextEntry] = useState(true);
   const passwordRef: any = useRef();
   const {handleLogin} = useLogin({navigation});
   const {onGoogleButtonPress} = useGoogleSignin({navigation});
@@ -66,17 +67,34 @@ const Login = ({navigation}: any) => {
                 <Text style={styles.errorText}>
                   {errors.email && touched.email ? errors.email : null}
                 </Text>
-                <TextInput
-                  ref={passwordRef}
-                  style={styles.input}
-                  placeholder="Enter Password"
-                  placeholderTextColor={'black'}
-                  enterKeyHint={'done'}
-                  onSubmitEditing={() => passwordRef.current?.focus()}
-                  onChangeText={handleChange('password')}
-                  onBlur={handleBlur('password')}
-                  value={values.password}
-                />
+                <View style={styles.passwordContainer}>
+                  <TextInput
+                    ref={passwordRef}
+                    style={styles.inputPass}
+                    placeholder="Enter Password"
+                    placeholderTextColor={'black'}
+                    enterKeyHint={'done'}
+                    onSubmitEditing={() => passwordRef.current?.focus()}
+                    onChangeText={handleChange('password')}
+                    onBlur={handleBlur('password')}
+                    value={values.password}
+                    secureTextEntry={textEntry}
+                  />
+                  <TouchableOpacity onPress={() => setTextEntry(!textEntry)}>
+                    {textEntry ? (
+                      <Image
+                        style={styles.iconShow}
+                        source={require('../../assets/iconAuth/Show.png')}
+                      />
+                    ) : (
+                      <Image
+                        style={styles.iconShow}
+                        source={require('../../assets/iconAuth/hideShow.png')}
+                      />
+                    )}
+                  </TouchableOpacity>
+                </View>
+
                 <Text style={styles.errorText}>
                   {errors.password && touched.password ? errors.password : null}
                 </Text>
@@ -168,7 +186,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1.221,
     borderBottomColor: '#063',
     color: '#000',
-    paddingLeft: 20,
+    paddingLeft: 25,
     fontSize: 14,
     backgroundColor: '#fff',
     shadowColor: '#000',
@@ -185,6 +203,30 @@ const styles = StyleSheet.create({
     gap: 4,
     marginTop: 20,
     marginHorizontal: 30,
+  },
+  passwordContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderRadius: 15,
+    borderBottomWidth: 1.221,
+    borderBottomColor: '#063',
+    color: '#000',
+    paddingLeft: 20,
+    fontSize: 14,
+    backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4,
+  },
+  iconShow: {
+    marginRight: 20,
   },
   errorText: {
     fontWeight: 'bold',

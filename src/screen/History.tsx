@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   ActivityIndicator,
+  FlatList,
   Image,
   ImageBackground,
   StyleSheet,
@@ -8,8 +9,38 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import ItemHistory from '../component/ItemHistory';
+import useGetHistory from '../hook/useGetHistory';
 
-const History = () => {
+interface History {
+  historyId: string;
+  userId: string;
+  barcode_number: string;
+  productData: {
+    _id: string;
+    barcode_number: number;
+    price: number;
+    subCategoryId: string;
+    name: string;
+    image: [
+      {
+        _id: string;
+        url: string;
+      },
+    ];
+  };
+  create_at: string;
+}
+
+const History = ({navigation}: any) => {
+  const {data, isLoading, isError} = useGetHistory();
+  const [itemHistory, setItemHistory] = useState<History>(useGetHistory().data);
+  useEffect(() => {
+    if (data) {
+      setItemHistory(data.data);
+    }
+  }, [data]);
+
   return (
     <ImageBackground
       style={styles.container}
@@ -17,80 +48,21 @@ const History = () => {
       <View style={styles.viewTitle}>
         <Text style={styles.title}>History</Text>
       </View>
-        <View style={styles.viewListHistory}>
-          <View style={styles.viewItem}>
-            <Image
-              style={styles.iconQrCode}
-              source={require('../assets/iconScanScreen/generate-focused.png')}
-            />
-            <View style={styles.viewInfo}>
-              <Text style={styles.name}>Sữa Vinamilk</Text>
-              <Text style={styles.barCode}>8935005801029</Text>
-            </View>
-            <View style={styles.viewTime}>
-              <TouchableOpacity style={styles.btnDelete}>
-                <Image
-                  source={require('../assets/iconGeneral/IconDelete.png')}
-                />
-              </TouchableOpacity>
-              <Text style={styles.time}>16 Dec 2024, 9:30 pm</Text>
-            </View>
-          </View>
-          <View style={styles.viewItem}>
-            <Image
-              style={styles.iconQrCode}
-              source={require('../assets/iconScanScreen/generate-focused.png')}
-            />
-            <View style={styles.viewInfo}>
-              <Text style={styles.name}>Sữa Vinamilk</Text>
-              <Text style={styles.barCode}>8935005801029</Text>
-            </View>
-            <View style={styles.viewTime}>
-              <TouchableOpacity style={styles.btnDelete}>
-                <Image
-                  source={require('../assets/iconGeneral/IconDelete.png')}
-                />
-              </TouchableOpacity>
-              <Text style={styles.time}>16 Dec 2024, 9:30 pm</Text>
-            </View>
-          </View>
-          <View style={styles.viewItem}>
-            <Image
-              style={styles.iconQrCode}
-              source={require('../assets/iconScanScreen/generate-focused.png')}
-            />
-            <View style={styles.viewInfo}>
-              <Text style={styles.name}>Sữa Vinamilk</Text>
-              <Text style={styles.barCode}>8935005801029</Text>
-            </View>
-            <View style={styles.viewTime}>
-              <TouchableOpacity style={styles.btnDelete}>
-                <Image
-                  source={require('../assets/iconGeneral/IconDelete.png')}
-                />
-              </TouchableOpacity>
-              <Text style={styles.time}>16 Dec 2024, 9:30 pm</Text>
-            </View>
-          </View>
-          <View style={styles.viewItem}>
-            <Image
-              style={styles.iconQrCode}
-              source={require('../assets/iconScanScreen/generate-focused.png')}
-            />
-            <View style={styles.viewInfo}>
-              <Text style={styles.name}>Sữa Vinamilk</Text>
-              <Text style={styles.barCode}>8935005801029</Text>
-            </View>
-            <View style={styles.viewTime}>
-              <TouchableOpacity style={styles.btnDelete}>
-                <Image
-                  source={require('../assets/iconGeneral/IconDelete.png')}
-                />
-              </TouchableOpacity>
-              <Text style={styles.time}>16 Dec 2024, 9:30 pm</Text>
-            </View>
-          </View>
-        </View>
+      <View style={styles.viewListHistory}>
+        {isLoading ? (
+          <ActivityIndicator size="large" color="#00ff00" />
+        ) : isError ? (
+          <Text style={styles.textError}>Đã xảy ra lỗi! Vui lòng thử lại</Text>
+        ) : (
+          <FlatList
+            data={itemHistory}
+            keyExtractor={item => item.id}
+            renderItem={({item}) => (
+              <ItemHistory data={item} navigation={navigation} />
+            )}
+          />
+        )}
+      </View>
     </ImageBackground>
   );
 };
@@ -110,46 +82,12 @@ const styles = StyleSheet.create({
   },
   viewListHistory: {
     flex: 6,
-    marginHorizontal: 20,
+    // paddingHorizontal: 20,
   },
-  viewItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    padding: 10,
-    backgroundColor: '#333333',
-    borderRadius: 10,
-    marginBottom: 15,
-  },
-  iconQrCode: {
-    width: 30,
-    height: 30,
-  },
-  viewInfo: {
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-  },
-  name: {
+  textError: {
     color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
-  barCode: {
-    color: '#A4A4A4',
-    fontSize: 11,
-  },
-  viewTime: {
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
-  },
-  btnDelete: {
-    padding: 2,
-    marginBottom: 5,
-  },
-  time: {
-    color: '#A4A4A4',
-    fontSize: 12,
+    fontSize: 20,
+    padding: 50,
   },
 });
 export default History;
