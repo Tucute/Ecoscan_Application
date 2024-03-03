@@ -14,11 +14,20 @@ const useGetProduct = ({navigation}: any) => {
           if (res.status === 200) {
             const history = {
               userId: '65d6b7a042ef2f2889ee3637',
-              barcodeNumber: Barcode,
+              barcodeNumber: Barcode.barcodeNumber,
             };
-            axios.post(`${Url}/history/postHistory`, history);
+            console.log(history);
+            
             const data = res.data;
-            navigation.navigate('DetailProduct', {data});
+            axios.post(`${Url}/history/postHistory`, history)
+            .then(async () => {
+              if (res.status === 200) {
+                navigation.navigate('DetailProduct', {data});
+              }
+            })
+            .catch(e => {
+              console.log(e.response.data.message);
+            });
           }
         })
         .catch(e => {
