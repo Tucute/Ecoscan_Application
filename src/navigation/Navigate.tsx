@@ -11,6 +11,9 @@ import Test from '../test';
 import History from '../screen/History';
 import BottomTab from './BottomTab';
 import CompareInterface from '../screen/CompareInterface';
+import RecyclingIns from '../screen/RecycleIns';
+import Store from '../screen/store/Index';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +22,16 @@ const Navigate = () => {
     <NavigationContainer>
       <Stack.Navigator>
       <Stack.Screen
+          name="store"
+          component={Store}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="RecycleIns"
+          component={RecyclingIns}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
           name="BottomTab"
           component={BottomTab}
           options={{headerShown: false}}
