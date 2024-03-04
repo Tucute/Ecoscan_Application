@@ -18,7 +18,7 @@ const useGoogleSignin = ({navigation}: any) => {
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
     await auth().signInWithCredential(googleCredential);
     Alert.alert('Success', 'Login successfully', [
-      {text: 'OK', onPress: () => navigation.navigate('Home')},
+      {text: 'OK', onPress: () => navigation.navigate('test')},
     ]);
   }
     return {onGoogleButtonPress};

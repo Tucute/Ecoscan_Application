@@ -109,6 +109,15 @@ const Login = ({navigation}: any) => {
                     />
                     <Text style={styles.textIcon}>Google</Text>
                   </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.viewIcon}
+                  >
+                    <Image
+                      style={styles.iconFacebook}
+                      source={require('../../assets/iconAuth/iconFacebook.png')}
+                    />
+                    <Text style={styles.textIcon}>Google</Text>
+                  </TouchableOpacity>
                 </View>
                 <View style={styles.viewFooter}>
                   <TouchableOpacity
@@ -252,7 +261,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 200,
+    width: 130,
     height: 50,
     shadowColor: '#000',
     shadowOffset: {
