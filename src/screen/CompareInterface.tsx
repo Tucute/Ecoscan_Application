@@ -1,166 +1,190 @@
-import { Image, View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import {
+  Image,
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import PriceProductCompare from '../component/ComponentCompare/PriceProductCompare';
 import InfoProduct from '../component/ComponentCompare/InfoProduct';
 import SimilarStore from '../component/ComponentCompare/SimilarStore';
 import TheOrigin from '../component/ComponentCompare/TheOrigin';
 
-const CompareInterface = ({ route }: any) => {
-    return (
-        <ScrollView style={styles.container}>
-            <View style={styles.componentCompare}>
-                <TouchableOpacity>
-                    <Image source={require('../assets/CompareInterface-icon/Iconback.png')}></Image>
-                </TouchableOpacity>
-                <View style={styles.imageCompare}>
-                    <View style={styles.firstProduct}>
-                        <Image
-                            style={styles.componentImage1}
-                            source={require('../assets/CompareInterface-icon/images_1.png')}>
-                        </Image>
-                        <TouchableOpacity style={styles.componentText}>
-                            <Text style={styles.text}>Choose</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.iconCompare}>
-                        <Image source={require('../assets/CompareInterface-icon/IconCompare.png')}></Image>
-                    </View>
-                    <View style={styles.secondProduct}>
-                        <Image
-                            style={styles.componentImage2}
-                            source={require('../assets/CompareInterface-icon/images_2.png')}>
-                        </Image>
-                        <TouchableOpacity style={styles.secondImageText}>
-                            <Text style={styles.text}>Choose</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </View>
-            <View style={styles.componentDetail}>
-                <View style={styles.firstProductDetail}>
-                    <Image
-                        style={{ width: 50, height: 50, marginTop: 20, marginLeft: 50 }}
-                        source={require('../assets/CompareInterface-icon/images_1.png')}>
-                    </Image>
-                    <Text style={styles.leftProductlText}>Sữa cô gái hà lan</Text>
-                    <View style={styles.priceProductCompare}>
-                        <PriceProductCompare />
-                    </View>
-                    <View style={styles.infoProduct}>
-                        <InfoProduct />
-                    </View>
-                    <View style={styles.theOrigin}>
-                        <TheOrigin />
-                    </View>
-                    <View style={styles.theOrigin}>
-                        <SimilarStore />
-                    </View>
-                </View>
-                {/* <View style={{ borderBottomWidth: 1, borderColor: 'black'  }}></View> */}
-                <View style={styles.secondProductDetail}>
-                    <Image
-                        style={{ width: 40, height: 50, marginTop: 20, marginHorizontal: 50 }}
-                        source={require('../assets/CompareInterface-icon/images_2.png')}>
-                    </Image>
-                    <Text style={styles.rightProductText}>Sữa tươi Vinamilk</Text>
-                    <View style={styles.priceProductCompare}>
-                        <PriceProductCompare />
-                    </View>
-                    <View style={styles.infoProduct}>
-                        <InfoProduct />
-                    </View>
+const CompareInterface = ({navigation, route}: any) => {
+  const item = route.params.item;
 
-                    <View style={styles.theOrigin}>
-                        <TheOrigin />
-                    </View>
-                    <View style={styles.theOrigin}>
-                        <SimilarStore />
-                    </View>
-                </View>
-            </View>
-        </ScrollView>
-    )
-}
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.componentCompare}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Image
+            source={require('../assets/CompareInterface-icon/Iconback.png')}></Image>
+        </TouchableOpacity>
+        <View style={styles.imageCompare}>
+          <View style={styles.firstProduct}>
+            <Image
+              style={styles.componentImage}
+              source={require('../assets/CompareInterface-icon/images_1.png')}></Image>
+            <TouchableOpacity style={styles.componentText}>
+              <Text style={styles.text}>Choose</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.viewIconCompare}>
+            <Image
+              style={styles.iconCompare}
+              source={{
+                uri: 'https://static.thenounproject.com/png/71604-200.png',
+              }}></Image>
+          </View>
+          <View style={styles.secondProduct}>
+            <Image
+              style={styles.componentImage}
+              source={require('../assets/CompareInterface-icon/images_2.png')}></Image>
+            <TouchableOpacity style={styles.componentText}>
+              <Text style={styles.text}>Choose</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+      <View style={styles.componentDetail}>
+        <View style={styles.firstProductDetail}>
+          <Image
+            style={{width: 50, height: 50, marginTop: 20, marginLeft: 50}}
+            source={require('../assets/CompareInterface-icon/images_1.png')}></Image>
+          <Text style={styles.leftProductlText}>{item.item1.name}</Text>
+          <View style={styles.priceProductCompare}>
+            <PriceProductCompare price={item.item1.price} />
+          </View>
+          <View style={styles.infoProduct}>
+            <InfoProduct ingredient={item.item1.ingredient} />
+          </View>
+          <View style={styles.theOrigin}>
+            <TheOrigin />
+          </View>
+          <View style={styles.theOrigin}>
+            <SimilarStore />
+          </View>
+        </View>
+        <View style={styles.secondProductDetail}>
+          <Image
+            style={{width: 40, height: 50, marginTop: 20, marginHorizontal: 50}}
+            source={require('../assets/CompareInterface-icon/images_2.png')}></Image>
+          <Text style={styles.rightProductText}>{item.item2.name}</Text>
+          <View style={styles.priceProductCompare}>
+            <PriceProductCompare price={item.item2.price} />
+          </View>
+          <View style={styles.infoProduct}>
+            <InfoProduct ingredient={item.item2.ingredient} />
+          </View>
+
+          <View style={styles.theOrigin}>
+            <TheOrigin />
+          </View>
+          <View style={styles.theOrigin}>
+            <SimilarStore />
+          </View>
+        </View>
+      </View>
+    </ScrollView>
+  );
+};
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#333'
-    },
-    componentCompare: {
-        backgroundColor: 'white',
-        marginHorizontal: 20,
-        marginTop: 20,
-        height: 280,
-        borderRadius: 15,
-    },
-    componentText: {
-        backgroundColor: '#B2CA1F',
-        justifyContent: 'center',
-        width: 75,
-        height: 30,
-        borderRadius: 10,
-        marginHorizontal: 20,
-    },
-    imageCompare: {
-        display: 'flex',
-        flexDirection: 'row',
-    },
-    firstProductDetail: {
-        borderRightWidth: 1,
-        borderColor: '#BA8F8F'
-    },
-    firstProduct: {
-        marginHorizontal: 5,
-    },
-    text: {
-        textAlign: 'center',
-        fontWeight: 'bold',
-    },
-    iconCompare: {
-        marginVertical: 30,
-        right: 10,
-    },
-    secondProduct: {
-        marginHorizontal: 10,
-        marginVertical: 25
-    },
-    secondImageText: {
-        backgroundColor: '#B2CA1F',
-        justifyContent: 'center',
-        width: 75,
-        height: 30,
-        borderRadius: 10,
-        marginVertical: 15,
-    },
-    componentDetail: {
-        backgroundColor: 'white',
-        marginHorizontal: 20,
-        marginVertical: 20,
-        borderRadius: 15,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'center'
-    },
-    leftProduct: {
-        // width: 30
-    },
-    originText: {
-        marginVertical: 10,
-        marginHorizontal: 15,
-    },
-    leftProductlText: {
-        marginVertical: 10,
-        marginHorizontal: 20,
-    },
-    rightProductText: {
-        marginVertical: 10,
-        marginHorizontal: 20
-    },
-    // leftProductPrice: {
-    //     marginHorizontal: 20,
-    // },
-
-})
+  container: {
+    flex: 1,
+    backgroundColor: '#333',
+  },
+  componentCompare: {
+    backgroundColor: 'white',
+    marginHorizontal: 20,
+    marginTop: 20,
+    height: 280,
+    borderRadius: 15,
+  },
+  componentText: {
+    backgroundColor: '#B2CA1F',
+    justifyContent: 'center',
+    width: 75,
+    height: 30,
+    borderRadius: 10,
+    margin: 20,
+  },
+  imageCompare: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  componentImage: {
+    width: 120,
+    height: 120,
+    objectFit: 'contain',
+  },
+  firstProductDetail: {
+    flex: 1,
+    borderRightWidth: 1,
+    borderColor: '#BA8F8F',
+  },
+  secondProductDetail: {
+    flex: 1,
+  },
+  firstProduct: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  iconCompare: {
+    width: 100,
+    height: 100,
+  },
+  secondProduct: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  secondImageText: {
+    backgroundColor: '#B2CA1F',
+    justifyContent: 'center',
+    width: 75,
+    height: 30,
+    borderRadius: 10,
+    marginVertical: 15,
+  },
+  componentDetail: {
+    flex: 1,
+    backgroundColor: 'white',
+    marginHorizontal: 20,
+    marginVertical: 20,
+    borderRadius: 15,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
+  originText: {
+    marginVertical: 10,
+    marginHorizontal: 15,
+  },
+  leftProductlText: {
+    color: '#000',
+    marginVertical: 10,
+    marginHorizontal: 20,
+  },
+  rightProductText: {
+    marginVertical: 10,
+    marginHorizontal: 20,
+  },
+  infoProduct: {
+    height: 300,
+  }
+  // leftProductPrice: {
+  //     marginHorizontal: 20,
+  // },
+});
 
 export default CompareInterface;
