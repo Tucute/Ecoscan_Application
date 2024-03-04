@@ -1,9 +1,4 @@
-import {
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Image,
-} from 'react-native';
+import {StyleSheet, TouchableOpacity, View, Image} from 'react-native';
 import React, {useState} from 'react';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {RNCamera} from 'react-native-camera';
@@ -42,10 +37,17 @@ const Home = ({navigation}: any) => {
             />
           </TouchableOpacity>
           <TouchableOpacity onPress={setFlash}>
-            <Image
-              style={styles.icon}
-              source={require('../assets/iconScanScreen/switchCam.png')}
-            />
+            {flashMode ? (
+              <Image
+                style={styles.iconFlash}
+                source={require('../assets/iconScanScreen/flash-focused.png')}
+              />
+            ) : (
+              <Image
+                style={styles.iconFlash}
+                source={require('../assets/iconScanScreen//flash.png')}
+              />
+            )}
           </TouchableOpacity>
         </View>
       }
@@ -94,7 +96,9 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
   },
-  
+  iconFlash: {
+    
+  },
 });
 
 export default Home;
