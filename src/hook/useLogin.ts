@@ -19,7 +19,7 @@ const useLogin = ({navigation}: any) => {
             // const user = JSON.stringify({token, userid});
             // await AsyncStorage.setItem('user', user);
             Alert.alert('Success', 'Login successfully', [
-              {text: 'OK', onPress: () => navigation.navigate('Home')},
+              {text: 'OK', onPress: () => navigation.navigate('Bottomtab')},
             ]);
           } else {
             Alert.alert('Error', 'Email or password is invalid');

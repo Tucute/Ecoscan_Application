@@ -18,11 +18,6 @@ const Navigate = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="BottomTab"
-          component={BottomTab}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
           name="LandingPage"
           component={LandingPage}
           options={{headerShown: false}}
@@ -38,8 +33,8 @@ const Navigate = () => {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="Home"
-          component={Home}
+          name="Bottomtab"
+          component={BottomTab}
           options={{headerShown: false}}
         />
         <Stack.Screen

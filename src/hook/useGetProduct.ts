@@ -16,8 +16,6 @@ const useGetProduct = ({navigation}: any) => {
               userId: '65d6b7a042ef2f2889ee3637',
               barcodeNumber: Barcode.barcodeNumber,
             };
-            console.log(history);
-            
             const data = res.data;
             axios.post(`${Url}/history/postHistory`, history)
             .then(async () => {

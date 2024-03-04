@@ -56,9 +56,13 @@ const History = ({navigation}: any) => {
         ) : (
           <FlatList
             data={itemHistory}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.historyId}
             renderItem={({item}) => (
-              <ItemHistory data={item} navigation={navigation} />
+              <ItemHistory
+                key={item.historyId}
+                data={item}
+                navigation={navigation}
+              />
             )}
           />
         )}

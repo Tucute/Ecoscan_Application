@@ -1,7 +1,9 @@
 import { Image, View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
-
-const PriceProductCompare = () => {
+interface Price {
+    price: number;
+}
+const PriceProductCompare = ({price}: Price) => {
     return (
         <View style={styles.container}>
             <View
@@ -12,7 +14,7 @@ const PriceProductCompare = () => {
                 }}
             />
             <View style={styles.priceItem}>
-                <Text style={styles.leftProductPrice}>Giá: 39.000VND</Text>
+                <Text style={styles.leftProductPrice}>Giá: {price}</Text>
             </View>
             <View
                 style={{
