@@ -10,6 +10,7 @@ import Test from '../test';
 import History from '../screen/History';
 import BottomTab from './BottomTab';
 import CompareInterface from '../screen/CompareInterface';
+import DrawerNavigator from './DrawerNavigation';
 
 const Stack = createNativeStackNavigator();
 
