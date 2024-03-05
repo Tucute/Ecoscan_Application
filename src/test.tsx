@@ -7,7 +7,6 @@ export default function Test({navigation}: any) {
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
-  
 
   // Handle user state changes
   function onAuthStateChanged(user) {
@@ -23,13 +22,14 @@ export default function Test({navigation}: any) {
   const Logout = async () => {
     await GoogleSignin
     .signOut()
-    .then(() => Alert.alert('Warning', 'Are you sure to Logout', [
-        {text: 'Yes', onPress: () => navigation.navigate('Login')},
-      ]));
-  }
+    // .then(() => Alert.alert('Warning', 'Are you sure to Logout', [
+    //     {text: 'Yes', onPress: () => navigation.navigate('Login')},
+    //   ]));
+  };
 
   const GetToken = async () => {
-    const token = await GoogleSignin.getTokens();  
+    const token = await GoogleSignin.getTokens();
+    console.log(token);
   }
 
   if (initializing) return null;

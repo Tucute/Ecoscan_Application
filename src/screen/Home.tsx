@@ -24,7 +24,7 @@ const Home = ({navigation}: any) => {
       flashMode={flashMode ? RNCamera.Constants.FlashMode.torch : null}
       topContent={
         <View style={styles.topContent}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('drawer')}>
             <Image
               style={styles.icon}
               source={require('../assets/iconScanScreen/home.png')}

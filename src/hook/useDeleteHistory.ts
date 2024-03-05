@@ -1,0 +1,19 @@
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
+import { Url } from '../url/Url';
+import { Alert } from 'react-native';
+
+const useDeleteHistory = () => {
+    const useDeleteHistory = useMutation({
+        mutationFn: async (id: String) => {
+            return axios.delete(`${Url}/deletedHistory/${id}`);
+        }
+    })
+    const handleDeleteHistory = (historyId: String) => {
+        useDeleteHistory.mutate(historyId);
+        Alert.alert('Success', 'Delete history successfully')
+    }
+    return {handleDeleteHistory}
+};
+
+export default useDeleteHistory;
