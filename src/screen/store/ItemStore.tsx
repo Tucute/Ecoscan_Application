@@ -7,198 +7,109 @@ export default function Map() {
     <View style={styles.container}>
       <ScrollView style={styles.listItems}>
         <View style={styles.section}>
-          <Text style={styles.sectionName}>Pending</Text>
-          <TouchableOpacity style={styles.seeAll}>
-            <Text
-              onPress={() => navigation.navigate('SeeAllLive')}
-            >See All</Text>
-            <Image source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}} />
-          </TouchableOpacity>
+          <Text style={styles.sectionName}>Product</Text>
         </View>
         <View style={styles.listItems}>
           <View style={styles.item}>
             <Image
               style={styles.image}
-              source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}}
+              source={{uri: 'https://res.cloudinary.com/djveiec3v/image/upload/v1708920769/Ecoscan/nuoc-suoi-aquafina-chai-500ml-3_mqrrz6.jpg'}}
             />
             <View style={styles.detailItems}>
-              <Text style={styles.time}>Wed, Apr 10 •8:30AM - 17:30 PM</Text>
               <View style={styles.times_group}>
                 <View style={styles.listItemDetail}>
-                  <Text style={styles.detail}>Challenge: Clear the city</Text>
+                  <Text style={styles.detail}>Aquafina</Text>
                   <View style={styles.times_group}>
-                    <Image source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}} />
                     <Text style={{
                       fontSize: 12,
                       color: "#363636"
-                    }}>Phuoc My • Son Tra • Da Nang</Text>
+                    }}>Thùng nước Aquafina 335ml</Text>
                   </View>
-                </View>
-                <View style={styles.displayCenter}>
-                  <Image source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}} style={styles.editGroup} />
+                  <Text style={styles.hour}>109.000đ</Text>
                 </View>
               </View>
-
-              <Text style={styles.hour}>1m ago.</Text>
             </View>
+            <View style={{borderRightWidth: 1, borderColor: 'black'}} />
           </View>
           <View style={styles.item}>
             <Image
               style={styles.image}
-              source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}}
+              source={{uri: 'https://res.cloudinary.com/djveiec3v/image/upload/v1708920769/Ecoscan/nuoc-suoi-aquafina-chai-500ml-3_mqrrz6.jpg'}}
             />
             <View style={styles.detailItems}>
-              <Text style={styles.time}>Wed, Apr 28 •8:30AM - 17:30 PM</Text>
               <View style={styles.times_group}>
                 <View style={styles.listItemDetail}>
-                  <Text style={styles.detail}>Challenge: Clean the beach</Text>
+                  <Text style={styles.detail}>Aquafina</Text>
                   <View style={styles.times_group}>
-                    <Image source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}} />
                     <Text style={{
                       fontSize: 12,
                       color: "#363636"
-                    }}>Phuoc My • Son Tra • Da Nang</Text>
+                    }}>Thùng nước Aquafina 335ml</Text>
                   </View>
-                </View>
-                <View style={styles.displayCenter}>
-                  <Image source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}} style={styles.editGroup} />
+                  <Text style={styles.hour}>109.000đ</Text>
                 </View>
               </View>
-
-              <Text style={styles.hour}>1m ago.</Text>
             </View>
           </View>
           <View style={styles.item}>
             <Image
               style={styles.image}
-              // source={{uri:'../../assets/images/Green.png'}}
+              source={{uri: 'https://res.cloudinary.com/djveiec3v/image/upload/v1708920769/Ecoscan/nuoc-suoi-aquafina-chai-500ml-3_mqrrz6.jpg'}}
             />
             <View style={styles.detailItems}>
-              <Text style={styles.time}>Wed, Apr 30 •8:30AM - 17:30 PM</Text>
               <View style={styles.times_group}>
                 <View style={styles.listItemDetail}>
-                  <Text style={styles.detail}>Challenge: Clear the city</Text>
+                  <Text style={styles.detail}>Aquafina</Text>
                   <View style={styles.times_group}>
-                    {/* <Image  source={{uri:'../../assets/icons/locationdetail.png'}} /> */}
                     <Text style={{
                       fontSize: 12,
                       color: "#363636"
-                    }}>Phuoc My • Son Tra • Da Nang</Text>
+                    }}>Thùng nước Aquafina 335ml</Text>
                   </View>
-                </View>
-                <View style={styles.displayCenter}>
-                  {/* <Image  source={{uri:'../../assets/icons/Shape.png'}} style={styles.editGroup} /> */}
+                  <Text style={styles.hour}>109.000đ</Text>
                 </View>
               </View>
+            </View>
+          </View>
 
-              <Text style={styles.hour}>1m ago.</Text>
-            </View>
-          </View>
-          <View style={styles.section}>
-            <Text style={styles.sectionName}>Approve</Text>
-            <TouchableOpacity style={styles.seeAll}>
-              <Text
-                onPress={() => navigation.navigate('SeeAllLive')}
-              >See All</Text>
-              {/* <Image  source={{uri:'../../assets/icons/iconSeeAll.png'}} /> */}
-            </TouchableOpacity>
-          </View>
           <View style={styles.item}>
             <Image
               style={styles.image}
-              //  source={{uri:'../../assets/images/Green.png'}}
+              source={{uri: 'https://res.cloudinary.com/djveiec3v/image/upload/v1708920769/Ecoscan/nuoc-suoi-aquafina-chai-500ml-3_mqrrz6.jpg'}}
             />
             <View style={styles.detailItems}>
-              <Text style={styles.time}>Wed, Apr 15 •8:30AM - 17:30 PM</Text>
               <View style={styles.times_group}>
-                <Text style={{ fontSize: 14, marginLeft: 5, color: "#363636" }}>
-                  <Text style={styles.detail}>Challenge:Protect the green fores...</Text>
-                </Text>
-              </View>
-              <View style={styles.times_group}>
-                    {/* <Image  source={{uri:'../../assets/icons/locationdetail.png'}} /> */}
+                <View style={styles.listItemDetail}>
+                  <Text style={styles.detail}>Aquafina</Text>
+                  <View style={styles.times_group}>
                     <Text style={{
                       fontSize: 12,
                       color: "#363636"
-                    }}>Vo Nguyen Giap • Son Tra • Da Nang</Text>
+                    }}>Thùng nước Aquafina 335ml</Text>
                   </View>
-              <Text style={styles.hour}>1m ago.</Text>
+                  <Text style={styles.hour}>109.000đ</Text>
+                </View>
+              </View>
             </View>
           </View>
           <View style={styles.item}>
             <Image
               style={styles.image}
-              //  source={{uri:'../../assets/images/Green.png'}}
+              source={{uri: 'https://res.cloudinary.com/djveiec3v/image/upload/v1708920769/Ecoscan/nuoc-suoi-aquafina-chai-500ml-3_mqrrz6.jpg'}}
             />
             <View style={styles.detailItems}>
-              <Text style={styles.time}>Wed, Apr 01 •9:30AM - 17:30 PM</Text>
               <View style={styles.times_group}>
-                <Text style={{ fontSize: 14, marginLeft: 5, color: "#363636" }}>
-                  <Text style={styles.detail}>Challenge:Protect the green fores...</Text>
-                </Text>
-              </View>
-              <View style={styles.times_group}>
-                    {/* <Image  source={{uri:'../../assets/icons/locationdetail.png'}} /> */}
+                <View style={styles.listItemDetail}>
+                  <Text style={styles.detail}>Aquafina</Text>
+                  <View style={styles.times_group}>
                     <Text style={{
                       fontSize: 12,
                       color: "#363636"
-                    }}>Vo Nguyen Giap • Son Tra • Da Nang</Text>
+                    }}>Thùng nước Aquafina 335ml</Text>
                   </View>
-              <Text style={styles.hour}>1m ago.</Text>
-            </View>
-          </View>
-          
-          <View style={styles.section}>
-            <Text style={styles.sectionName}>Reject</Text>
-            <TouchableOpacity style={styles.seeAll}>
-              <Text
-                onPress={() => navigation.navigate('SeeAllLive')}
-              >See All</Text>
-              {/* <Image  source={{uri:'../../assets/icons/iconSeeAll.png'}} /> */}
-            </TouchableOpacity>
-          </View>
-          <View style={styles.item}>
-            <Image
-              style={styles.image}
-              //  source={{uri:'../../assets/profile/Sa.jpg'}}
-            />
-            <View style={styles.detailItems}>
-              <Text style={styles.time}>Wed, Apr 30 •8:30AM - 17:30 PM</Text>
-              <View style={styles.times_group}>
-                <Text style={{ fontSize: 14, marginLeft: 5, color: "#363636" }}>
-                  <Text style={styles.detail}>Challenge: Racing event</Text>
-                </Text>
+                  <Text style={styles.hour}>109.000đ</Text>
+                </View>
               </View>
-              <View style={styles.times_group}>
-                    {/* <Image source={{uri:'../../assets/icons/locationdetail.png'}} /> */}
-                    <Text style={{
-                      fontSize: 12,
-                      color: "#363636"
-                    }}>Vo Van Kiet • Son Tra • Da Nang</Text>
-                  </View>
-              <Text style={styles.hour}>2m ago.</Text>
-            </View>
-          </View>
-          <View style={styles.item}>
-            <Image
-              style={styles.image}
-               source={{uri:'../../assets/profile/Sa.jpg'}}
-            />
-            <View style={styles.detailItems}>
-              <Text style={styles.time}>Wed, Apr 30 •8:30AM - 17:30 PM</Text>
-              <View style={styles.times_group}>
-                <Text style={{ fontSize: 14, marginLeft: 5, color: "#363636" }}>
-                  <Text style={styles.detail}>Challenge: Racing event</Text>
-                </Text>
-              </View>
-              <View style={styles.times_group}>
-                    {/* <Image source={{uri:'../../assets/icons/locationdetail.png'}} /> */}
-                    <Text style={{
-                      fontSize: 12,
-                      color: "#363636"
-                    }}>Vo Van Kiet • Son Tra • Da Nang</Text>
-                  </View>
-              <Text style={styles.hour}>3m ago.</Text>
             </View>
           </View>
         </View>
@@ -241,7 +152,6 @@ const styles = StyleSheet.create({
     height: 79,
     borderRadius: 10,
   },
-
   time: {
     color: '#216C53',
     fontSize: 12,
@@ -276,7 +186,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 5,
-    gap: 12,
   },
   section: {
     flexDirection: 'row',

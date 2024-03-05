@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#BA8F8F',
         borderBottomWidth: 1,
         width: '100%',
-      },
+    },
 });
 
 export default TheOrigin

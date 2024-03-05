@@ -6,13 +6,13 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import PriceProductCompare from '../component/ComponentCompare/PriceProductCompare';
 import InfoProduct from '../component/ComponentCompare/InfoProduct';
 import SimilarStore from '../component/ComponentCompare/SimilarStore';
 import TheOrigin from '../component/ComponentCompare/TheOrigin';
 
-const CompareInterface = ({navigation, route}: any) => {
+const CompareInterface = ({ navigation, route }: any) => {
   const item = route.params.item;
 
   return (
@@ -51,7 +51,7 @@ const CompareInterface = ({navigation, route}: any) => {
       <View style={styles.componentDetail}>
         <View style={styles.firstProductDetail}>
           <Image
-            style={{width: 50, height: 50, marginTop: 20, marginLeft: 50}}
+            style={{ width: 50, height: 50, marginTop: 20, marginLeft: 50 }}
             source={require('../assets/CompareInterface-icon/images_1.png')}></Image>
           <Text style={styles.leftProductlText}>{item.item1.name}</Text>
           <View style={styles.priceProductCompare}>
@@ -69,7 +69,7 @@ const CompareInterface = ({navigation, route}: any) => {
         </View>
         <View style={styles.secondProductDetail}>
           <Image
-            style={{width: 40, height: 50, marginTop: 20, marginHorizontal: 50}}
+            style={{ width: 40, height: 50, marginTop: 20, marginHorizontal: 50 }}
             source={require('../assets/CompareInterface-icon/images_2.png')}></Image>
           <Text style={styles.rightProductText}>{item.item2.name}</Text>
           <View style={styles.priceProductCompare}>
