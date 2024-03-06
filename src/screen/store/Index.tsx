@@ -23,13 +23,12 @@ export default function Store({ navigation }: any) {
     const [selectedTab, setSelectedTab] = useState('ABOUT');
     const handleMessage = () => {
         console.log('fsdfsdfsd');
-
     };
     return (
         <View style={styles.container}>
             <View style={styles.header}>
                 {/* <HeaderProfile navigation={navigation} /> */}
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
                     <Image source={require('../../assets/CompareInterface-icon/Iconback.png')}></Image>
                 </TouchableOpacity>
             </View>
