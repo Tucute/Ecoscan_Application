@@ -14,7 +14,8 @@ import TheOrigin from '../component/ComponentCompare/TheOrigin';
 
 const CompareInterface = ({navigation, route}: any) => {
   const item = route.params.item;
-
+  console.log(item);
+  
   return (
     <ScrollView style={styles.container}>
       <View style={styles.componentCompare}>
@@ -26,9 +27,9 @@ const CompareInterface = ({navigation, route}: any) => {
           <View style={styles.firstProduct}>
             <Image
               style={styles.componentImage}
-              source={require('../assets/CompareInterface-icon/images_1.png')}></Image>
-            <TouchableOpacity style={styles.componentText}>
-              <Text style={styles.text}>Choose</Text>
+              source={{uri: item.item1.image[0].url}}></Image>
+            <TouchableOpacity style={styles.componentText} onPress={() => navigation.navigate('Recycle')}>
+              <Text style={styles.text}>Go to recycling</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.viewIconCompare}>
@@ -41,9 +42,9 @@ const CompareInterface = ({navigation, route}: any) => {
           <View style={styles.secondProduct}>
             <Image
               style={styles.componentImage}
-              source={require('../assets/CompareInterface-icon/images_2.png')}></Image>
-            <TouchableOpacity style={styles.componentText}>
-              <Text style={styles.text}>Choose</Text>
+              source={{uri: item.item2.image[0].url}}></Image>
+            <TouchableOpacity style={styles.componentText} onPress={() => navigation.navigate('Recycle')}>
+              <Text style={styles.text}>Go to recycle</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -52,7 +53,7 @@ const CompareInterface = ({navigation, route}: any) => {
         <View style={styles.firstProductDetail}>
           <Image
             style={{width: 50, height: 50, marginTop: 20, marginLeft: 50}}
-            source={require('../assets/CompareInterface-icon/images_1.png')}></Image>
+            source={{uri: item.item1.image[0].url}}></Image>
           <Text style={styles.leftProductlText}>{item.item1.name}</Text>
           <View style={styles.priceProductCompare}>
             <PriceProductCompare price={item.item1.price} />
@@ -64,13 +65,13 @@ const CompareInterface = ({navigation, route}: any) => {
             <TheOrigin />
           </View>
           <View style={styles.theOrigin}>
-            <SimilarStore />
+            <SimilarStore navigation={navigation}/>
           </View>
         </View>
         <View style={styles.secondProductDetail}>
           <Image
             style={{width: 40, height: 50, marginTop: 20, marginHorizontal: 50}}
-            source={require('../assets/CompareInterface-icon/images_2.png')}></Image>
+            source={{uri: item.item2.image[0].url}}></Image>
           <Text style={styles.rightProductText}>{item.item2.name}</Text>
           <View style={styles.priceProductCompare}>
             <PriceProductCompare price={item.item2.price} />
@@ -83,7 +84,7 @@ const CompareInterface = ({navigation, route}: any) => {
             <TheOrigin />
           </View>
           <View style={styles.theOrigin}>
-            <SimilarStore />
+            <SimilarStore navigation={navigation}/>
           </View>
         </View>
       </View>
@@ -118,9 +119,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   componentImage: {
-    width: 120,
+    borderRadius: 15,
+    width: 100,
     height: 120,
-    objectFit: 'contain',
+    objectFit: 'cover',
   },
   firstProductDetail: {
     flex: 1,

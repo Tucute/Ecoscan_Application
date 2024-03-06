@@ -6,7 +6,7 @@ import LandingPage from '../screen/auth/LandingPage';
 import Login from '../screen/auth/Login';
 import Register from '../screen/auth/Register';
 import DetailProduct from '../screen/DetailProduct';
-import Test from '../test';
+import Test from '../Profile';
 import History from '../screen/History';
 import BottomTab from './BottomTab';
 import CompareInterface from '../screen/CompareInterface';
@@ -36,8 +36,8 @@ const Navigate = () => {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="Bottomtab"
-          component={BottomTab}
+          name="Root"
+          component={DrawerNavigator}
           options={{headerShown: false}}
         />
         <Stack.Screen
@@ -50,24 +50,14 @@ const Navigate = () => {
           component={CompareInterface}
           options={{headerShown: false}}
         />
-           <Stack.Screen
-          name="store"
+        <Stack.Screen
+          name="Store"
           component={Store}
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="RecycleIns"
+          name="Recycle"
           component={RecyclingIns}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="BottomTab"
-          component={BottomTab}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="test"
-          component={Test}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
