@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import { Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const useGoogleSignin = ({navigation}: any) => {
     
@@ -14,11 +15,14 @@ const useGoogleSignin = ({navigation}: any) => {
   
   async function onGoogleButtonPress() {
     await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
-    const {idToken} = await GoogleSignin.signIn();
+    const {idToken, user} = await GoogleSignin.signIn();
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
     await auth().signInWithCredential(googleCredential);
+    const newUser = JSON.stringify(user);
+    await AsyncStorage.setItem('user', newUser)
+
     Alert.alert('Success', 'Login successfully', [
-      {text: 'OK', onPress: () => navigation.navigate('BottomTab')},
+      {text: 'OK', onPress: () => navigation.navigate('Root')},
     ]);
   }
     return {onGoogleButtonPress};

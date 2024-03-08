@@ -1,6 +1,8 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import useGetProduct from '../hook/useGetProduct';
+import useDeleteHistory from '../hook/useDeleteHistory';
+import itemProduct from './itemProduct';
 
 interface History {
   historyId: string;
@@ -25,8 +27,9 @@ interface History {
 interface Item {
   data: History;
   navigation: any;
+  method: () => void;
 }
-const ItemHistory = ({data, navigation}: Item) => {
+const ItemHistory = ({method, data, navigation}: Item) => {
   const {handleBarcode} = useGetProduct({navigation});
 
   const getDetail = () => {
@@ -44,7 +47,7 @@ const ItemHistory = ({data, navigation}: Item) => {
         <Text style={styles.barCode}>{data.productData.barcode_number}</Text>
       </View>
       <View style={styles.viewTime}>
-        <TouchableOpacity style={styles.btnDelete}>
+        <TouchableOpacity style={styles.btnDelete} onPress={method}>
           <Image source={require('../assets/iconGeneral/IconDelete.png')} />
         </TouchableOpacity>
         <Text style={styles.time}>{data.create_at}</Text>
