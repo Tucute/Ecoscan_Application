@@ -181,4 +181,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Setting
+export default Setting;

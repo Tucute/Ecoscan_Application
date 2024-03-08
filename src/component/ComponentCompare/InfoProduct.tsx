@@ -16,13 +16,6 @@ const InfoProduct = ({ingredient}: Ingredient) => {
                 <Text style={{ fontWeight: 'bold' }}>Khoáng chất</Text> (natri {'\n'}selenit) {'\n'} */}
                 {ingredient}
             </Text>
-            <View
-                style={{
-                    borderBottomColor: '#BA8F8F',
-                    borderBottomWidth: 1,
-                    width: '100%',   
-                }}
-            />
         </View>
     )
 }

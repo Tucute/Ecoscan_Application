@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import ItemHistory from '../component/ItemHistory';
 import useGetHistory from '../hook/useGetHistory';
+import useDeleteHistory from '../hook/useDeleteHistory';
 
 interface History {
   historyId: string;
@@ -34,7 +35,17 @@ interface History {
 
 const History = ({navigation}: any) => {
   const {data, isLoading, isError} = useGetHistory();
-  const [itemHistory, setItemHistory] = useState<History>(useGetHistory().data);
+  const [itemHistory, setItemHistory] = useState<History[]>(useGetHistory().data);
+  const {handleDeleteHistory} = useDeleteHistory();
+  
+  const handleDelete = (historyId: String) => {
+    const data = itemHistory.filter(item => {
+      return item.historyId != historyId; 
+    });
+    setItemHistory(data);
+    handleDeleteHistory(historyId);
+  }
+
   useEffect(() => {
     if (data) {
       setItemHistory(data.data);
@@ -59,6 +70,7 @@ const History = ({navigation}: any) => {
             keyExtractor={item => item.historyId}
             renderItem={({item}) => (
               <ItemHistory
+                method={() =>handleDelete(item.historyId)}
                 key={item.historyId}
                 data={item}
                 navigation={navigation}

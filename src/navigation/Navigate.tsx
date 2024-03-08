@@ -6,15 +6,15 @@ import LandingPage from '../screen/auth/LandingPage';
 import Login from '../screen/auth/Login';
 import Register from '../screen/auth/Register';
 import DetailProduct from '../screen/DetailProduct';
-import Test from '../test';
+import Test from '../Profile';
 import History from '../screen/History';
 import BottomTab from './BottomTab';
 import CompareInterface from '../screen/CompareInterface';
+import DrawerNavigator from './DrawerNavigation';
 import RecyclingIns from '../screen/RecycleIns';
 import Store from '../screen/store/Index';
 import Setting from '../screen/Setting';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-
 
 const Stack = createNativeStackNavigator();
 
@@ -49,6 +49,11 @@ const Navigate = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
+          name="Root"
+          component={DrawerNavigator}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
           name="DetailProduct"
           component={DetailProduct}
           options={{ headerShown: false }}
@@ -64,7 +69,7 @@ const Navigate = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="RecycleIns"
+          name="Recycle"
           component={RecyclingIns}
           options={{ headerShown: false }}
         />
@@ -81,7 +86,6 @@ const Navigate = () => {
       </Stack.Navigator>
     </NavigationContainer>
     </GestureHandlerRootView>
-
   );
 };
 
