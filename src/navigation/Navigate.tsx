@@ -5,6 +5,7 @@ import Home from '../screen/Home';
 import LandingPage from '../screen/auth/LandingPage';
 import Login from '../screen/auth/Login';
 import Register from '../screen/auth/Register';
+import UploadImage from '../screen/UploadImage';
 import DetailProduct from '../screen/DetailProduct';
 import Test from '../Profile';
 import History from '../screen/History';
@@ -23,7 +24,12 @@ const Navigate = () => {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName='uploadImage'>
+      <Stack.Screen
+          name="uploadImage"
+          component={UploadImage}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="LandingPage"
           component={LandingPage}

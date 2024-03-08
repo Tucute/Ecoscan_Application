@@ -7,16 +7,14 @@ import {
     Image,
     Alert,
     Modal,
-    ScrollView,
-    TextInput
+    ScrollView
 } from 'react-native';
 import axios from 'axios';
 import React, { useState } from 'react';
+import { TextInput,Button } from 'react-native-paper';
 import DocumentPicker from 'react-native-document-picker';
 
-
 const UploadImage = ({ route }: any) => {
-
     const [url, setUrl] = useState('');
     const [selectedImageUri, setSelectedImageUri] = useState<string | null>(null);
     const [imageSelected, setImageSelected] = useState(false);
