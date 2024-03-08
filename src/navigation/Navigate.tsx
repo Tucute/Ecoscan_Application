@@ -25,11 +25,6 @@ const Navigate = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="Setting"
-          component={Setting}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
           name="LandingPage"
           component={LandingPage}
           options={{ headerShown: false }}
@@ -42,6 +37,16 @@ const Navigate = () => {
         <Stack.Screen
           name="Register"
           component={Register}
+          options={{headerShown: false}}
+        /> 
+        <Stack.Screen
+          name="store"
+          component={Store}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="RecycleIns"
+          component={RecyclingIns}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -82,6 +87,11 @@ const Navigate = () => {
         <Stack.Screen
           name="test"
           component={Test}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Setting"
+          component={Setting}
           options={{ headerShown: false }}
         />
         <Stack.Screen

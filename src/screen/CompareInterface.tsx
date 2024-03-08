@@ -6,13 +6,13 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import PriceProductCompare from '../component/ComponentCompare/PriceProductCompare';
 import InfoProduct from '../component/ComponentCompare/InfoProduct';
 import SimilarStore from '../component/ComponentCompare/SimilarStore';
 import TheOrigin from '../component/ComponentCompare/TheOrigin';
 
-const CompareInterface = ({navigation, route}: any) => {
+const CompareInterface = ({ navigation, route }: any) => {
   const item = route.params.item;
   
   return (
