@@ -12,8 +12,20 @@ const useGetProduct = ({navigation}: any) => {
         .post(`${Url}/product/getProductByBarcode`, Barcode)
         .then(async res => {
           if (res.status === 200) {
+            const history = {
+              userId: '65d6b7a042ef2f2889ee3637',
+              barcodeNumber: Barcode.barcodeNumber,
+            };
             const data = res.data;
-            navigation.navigate('DetailProduct', {data});
+            axios.post(`${Url}/history/postHistory`, history)
+            .then(async () => {
+              if (res.status === 200) {
+                navigation.navigate('DetailProduct', {data});
+              }
+            })
+            .catch(e => {
+              console.log(e.response.data.message);
+            });
           }
         })
         .catch(e => {

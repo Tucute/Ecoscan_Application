@@ -14,19 +14,7 @@ import React, { useState } from 'react';
 import { TextInput,Button } from 'react-native-paper';
 import DocumentPicker from 'react-native-document-picker';
 
-
 const UploadImage = ({ route }: any) => {
-
-    // const getDetails =(type) =>{
-    //     if(route.params){
-    //         switch(type){
-    //             case "picture":
-    //                 return route.params.picture
-    //         }
-    //     }
-    //     return ""
-    // }
-
     const [url, setUrl] = useState('');
     const [selectedImageUri, setSelectedImageUri] = useState<string | null>(null);
     const [imageSelected, setImageSelected] = useState(false);

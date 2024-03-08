@@ -1,6 +1,6 @@
 import {useMutation} from '@tanstack/react-query';
 import axios from 'axios';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Alert} from 'react-native';
 import {Url} from '../url/Url';
 interface Account {
@@ -14,19 +14,18 @@ const useLogin = ({navigation}: any) => {
         .post(`${Url}/user/sign-in`, data)
         .then(async res => {
           if (res.status === 200) {
-            // const token = res.data.token;
-            // const userid = res.data.user.id;
-            // const user = JSON.stringify({token, userid});
-            // await AsyncStorage.setItem('user', user);
+            const user = JSON.stringify(res.data.data);
+            console.log('user : ',user);
+            await AsyncStorage.setItem('user', user);
             Alert.alert('Success', 'Login successfully', [
-              {text: 'OK', onPress: () => navigation.navigate('Home')},
+              {text: 'OK', onPress: () => navigation.navigate('Root')},
             ]);
           } else {
             Alert.alert('Error', 'Email or password is invalid');
           }
         })
         .catch(e => {
-          Alert.alert(e.response.data.message);
+          console.log(e);
         });
     },
   })

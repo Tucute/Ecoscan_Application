@@ -1,8 +1,29 @@
-import React from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useEffect, useState } from 'react';
 import {ImageBackground, StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+interface User {
+  name: string;
+  email: string;
+  age?: number;
+  phone?: string;
+}
 const LandingPage = ({navigation}: any) => {
+  const [user, setUser] = useState<User>();
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const jsonValue = await AsyncStorage.getItem('user');
+        if (jsonValue) {
+          setUser(JSON.parse(jsonValue));
+        }
+      } catch (e) {
+        console.log('Not login yet: ', e);
+      }
+    };
+    getUser();
+  }, [user])
+
   return (
       <ImageBackground
         resizeMode="cover"
@@ -18,7 +39,7 @@ const LandingPage = ({navigation}: any) => {
           <Text style={styles.textStart}>Get Started </Text>
             <Text style={styles.textIntro}>Go and enjoy our features for free and make your life easy with us.</Text>
           </View>
-            <TouchableOpacity style={styles.btnStart} onPress={() => navigation.navigate('Login')}>
+            <TouchableOpacity style={styles.btnStart} onPress={() => {user? navigation.navigate('Root'): navigation.navigate('Login')}}>
                 <Text style={styles.textStartBtn}>Let's Start</Text>
             </TouchableOpacity>
         </View>

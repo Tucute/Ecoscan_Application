@@ -18,7 +18,9 @@ import useRegister from '../../hook/useRegister';
 
 const Register = ({navigation}: any) => {
   const {mutationRegister} = useRegister({navigation});
-  const inputRef: any = useRef();
+  const emailRef: any = useRef();
+  const passlRef: any = useRef();
+  const confirmPassRef: any = useRef();
   return (
     <Formik
       initialValues={{
@@ -57,12 +59,11 @@ const Register = ({navigation}: any) => {
               </View>
               <View style={styles.textInput}>
                 <TextInput
-                  // ref={inputRef}
                   style={styles.input}
                   placeholder="Enter Username"
                   placeholderTextColor={'black'}
                   enterKeyHint={'next'}
-                  onSubmitEditing={() => inputRef.current?.focus()}
+                  onSubmitEditing={() => emailRef.current?.focus()}
                   onChangeText={handleChange('username')}
                   onBlur={handleBlur('username')}
                   value={values.username}
@@ -71,11 +72,12 @@ const Register = ({navigation}: any) => {
                   {errors.username && touched.username ? errors.username : null}
                 </Text>
                 <TextInput
+                  ref={emailRef}
                   style={styles.input}
                   placeholder="Enter Email"
                   placeholderTextColor={'black'}
                   enterKeyHint={'next'}
-                  onSubmitEditing={() => inputRef.current?.focus()}
+                  onSubmitEditing={() => passlRef.current?.focus()}
                   onChangeText={handleChange('email')}
                   onBlur={handleBlur('email')}
                   value={values.email}
@@ -84,12 +86,12 @@ const Register = ({navigation}: any) => {
                   {errors.email && touched.email ? errors.email : null}
                 </Text>
                 <TextInput
-                  ref={inputRef}
+                  ref={passlRef}
                   style={styles.input}
                   placeholder="Enter Password"
                   placeholderTextColor={'black'}
                   enterKeyHint={'next'}
-                  onSubmitEditing={() => inputRef.current?.focus()}
+                  onSubmitEditing={() => confirmPassRef.current?.focus()}
                   onChangeText={handleChange('newPassword')}
                   onBlur={handleBlur('newPassword')}
                   value={values.newPassword}
@@ -100,12 +102,12 @@ const Register = ({navigation}: any) => {
                     : null}
                 </Text>
                 <TextInput
-                  ref={inputRef}
+                  ref={confirmPassRef}
                   style={styles.input}
                   placeholder="Confirm Password"
                   placeholderTextColor={'black'}
                   enterKeyHint={'done'}
-                  onSubmitEditing={() => inputRef.current?.focus()}
+                  onSubmitEditing={() => confirmPassRef.current?.focus()}
                   onChangeText={handleChange('confirmPassword')}
                   onBlur={handleBlur('confirmPassword')}
                   value={values.confirmPassword}

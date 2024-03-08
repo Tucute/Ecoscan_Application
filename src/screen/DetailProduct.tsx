@@ -1,4 +1,3 @@
-import { formToJSON } from 'axios';
 import React, {useRef, useState} from 'react';
 import {
   StyleSheet,
@@ -8,41 +7,53 @@ import {
   Dimensions,
   TouchableOpacity,
   FlatList,
+  ScrollView,
+  ImageBackground,
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
-
+interface ImageSource {
+  _id: string;
+  url: string;
+}
 interface Item {
   _id: string;
   barcode_number: number;
-  image: Image[];
+  image: ImageSource[];
   price: 5;
   ingredient: string;
   name: string;
   subCategoryId: string;
   origin: string;
 }
-interface Image {
+interface ItemImage {
   id: string;
   url: string;
 }
-interface Data {
-  data: Item;
-  relatedProduct: Item[];
-}
-interface PropData {
-  data: Data;
-}
-
 const {width} = Dimensions.get('window');
 
-const DetailProduct = ({navigaiton, route}: any) => {
-  const [item, setItem] = useState(route.params);
-  const itemImage = item.data.data.image;
-  const listItem = item.data.relatedProduct;
-  const carouselRef = useRef<Carousel<Item>>(null);
+const DetailProduct = ({navigation, route}: any) => {
+  const [itemProduct, setItemProduct] = useState(route.params.data);
+  const itemImage = itemProduct.data.image;
+  const listItem: Item[] = itemProduct.relatedProduct;
+  const carouselRef = useRef<Carousel<ItemImage>>(null);
 
+  const Compare = (navigaiton: any, data: Item) => {
+    const item1: Item = itemProduct.data;
+    const item2 = data;
+    const item = {
+      item1: item1,
+      item2: item2,
+    };
+    navigaiton.navigate('Compare', {item});
+  };
   return (
     <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.iconBack}
+        onPress={() => navigation.goBack()}>
+        <Image
+          source={require('../assets/CompareInterface-icon/Iconback.png')}></Image>
+      </TouchableOpacity>
       <Carousel
         data={itemImage}
         renderItem={({item}) => (
@@ -50,33 +61,31 @@ const DetailProduct = ({navigaiton, route}: any) => {
             <Image
               source={{uri: item.url}}
               style={styles.imgProduct}
-              resizeMode="cover"
-            />
+              resizeMode="cover"></Image>
           </View>
         )}
         ref={carouselRef}
         sliderWidth={width}
-        itemWidth={width - 10}
+        itemWidth={width - 20}
         enableSnap
       />
       <View style={styles.viewDetail}>
-        <Text style={styles.nameProduct}>{item.data.data.name}</Text>
-        <Text style={styles.ingredient}>
-          {item.data.data.ingredient}
-        </Text>
-        <Text style={styles.price}>{item.data.data.price} đ</Text>
+        <Text style={styles.nameProduct}>{itemProduct.data.name}</Text>
+        <Text style={styles.ingredient}>{itemProduct.data.ingredient}</Text>
+        <Text style={styles.price}>{itemProduct.data.price} đ</Text>
       </View>
-      <View style={styles.viewSimilarProduct}>
-        <View style={styles.titleList}>
-          <Text style={styles.textTitleList}>Similar products</Text>
-          <View style={styles.viewDropdown}>
-            <Text style={styles.textTitleSoft}>Soft by price</Text>
-            <Image
-              source={require('../assets/iconGeneral/chevron_down.png')}
-              resizeMode="cover"
-            />
-          </View>
+      <View style={styles.titleList}>
+        <Text style={styles.textTitleList}>Similar products</Text>
+        <View style={styles.viewDropdown}>
+          <Text style={styles.textTitleSoft}>Soft by price</Text>
+          <Image
+            source={require('../assets/iconGeneral/chevron_down.png')}
+            resizeMode="cover"
+          />
         </View>
+      </View>
+
+      <View style={styles.viewSimilarProduct}>
         <FlatList
           contentContainerStyle={styles.listSimilarProduct}
           numColumns={2}
@@ -84,13 +93,22 @@ const DetailProduct = ({navigaiton, route}: any) => {
           keyExtractor={item => item._id}
           renderItem={({item}) => (
             <View style={styles.item}>
-              <TouchableOpacity style={styles.btnCompare}>
+              <TouchableOpacity
+                style={styles.btnCompare}
+                onPress={() => Compare(navigation, item)}>
                 <Text style={styles.textBtn}>Compare</Text>
               </TouchableOpacity>
-              <Image style={styles.imageItem} source={{uri: 'https://donchicken.vn/pub/media/catalog/product/cache/8872124951f387c8ded3f228faa55bea/a/q/aquafina_500ml.png'}} />
+              <Image
+                style={styles.imageItem}
+                source={{
+                  uri: item.image[0].url,
+                }}
+              />
               <View style={styles.viewInfoItem}>
                 <Text style={styles.nameItem}>{item.name}</Text>
-                <Text style={styles.originItem}>{item.ingredient}</Text>
+                <Text numberOfLines={2} style={styles.originItem}>
+                  {item.origin}
+                </Text>
                 <Text style={styles.priceItem}>{item.price} VND</Text>
               </View>
             </View>
@@ -107,14 +125,19 @@ const styles = StyleSheet.create({
   },
   viewImage: {
     flex: 1,
-    backgroundColor: '#fff',
     borderRadius: 15,
     margin: 10,
-    padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
   },
+  iconBack: {
+    justifyContent: 'flex-start',
+    width: '100%',
+    marginTop: 10,
+    marginLeft: 20,
+  },
   imgProduct: {
+    borderRadius: 15,
     width: '100%',
     height: '100%',
     objectFit: 'cover',
@@ -163,32 +186,34 @@ const styles = StyleSheet.create({
   },
   listSimilarProduct: {
     flexDirection: 'column',
-    // justifyContent: 'space-around',
-    // alignItems: 'center',
     flex: 1,
     marginHorizontal: 10,
   },
   item: {
+    width: 150,
     backgroundColor: '#D9D9D9',
     borderRadius: 15,
     padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    // flex: 1,
     marginHorizontal: 10,
   },
   imageItem: {
-    width: 130,
-    height: 130,
+    width: 120,
+    height: 120,
+    borderRadius: 15,
+    objectFit: 'cover',
   },
   viewInfoItem: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
+    width: 140,
     height: 'auto',
     backgroundColor: '#fff',
     borderRadius: 10,
     marginTop: 10,
+    paddingHorizontal: 5,
+    bottom: -5,
   },
   nameItem: {
     fontSize: 16,
@@ -204,14 +229,17 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   btnCompare: {
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: '#201DAE',
     paddingHorizontal: 5,
     borderRadius: 10,
-    left: 40,
-    marginBottom: 5,
+    left: '25%',
+    marginBottom: 10,
   },
   textBtn: {
     color: '#fff',
+    padding: 1,
   },
 });
 export default DetailProduct;
