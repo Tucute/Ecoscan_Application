@@ -13,6 +13,7 @@ import CompareInterface from '../screen/CompareInterface';
 import DrawerNavigator from './DrawerNavigation';
 import RecyclingIns from '../screen/RecycleIns';
 import Store from '../screen/store/Index';
+import Notification from '../screen/Notification';
 
 const Stack = createNativeStackNavigator();
 
@@ -59,6 +60,11 @@ const Navigate = () => {
           name="Recycle"
           component={RecyclingIns}
           options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Notification"
+          component={Notification}
+          options={{headerShown: true}}
         />
       </Stack.Navigator>
     </NavigationContainer>
