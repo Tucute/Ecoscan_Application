@@ -13,6 +13,7 @@ import CompareInterface from '../screen/CompareInterface';
 import DrawerNavigator from './DrawerNavigation';
 import RecyclingIns from '../screen/RecycleIns';
 import Store from '../screen/store/Index';
+import Notification from '../screen/Notification';
 import Setting from '../screen/Setting';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
@@ -82,6 +83,11 @@ const Navigate = () => {
           name="test"
           component={Test}
           options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Notification"
+          component={Notification}
+          options={{headerShown: true}}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -14,7 +14,6 @@ import TheOrigin from '../component/ComponentCompare/TheOrigin';
 
 const CompareInterface = ({navigation, route}: any) => {
   const item = route.params.item;
-  console.log(item);
   
   return (
     <ScrollView style={styles.container}>
