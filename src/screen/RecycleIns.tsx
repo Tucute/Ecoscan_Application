@@ -1,4 +1,4 @@
-import { FlatList, View, StyleSheet, TouchableOpacity, Image, Dimensions, Text } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Image, Dimensions, Text } from "react-native";
 import DetailRecycle from "../component/ComponentRecycle/DetailRecycle";
 import data from '../data/DataProduct'
 import ComponentImage from "../component/ComponentRecycle/ComponentImage";
