@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   FlatList,
   ScrollView,
+  ImageBackground,
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 interface ImageSource {
@@ -46,7 +47,13 @@ const DetailProduct = ({navigation, route}: any) => {
     navigaiton.navigate('Compare', {item});
   };
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.iconBack}
+        onPress={() => navigation.goBack()}>
+        <Image
+          source={require('../assets/CompareInterface-icon/Iconback.png')}></Image>
+      </TouchableOpacity>
       <Carousel
         data={itemImage}
         renderItem={({item}) => (
@@ -54,8 +61,7 @@ const DetailProduct = ({navigation, route}: any) => {
             <Image
               source={{uri: item.url}}
               style={styles.imgProduct}
-              resizeMode="cover"
-            />
+              resizeMode="cover"></Image>
           </View>
         )}
         ref={carouselRef}
@@ -82,6 +88,11 @@ const DetailProduct = ({navigation, route}: any) => {
       <View style={styles.viewSimilarProduct}>
         <FlatList
           contentContainerStyle={styles.listSimilarProduct}
+          ListEmptyComponent={() => (
+            <View style={styles.listSimilarProduct}>
+              <Text style={styles.emptyProduct}>There are no related products</Text>
+            </View>
+          )}
           numColumns={2}
           data={listItem}
           keyExtractor={item => item._id}
@@ -109,7 +120,7 @@ const DetailProduct = ({navigation, route}: any) => {
           )}
         />
       </View>
-    </ScrollView>
+    </View>
   );
 };
 const styles = StyleSheet.create({
@@ -119,12 +130,16 @@ const styles = StyleSheet.create({
   },
   viewImage: {
     flex: 1,
-    backgroundColor: '#fff',
     borderRadius: 15,
     margin: 10,
-    padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  iconBack: {
+    justifyContent: 'flex-start',
+    width: '100%',
+    marginTop: 10,
+    marginLeft: 20,
   },
   imgProduct: {
     borderRadius: 15,
@@ -230,6 +245,11 @@ const styles = StyleSheet.create({
   textBtn: {
     color: '#fff',
     padding: 1,
+  },
+  emptyProduct: {
+    color: '#fff',
+    fontSize: 24,
+    fontWeight: 'bold',
   },
 });
 export default DetailProduct;

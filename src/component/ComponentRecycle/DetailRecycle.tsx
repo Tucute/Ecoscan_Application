@@ -1,10 +1,10 @@
-import { View, Image, Text, StyleSheet, Dimensions } from "react-native";
+import { View, Image, Text, StyleSheet, Dimensions, ScrollView } from "react-native";
 
 const { width, height } = Dimensions.get('screen');
 
 const DetailRecycle = () => {
     return (
-        <View style={style.container}>
+        <ScrollView style={style.container}>
             <View style={style.title}>
                 <Text style={[style.titleText, { flexWrap: 'wrap' }]}>
                     Chúng ta uống sữa mỗi ngày và thải ra môi trường vô số hộp sữa rỗng gọi là "rác chết".
@@ -42,14 +42,15 @@ const DetailRecycle = () => {
                     Chỉ cần vài động tác đơn giản là bạn đã có những chậu cây bé xíu trong nhà rồi, hãy đợi đến ngày thu được thành quả nhé.
                 </Text>
             </View>
-        </View>
+        </ScrollView>
     );
 };
 
 
 const style = StyleSheet.create({
     container: {
-        flex: 2,
+        flex: 1,
+        backgroundColor: '#333333'
     },
     title: {
         marginHorizontal: 20,

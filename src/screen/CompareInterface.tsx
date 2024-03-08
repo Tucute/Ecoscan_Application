@@ -14,7 +14,6 @@ import TheOrigin from '../component/ComponentCompare/TheOrigin';
 
 const CompareInterface = ({navigation, route}: any) => {
   const item = route.params.item;
-  console.log(item);
   
   return (
     <ScrollView style={styles.container}>
@@ -29,7 +28,7 @@ const CompareInterface = ({navigation, route}: any) => {
               style={styles.componentImage}
               source={{uri: item.item1.image[0].url}}></Image>
             <TouchableOpacity style={styles.componentText} onPress={() => navigation.navigate('Recycle')}>
-              <Text style={styles.text}>Go to recycling</Text>
+              <Text style={styles.text}>Recycling</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.viewIconCompare}>
@@ -44,7 +43,7 @@ const CompareInterface = ({navigation, route}: any) => {
               style={styles.componentImage}
               source={{uri: item.item2.image[0].url}}></Image>
             <TouchableOpacity style={styles.componentText} onPress={() => navigation.navigate('Recycle')}>
-              <Text style={styles.text}>Go to recycle</Text>
+              <Text style={styles.text}>Recycling</Text>
             </TouchableOpacity>
           </View>
         </View>

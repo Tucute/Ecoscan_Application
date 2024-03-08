@@ -6,14 +6,13 @@ import Carousel from "react-native-snap-carousel";
 
 const { width, height } = Dimensions.get('screen');
 
-const RecyclingIns = () => {
+const RecyclingIns = ({navigation}: any) => {
     
     return (
         <View style={style.container}>
             <View style={style.componentRecycle}>
-                <TouchableOpacity style={style.iconBack}>
+                <TouchableOpacity style={style.iconBack} onPress={() => navigation.goBack()}>
                     <Image
-                        style={style.image}
                         source={require('../assets/CompareInterface-icon/Iconback.png')}>
                     </Image>
                 </TouchableOpacity>
@@ -38,7 +37,8 @@ const style = StyleSheet.create({
         height,
     },
     componentRecycle: {
-        flex: 1.5,
+        // flex: 1,
+        marginBottom: 20,
         backgroundColor: '#fff',
     },
     iconBack: {
