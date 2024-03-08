@@ -88,6 +88,11 @@ const DetailProduct = ({navigation, route}: any) => {
       <View style={styles.viewSimilarProduct}>
         <FlatList
           contentContainerStyle={styles.listSimilarProduct}
+          ListEmptyComponent={() => (
+            <View style={styles.listSimilarProduct}>
+              <Text style={styles.emptyProduct}>There are no related products</Text>
+            </View>
+          )}
           numColumns={2}
           data={listItem}
           keyExtractor={item => item._id}
@@ -240,6 +245,11 @@ const styles = StyleSheet.create({
   textBtn: {
     color: '#fff',
     padding: 1,
+  },
+  emptyProduct: {
+    color: '#fff',
+    fontSize: 24,
+    fontWeight: 'bold',
   },
 });
 export default DetailProduct;

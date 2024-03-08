@@ -33,8 +33,8 @@ const ItemHistory = ({method, data, navigation}: Item) => {
   const {handleBarcode} = useGetProduct({navigation});
 
   const getDetail = () => {
-    const data = {barcodeNumber: 8935005801029};
-    handleBarcode(data);
+    const barcode = {barcodeNumber: data.productData.barcode_number};
+    handleBarcode(barcode);
   }
   return (
     <TouchableOpacity key={data.historyId} style={styles.viewItem} onPress={getDetail}>
