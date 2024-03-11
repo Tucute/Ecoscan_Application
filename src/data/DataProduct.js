@@ -6,7 +6,7 @@ export default data = [
       barcode: "barcode 1",
       typeId: 32,
       origin: "origin 1",
-      image: "https://res.cloudinary.com/djveiec3v/image/upload/v1708935936/Ecoscan/ta9k2ezlpn95ufcop4ct.jpg",
+      image: "https://vesinhnha.com.vn/wp-content/uploads/2019/03/cach-tai-che-chai-nhua-17-1.jpg",
       storeId: 75,
       id: "1"
     },
@@ -17,7 +17,7 @@ export default data = [
       barcode: "barcode 2",
       typeId: 13,
       origin: "origin 2",
-      image: "https://res.cloudinary.com/djveiec3v/image/upload/v1708935936/Ecoscan/mjfwgqxbygmwm7oovp3y.jpg",
+      image: "https://www.cleanipedia.com/images/5iwkm8ckyw6v/951b8bdb12c62b256dbb8b868f7370ce/7573f6bb269afcd34db2e43b09a2d6de/aHR0cHNfX193d3cuY2xlYW5pcGVkaWEuY29tX2NvbnRlbnRfZGFtX3VuaWxldmVyX2NsZWFuaXBlZGlhX3ZpZXRuYW1fZ2VuZXJhbF9pbWFnZV9yZWN5Y2xlX3BsYXN0aWNfYm90dGxlc19oYW5naW5nX2luX3RoZV9nYS5qcGc/720w-480h/c%C3%A1ch-t%C3%A1i-ch%E1%BA%BF-chai-nh%E1%BB%B1a-tr%E1%BB%93ng-hoa-%C4%91%E1%BA%B7c-s%E1%BA%AFc-v%C3%A0-%C4%91%E1%BB%99c-%C4%91%C3%A1o.jpg",
       storeId: 28,
       id: "2"
     },
@@ -28,7 +28,7 @@ export default data = [
       barcode: "barcode 3",
       typeId: 58,
       origin: "origin 3",
-      image: "https://res.cloudinary.com/djveiec3v/image/upload/v1708935936/Ecoscan/fpfzsivkd1zv3pxaydj9.jpg",
+      image: "https://static.khoedep.vn/2016/01/tan-dung-vo-chai-nhua.jpg",
       storeId: 5,
       id: "3"
     },

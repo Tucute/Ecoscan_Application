@@ -6,7 +6,7 @@ import { Alert } from 'react-native';
 const useDeleteHistory = () => {
     const useDeleteHistory = useMutation({
         mutationFn: async (id: String) => {
-            return axios.delete(`${Url}/deletedHistory/${id}`);
+            return await axios.delete(`${Url}/history/deletedHistory/${id}`);
         }
     })
     const handleDeleteHistory = (historyId: String) => {

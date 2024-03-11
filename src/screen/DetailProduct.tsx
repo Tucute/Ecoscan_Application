@@ -72,17 +72,17 @@ const DetailProduct = ({navigation, route}: any) => {
       <View style={styles.viewDetail}>
         <Text style={styles.nameProduct}>{itemProduct.data.name}</Text>
         <Text style={styles.ingredient}>{itemProduct.data.ingredient}</Text>
-        <Text style={styles.price}>{itemProduct.data.price} đ</Text>
+        <Text style={styles.price}>{itemProduct.data.price} VND</Text>
       </View>
       <View style={styles.titleList}>
         <Text style={styles.textTitleList}>Similar products</Text>
-        <View style={styles.viewDropdown}>
+        {/* <View style={styles.viewDropdown}>
           <Text style={styles.textTitleSoft}>Soft by price</Text>
           <Image
             source={require('../assets/iconGeneral/chevron_down.png')}
             resizeMode="cover"
           />
-        </View>
+        </View> */}
       </View>
 
       <View style={styles.viewSimilarProduct}>
@@ -110,10 +110,10 @@ const DetailProduct = ({navigation, route}: any) => {
                 }}
               />
               <View style={styles.viewInfoItem}>
-                <Text style={styles.nameItem}>{item.name}</Text>
-                <Text numberOfLines={2} style={styles.originItem}>
+                <Text numberOfLines={1} style={styles.nameItem}>{item.name}</Text>
+                {/* <Text numberOfLines={2} style={styles.originItem}>
                   {item.origin}
-                </Text>
+                </Text> */}
                 <Text style={styles.priceItem}>{item.price} VND</Text>
               </View>
             </View>
@@ -145,8 +145,8 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     width: '100%',
     height: '100%',
-    objectFit: 'cover',
-    backgroundColor: 'red',
+    objectFit: 'contain',
+    backgroundColor: '#fff',
   },
   viewDetail: {
     marginHorizontal: 20,
@@ -193,6 +193,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flex: 1,
     marginHorizontal: 10,
+    marginBottom: 10,
   },
   item: {
     width: 150,
@@ -202,6 +203,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginHorizontal: 10,
+    marginBottom: 15,
   },
   imageItem: {
     width: 120,
@@ -216,7 +218,7 @@ const styles = StyleSheet.create({
     height: 'auto',
     backgroundColor: '#fff',
     borderRadius: 10,
-    marginTop: 10,
+    marginTop: 3,
     paddingHorizontal: 5,
     bottom: -5,
   },

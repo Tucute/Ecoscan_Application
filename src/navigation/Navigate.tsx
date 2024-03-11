@@ -12,6 +12,7 @@ import Store from '../screen/store/Index';
 import Setting from '../screen/Setting';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Notification from '../screen/Notification';
+import Profile from '../Profile';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,11 +21,6 @@ const Navigate = () => {
     <GestureHandlerRootView style={{ flex: 1 }}>
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name="Setting"
-          component={Setting}
-          options={{ headerShown: false }}
-        />
         <Stack.Screen
           name="LandingPage"
           component={LandingPage}
@@ -38,11 +34,6 @@ const Navigate = () => {
         <Stack.Screen
           name="Register"
           component={Register}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Bottomtab"
-          component={BottomTab}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -61,7 +52,7 @@ const Navigate = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="store"
+          name="Store"
           component={Store}
           options={{ headerShown: false }}
         />
@@ -71,13 +62,13 @@ const Navigate = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="BottomTab"
-          component={BottomTab}
+          name="profile"
+          component={Profile}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="test"
-          component={Test}
+          name="Setting"
+          component={Setting}
           options={{ headerShown: false }}
         />
         <Stack.Screen
