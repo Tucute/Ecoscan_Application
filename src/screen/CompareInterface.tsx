@@ -6,15 +6,15 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import PriceProductCompare from '../component/ComponentCompare/PriceProductCompare';
 import InfoProduct from '../component/ComponentCompare/InfoProduct';
 import SimilarStore from '../component/ComponentCompare/SimilarStore';
 import TheOrigin from '../component/ComponentCompare/TheOrigin';
 
-const CompareInterface = ({navigation, route}: any) => {
+const CompareInterface = ({ navigation, route }: any) => {
   const item = route.params.item;
-  
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.componentCompare}>
@@ -26,12 +26,12 @@ const CompareInterface = ({navigation, route}: any) => {
           <View style={styles.firstProduct}>
             <Image
               style={styles.componentImage}
-              source={{uri: item.item1.image[2].url}}></Image>
+              source={{ uri: item.item1.image[2].url }}></Image>
             <TouchableOpacity style={styles.componentText} onPress={() => navigation.navigate('Recycle')}>
               <Text style={styles.text}>Recycling</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.viewIconCompare}>
+          <View>
             <Image
               style={styles.iconCompare}
               source={{
@@ -41,7 +41,7 @@ const CompareInterface = ({navigation, route}: any) => {
           <View style={styles.secondProduct}>
             <Image
               style={styles.componentImage}
-              source={{uri: item.item2.image[0].url}}></Image>
+              source={{ uri: item.item2.image[0].url }}></Image>
             <TouchableOpacity style={styles.componentText} onPress={() => navigation.navigate('Recycle')}>
               <Text style={styles.text}>Recycling</Text>
             </TouchableOpacity>
@@ -51,39 +51,39 @@ const CompareInterface = ({navigation, route}: any) => {
       <View style={styles.componentDetail}>
         <View style={styles.firstProductDetail}>
           <Image
-            style={{width: 50, height: 50, marginTop: 20, marginLeft: 50, borderRadius: 15, objectFit: 'contain'}}
-            source={{uri: item.item1.image[2].url}}></Image>
+            style={{ width: 50, height: 50, marginTop: 20, marginLeft: 50, borderRadius: 15, objectFit: 'contain' }}
+            source={{ uri: item.item1.image[2].url }}></Image>
           <Text numberOfLines={1} style={styles.leftProductlText}>{item.item1.name}</Text>
-          <View style={styles.priceProductCompare}>
+          <View>
             <PriceProductCompare price={item.item1.price} />
           </View>
           <View style={styles.infoProduct}>
             <InfoProduct ingredient={item.item1.ingredient} />
           </View>
-          <View style={styles.theOrigin}>
+          <View>
             <TheOrigin />
           </View>
-          <View style={styles.theOrigin}>
-            <SimilarStore navigation={navigation}/>
+          <View>
+            <SimilarStore navigation={navigation} />
           </View>
         </View>
         <View style={styles.secondProductDetail}>
           <Image
-            style={{width: 40, height: 50, marginTop: 20, marginHorizontal: 50}}
-            source={{uri: item.item2.image[0].url}}></Image>
+            style={{ width: 40, height: 50, marginTop: 20, marginHorizontal: 50 }}
+            source={{ uri: item.item2.image[0].url }}></Image>
           <Text numberOfLines={1} style={styles.rightProductText}>{item.item2.name}</Text>
-          <View style={styles.priceProductCompare}>
+          <View>
             <PriceProductCompare price={item.item2.price} />
           </View>
           <View style={styles.infoProduct}>
             <InfoProduct ingredient={item.item2.ingredient} />
           </View>
 
-          <View style={styles.theOrigin}>
+          <View>
             <TheOrigin />
           </View>
-          <View style={styles.theOrigin}>
-            <SimilarStore navigation={navigation}/>
+          <View>
+            <SimilarStore navigation={navigation} />
           </View>
         </View>
       </View>
