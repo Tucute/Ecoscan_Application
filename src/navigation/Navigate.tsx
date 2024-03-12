@@ -13,6 +13,8 @@ import Setting from '../screen/Setting';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Notification from '../screen/Notification';
 import Profile from '../Profile';
+import ViewProfile from '../screen/ViewProfile';
+import EditProfile from '../screen/EditProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +23,16 @@ const Navigate = () => {
     <GestureHandlerRootView style={{ flex: 1 }}>
     <NavigationContainer>
       <Stack.Navigator>
+      <Stack.Screen
+          name="ViewProfile"
+          component={ViewProfile}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="EditProfile"
+          component={EditProfile}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name="LandingPage"
           component={LandingPage}
