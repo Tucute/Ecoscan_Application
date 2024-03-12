@@ -17,9 +17,10 @@ const useLogin = ({navigation}: any) => {
             const user = JSON.stringify(res.data.data);
             console.log('user : ',user);
             await AsyncStorage.setItem('user', user);
-            Alert.alert('Success', 'Login successfully', [
-              {text: 'OK', onPress: () => navigation.navigate('Root')},
-            ]);
+            // Alert.alert('Success', 'Login successfully', [
+            //   {text: 'OK', onPress: () => navigation.navigate('Root')},
+            // ]);
+            navigation.navigate('Root')
           } else {
             Alert.alert('Error', 'Email or password is invalid');
           }
