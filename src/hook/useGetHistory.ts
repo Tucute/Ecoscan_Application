@@ -1,9 +1,13 @@
 import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
 import {Url} from '../url/Url';
+import useGetUser from './useGetUser';
 
 const useGetHistory = () => {
-  const userId = '65d6b7a042ef2f2889ee3637';
+  const {user} = useGetUser();
+  console.log(user);
+  
+  const userId = user._id;
 
   const {data, isLoading, isError} = useQuery({
     queryKey: ['getHistory'],

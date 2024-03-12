@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const useGoogleSignin = ({navigation}: any) => {
-    
+const useGoogleSignin = () => {
   useEffect(() => {
     GoogleSignin.configure({
       webClientId:
@@ -18,12 +16,14 @@ const useGoogleSignin = ({navigation}: any) => {
     const {idToken, user} = await GoogleSignin.signIn();
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
     await auth().signInWithCredential(googleCredential);
-    const newUser = JSON.stringify(user);
-    await AsyncStorage.setItem('user', newUser)
-
-    Alert.alert('Success', 'Login successfully', [
-      {text: 'OK', onPress: () => navigation.navigate('Root')},
-    ]);
+    const newUser = {
+      _id: user.id,
+      email: user.email,
+      name: user.givenName
+    }
+    const value = JSON.stringify(newUser);
+    await AsyncStorage.setItem('user', value)
+    console.log(value);
   }
     return {onGoogleButtonPress};
 };
