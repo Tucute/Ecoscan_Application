@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import useLoginGoogle from './useLoginGoogle';
 
-const useGoogleSignin = () => {
+const useGoogleSignin = ({navigation}: any) => {
+  const {handleLoginGoogle} = useLoginGoogle({navigation});
+  
   useEffect(() => {
     GoogleSignin.configure({
       webClientId:
@@ -16,14 +18,12 @@ const useGoogleSignin = () => {
     const {idToken, user} = await GoogleSignin.signIn();
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
     await auth().signInWithCredential(googleCredential);
-    const newUser = {
-      _id: user.id,
+    const account = {
+      username: user.name,
       email: user.email,
-      name: user.givenName
+      photo: user.photo,
     }
-    const value = JSON.stringify(newUser);
-    await AsyncStorage.setItem('user', value)
-    console.log(value);
+    handleLoginGoogle(account);
   }
     return {onGoogleButtonPress};
 };

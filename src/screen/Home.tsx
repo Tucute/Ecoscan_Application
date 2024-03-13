@@ -6,7 +6,7 @@ import useGetProduct from '../hook/useGetProduct';
 
 const Home = ({navigation}: any) => {
   const [flashMode, setFlashMode] = useState<boolean>(false);
-  const {handleBarcode} = useGetProduct({navigation});
+  const {handleBarcode, isLoading, isError} = useGetProduct({navigation});
 
   const setFlash = () => {
     setFlashMode(!flashMode);
@@ -22,6 +22,18 @@ const Home = ({navigation}: any) => {
     <QRCodeScanner
       onRead={onSuccess}
       flashMode={flashMode ? RNCamera.Constants.FlashMode.torch : null}
+      showMarker={true}
+      customMarker={
+        <View style={styles.customMarkerContainer}>
+          {/* Khung marker */}
+          <View style={styles.markerBox} />
+          {/* Biểu tượng quét */}
+          {/* <Image
+            style={styles.scanIcon}
+            source={require('../assets/iconScanScreen/scan-icon.png')}
+          /> */}
+        </View>
+      }
       topContent={
         <View style={styles.topContent}>
           <TouchableOpacity onPress={() => navigation.navigate('drawer')}>
@@ -61,6 +73,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
     padding: 32,
     color: '#777',
+  },
+  customMarkerContainer: {
+    alignItems: 'center',
+  },
+  markerBox: {
+    width: 200,
+    height: 200,
+    borderWidth: 2,
+    borderColor: '#FFF', // Màu của khung marker
+    borderRadius: 10,
+    opacity: 0.5, // Độ mờ của khung marker
   },
   textBold: {
     fontWeight: '500',

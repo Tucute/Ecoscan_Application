@@ -173,10 +173,13 @@ const styles = StyleSheet.create({
   },
   leftProductlText: {
     color: '#000',
+    fontWeight: 'bold',
     marginVertical: 10,
     marginHorizontal: 20,
   },
   rightProductText: {
+    color: '#000',
+    fontWeight: 'bold',
     marginVertical: 10,
     marginHorizontal: 20,
   },

@@ -15,6 +15,7 @@ import Notification from '../screen/Notification';
 import Profile from '../Profile';
 import ViewProfile from '../screen/ViewProfile';
 import EditProfile from '../screen/EditProfile';
+import Maps from '../screen/store/Map';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,16 +24,6 @@ const Navigate = () => {
     <GestureHandlerRootView style={{ flex: 1 }}>
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen
-          name="ViewProfile"
-          component={ViewProfile}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="EditProfile"
-          component={EditProfile}
-          options={{ headerShown: false }}
-        />
         <Stack.Screen
           name="LandingPage"
           component={LandingPage}
@@ -87,6 +78,16 @@ const Navigate = () => {
           name="Notification"
           component={Notification}
           options={{headerShown: true}}
+        />
+        <Stack.Screen
+          name="ViewProfile"
+          component={ViewProfile}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="EditProfile"
+          component={EditProfile}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>
