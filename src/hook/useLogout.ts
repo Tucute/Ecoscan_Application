@@ -41,7 +41,6 @@ const useLogout = ({ navigation }: any) => {
       Alert.alert('Error', 'An error occurred while logging out');
     }
   };
-
   return { Logout };
 };
 
