@@ -24,7 +24,7 @@ const Login = ({navigation}: any) => {
   const [textEntry, setTextEntry] = useState(true);
   const passwordRef: any = useRef();
   const {handleLogin} = useLogin({navigation});
-  const {onGoogleButtonPress} = useGoogleSignin();
+  const {onGoogleButtonPress} = useGoogleSignin({navigation});
   const handleGoogleSignin = async () => {
     await onGoogleButtonPress();
     setIsLoading(true);

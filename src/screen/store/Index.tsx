@@ -20,7 +20,7 @@ export default function Store({ navigation }: any) {
     const handleFllow = () => {
         Alert.alert('Oke m');
     };
-    const [selectedTab, setSelectedTab] = useState('ABOUT');
+    const [selectedTab, setSelectedTab] = useState('MAP');
     const handleMessage = () => {
         console.log('fsdfsdfsd');
     };
@@ -46,12 +46,10 @@ export default function Store({ navigation }: any) {
             <View style={styles.actionInteraction}>
                 <Button
                     title="Rating"
-                    // icon={require('../../assets/CompareInterface-icon/Iconback.png')}
                     onPress={handleFllow}
                 />
                 <Button
                     title="Message"
-                    // icon={require('../../assets/CompareInterface-icon/Iconback.png')}
                     onPress={handleMessage}
                 />
             </View>
@@ -69,16 +67,9 @@ export default function Store({ navigation }: any) {
                     ]}>
                     <Text style={styles.titleLarge}>ITEM STORE</Text>
                 </TouchableOpacity>
-                {/* <TouchableOpacity
-          onPress={() => setSelectedTab('REVIEWS')}
-          style={[styles.tab, selectedTab === 'REVIEWS' && styles.selectedTab]}>
-          <Text style={styles.titleLarge}>REVIEWS</Text>
-        </TouchableOpacity> */}
             </View>
-
             {selectedTab === 'MAP' && <Map />}
             {selectedTab === 'ITEMSTORE' && <ItemStore />}
-            {/* {selectedTab === 'REVIEWS' && <ReviewScreen />} */}
         </View>
     );
 }
