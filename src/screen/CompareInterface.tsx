@@ -28,22 +28,22 @@ const CompareInterface = ({ navigation, route }: any) => {
               style={styles.componentImage}
               source={{ uri: item.item1.image[2].url }}></Image>
             <TouchableOpacity style={styles.componentText} onPress={() => navigation.navigate('Recycle')}>
-              <Text style={styles.text}>Recycling</Text>
+              <Text style={styles.text}>Choose</Text>
             </TouchableOpacity>
           </View>
-          <View>
+          {/* <View>
             <Image
               style={styles.iconCompare}
               source={{
                 uri: 'https://static.thenounproject.com/png/71604-200.png',
               }}></Image>
-          </View>
+          </View> */}
           <View style={styles.secondProduct}>
             <Image
               style={styles.componentImage}
               source={{ uri: item.item2.image[0].url }}></Image>
             <TouchableOpacity style={styles.componentText} onPress={() => navigation.navigate('Recycle')}>
-              <Text style={styles.text}>Recycling</Text>
+              <Text style={styles.text}>Choose</Text>
             </TouchableOpacity>
           </View>
         </View>

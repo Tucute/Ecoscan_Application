@@ -2,6 +2,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
       android:name=".MainApplication"
@@ -23,7 +25,7 @@
         </intent-filter>
       </activity>
       <meta-data
-     android:name="com.google.android.geo.API_KEY"
-     android:value=""/>
+      android:name="com.google.android.geo.API_KEY"
+      android:value="AIzaSyB39iGJdn-YNRymVVQ1xX09KP3VaAjhk74"/>
     </application>
 </manifest>
