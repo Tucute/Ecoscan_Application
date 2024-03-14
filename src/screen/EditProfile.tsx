@@ -1,8 +1,10 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity, Image, Text } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
+import useGetUser from "../hook/useGetUser";
 
-const EditProfile = () => {
+const EditProfile = ({navigation, route}:any) => {
+    const {user} = useGetUser();
     return (
         <View style={styles.container}>
             <View style={styles.background}>
@@ -12,7 +14,7 @@ const EditProfile = () => {
                 />
             </View>
 
-            <TouchableOpacity style={styles.iconBack}>
+            <TouchableOpacity style={styles.iconBack} onPress={() => navigation.goBack()}>
                 <Image
                     style={styles.icBack}
                     source={require('../assets/CompareInterface-icon/Iconback.png')}
@@ -27,7 +29,7 @@ const EditProfile = () => {
                 <TouchableOpacity>
                     <Image style={styles.edit} source={require('../assets/ViewProfile/cameraIcon.png')}></Image>
                 </TouchableOpacity>
-                <View style={styles.userName}>
+                <View>
                     <Text style={{ fontSize: 26, color: '#fff', fontWeight: 'bold' }}>Ho Thi Kieu</Text>
                 </View>
             </View>
@@ -36,24 +38,21 @@ const EditProfile = () => {
                     <Image style={styles.userNameIcon}
                         source={require('../assets/ViewProfile/userIcon.png')}></Image>
                     <View style={styles.userNameGroup}>
-                        {/* <Text style={styles.userNameTitle}>User Name</Text> */}
-                        <TextInput style={{color: '#C3C7C7'}}>Ho Thi Kieu</TextInput>
+                        <TextInput style={{color: '#C3C7C7'}}>{user?.name}</TextInput>
                     </View>
                 </View>
                 <View style={styles.componentUserName}>
                     <Image style={styles.userNameIcon}
                         source={require('../assets/ViewProfile/emailIcon.png')}></Image>
                     <View style={styles.userNameGroup}>
-                        {/* <Text style={styles.userNameTitle}>Email</Text> */}
-                        <TextInput style={{color: '#C3C7C7'}}>kieungayngo321@gmail.com</TextInput>
+                        <TextInput numberOfLines={1} style={{color: '#C3C7C7', width: '90%'}}>{user?.email}</TextInput>
                     </View>
                 </View>
                 <View style={styles.componentUserName}>
                     <Image style={styles.userNameIcon}
                         source={require('../assets/ViewProfile/passwordIcon.png')}></Image>
                     <View style={styles.userNameGroup}>
-                        {/* <Text style={styles.userNameTitle}>Password</Text> */}
-                        <TextInput style={{color: '#C3C7C7'}}>kieupro223</TextInput>
+                        <TextInput style={{color: '#C3C7C7'}}>08754566878</TextInput>
                     </View>
                 </View>
             </View>
@@ -106,7 +105,6 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         backgroundColor: '#333333',
-        width: 330,
         margin: 10,
         borderRadius: 10,
     },
@@ -124,12 +122,9 @@ const styles = StyleSheet.create({
     },
     userNameGroup: {
         left: 30,
-        marginVertical: 10
+        marginVertical: 10,
+        width: '90%'
     },
-    // userNameTitle: {
-    //     fontSize: 16,
-    //     color: '#fff',
-    // }
 });
 
 export default EditProfile;

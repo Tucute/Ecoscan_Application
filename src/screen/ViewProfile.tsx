@@ -1,7 +1,13 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity, Image, Text } from "react-native";
+import useGetUser from "../hook/useGetUser";
+// import { AntDesign } from "react-native-vector-icons/AntDesign";
+import AntDesign from 'react-native-vector-icons/AntDesign'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const ViewProfile = ({navigation, route}: any) => {
+const ViewProfile = ({navigation, route }: any) => {
+    const {user} = useGetUser();
+    
     return (
         <View style={styles.container}>
             <View style={styles.background}>
@@ -27,7 +33,7 @@ const ViewProfile = ({navigation, route}: any) => {
                     <Text style={styles.edit}>Edit</Text>
                 </TouchableOpacity>
                 <View style={styles.userName}>
-                    <Text style={{ fontSize: 26, color: '#fff', fontWeight: 'bold' }}>Ho Thi Kieu</Text>
+                    <Text style={{ fontSize: 26, color: '#fff', fontWeight: 'bold' }}>{user?.name}</Text>
                 </View>
             </View>
             <View style={styles.componentInfo}>
@@ -36,7 +42,7 @@ const ViewProfile = ({navigation, route}: any) => {
                         source={require('../assets/ViewProfile/userIcon.png')}></Image>
                     <View style={styles.userNameGroup}>
                         <Text style={styles.userNameTitle}>User Name</Text>
-                        <Text style={{color: '#C3C7C7'}}>Ho Thi Kieu</Text>
+                        <Text style={{color: '#C3C7C7'}}>{user?.name}</Text>
                     </View>
                 </View>
                 <View style={styles.componentUserName}>
@@ -44,15 +50,17 @@ const ViewProfile = ({navigation, route}: any) => {
                         source={require('../assets/ViewProfile/emailIcon.png')}></Image>
                     <View style={styles.userNameGroup}>
                         <Text style={styles.userNameTitle}>Email</Text>
-                        <Text style={{color: '#C3C7C7'}}>kieungayngo321@gmail.com</Text>
+                        <Text numberOfLines={1} style={{color: '#C3C7C7', width: '90%'}}>{user?.email}</Text>
                     </View>
                 </View>
                 <View style={styles.componentUserName}>
-                    <Image style={styles.userNameIcon}
-                        source={require('../assets/ViewProfile/passwordIcon.png')}></Image>
+                    {/* <Image style={styles.userNameIcon}
+                        source={require('../assets/ViewProfile/passwordIcon.png')}></Image> */}
+                        <AntDesign name="question" size={30} color="#900" />
+                        <Icon name="rocket" size={30} color="#900" />
                     <View style={styles.userNameGroup}>
-                        <Text style={styles.userNameTitle}>Password</Text>
-                        <Text style={{color: '#C3C7C7'}}>kieupro223</Text>
+                        <Text style={styles.userNameTitle}>Phone</Text>
+                        <Text style={{color: '#C3C7C7'}}>0487384554</Text>
                     </View>
                 </View>
             </View>
@@ -86,7 +94,7 @@ const styles = StyleSheet.create({
     },
     userProfile: {
         position: 'absolute',
-        bottom: 450,
+        bottom: 380,
         alignSelf: 'center',
         alignItems: 'center'
     },
@@ -107,7 +115,6 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         backgroundColor: '#333333',
-        width: 330,
         margin: 10,
         borderRadius: 10,
     },
@@ -115,17 +122,17 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         marginVertical: 350,
-        marginHorizontal: 20,
-        width: 350,
+        alignSelf: 'center',
         borderRadius: 10,
     },
     userNameIcon: {
         alignSelf: 'center',
-        left: 15
+        left: 15,
     },
     userNameGroup: {
         left: 30,
-        marginVertical: 10
+        marginVertical: 10,
+        width: '90%'
     },
     userNameTitle: {
         fontSize: 16,
