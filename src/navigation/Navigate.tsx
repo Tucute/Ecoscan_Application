@@ -23,7 +23,6 @@ const Navigate = () => {
     <GestureHandlerRootView style={{ flex: 1 }}>
     <NavigationContainer>
       <Stack.Navigator>
-      
         <Stack.Screen
           name="LandingPage"
           component={LandingPage}

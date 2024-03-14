@@ -5,9 +5,9 @@ import useGetUser from "../hook/useGetUser";
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const ViewProfile = ({navigation, route }: any) => {
-    const {user} = useGetUser();
-    
+const ViewProfile = ({ navigation, route }: any) => {
+    const { user } = useGetUser();
+
     return (
         <View style={styles.container}>
             <View style={styles.background}>
@@ -38,29 +38,38 @@ const ViewProfile = ({navigation, route }: any) => {
             </View>
             <View style={styles.componentInfo}>
                 <View style={styles.componentUserName}>
-                    <Image style={styles.userNameIcon}
-                        source={require('../assets/ViewProfile/userIcon.png')}></Image>
+                    {/* <Image style={styles.userNameIcon}
+                        source={require('../assets/ViewProfile/userIcon.png')}></Image> */}
+                    <AntDesign style={styles.iconInfo} name="user" size={30} color="#B3CB1D" />
                     <View style={styles.userNameGroup}>
                         <Text style={styles.userNameTitle}>User Name</Text>
-                        <Text style={{color: '#C3C7C7'}}>{user?.name}</Text>
+                        {user && user.name ? (
+                            <Text style={{color: '#C3C7C7'}}>{user?.name}</Text>
+                        ) : (
+                            <Text style={{color: 'red'}}>User name not found!</Text>
+                        )}
                     </View>
                 </View>
                 <View style={styles.componentUserName}>
-                    <Image style={styles.userNameIcon}
-                        source={require('../assets/ViewProfile/emailIcon.png')}></Image>
+                    <AntDesign style={styles.iconInfo} name="email" size={30} color="#B3CB1D" />
                     <View style={styles.userNameGroup}>
                         <Text style={styles.userNameTitle}>Email</Text>
-                        <Text numberOfLines={1} style={{color: '#C3C7C7', width: '90%'}}>{user?.email}</Text>
+                        {user && user.email ? (
+                            <Text numberOfLines={1} style={{ color: '#C3C7C7', width: '90%' }}>{user.email}</Text>
+                        ) : (
+                            <Text style={{ color: 'red', width: '90%' }}>Email not available</Text>
+                        )}
                     </View>
                 </View>
                 <View style={styles.componentUserName}>
-                    {/* <Image style={styles.userNameIcon}
-                        source={require('../assets/ViewProfile/passwordIcon.png')}></Image> */}
-                        <AntDesign name="question" size={30} color="#900" />
-                        <Icon name="rocket" size={30} color="#900" />
+                    <AntDesign style={styles.iconInfo} name="phone" size={30} color="#B3CB1D" />
                     <View style={styles.userNameGroup}>
                         <Text style={styles.userNameTitle}>Phone</Text>
-                        <Text style={{color: '#C3C7C7'}}>0487384554</Text>
+                        {user && user.phone ? (
+                            <Text style={{color: '#C3C7C7'}}>{user?.phone}</Text>
+                        ) : (
+                            <Text style={{color: 'red'}}>Phone number not found!</Text>
+                        )}
                     </View>
                 </View>
             </View>
@@ -125,7 +134,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         borderRadius: 10,
     },
-    userNameIcon: {
+    iconInfo: {
         alignSelf: 'center',
         left: 15,
     },
@@ -137,6 +146,7 @@ const styles = StyleSheet.create({
     userNameTitle: {
         fontSize: 16,
         color: '#fff',
+        fontWeight: 'bold'
     }
 });
 
