@@ -8,6 +8,7 @@ import Profile from '../Profile';
 import History from '../screen/History';
 import Setting from '../screen/Setting';
 import MyQRCode from '../screen/MyQRCode';
+import ViewProfile from '../screen/ViewProfile';
 
 interface OptionsScreenProps {
   drawerIcon: any;
@@ -73,8 +74,8 @@ const DrawerNavigator = () => {
         })}
       />
       <Drawer.Screen
-        name="Profile"
-        component={Profile}
+        name="ViewProfile"
+        component={ViewProfile}
         options={optionsScreen({
           drawerIcon: require('../assets/iconDrawerNavigation/profile.png'),
           backgroundColor: 'white',

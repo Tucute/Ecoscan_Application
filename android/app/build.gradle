@@ -2,10 +2,6 @@ apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
 apply plugin: 'com.google.gms.google-services'
-
-project.ext.vectoricons = [
-    iconFontNames: [ 'MaterialIcons.ttf', 'EvilIcons.ttf' ] // Specify font files
-]
 apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
 
 /**
@@ -121,7 +117,8 @@ dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
     implementation("com.facebook.react:flipper-integration")
-    
+    implementation project(':react-native-vector-icons')
+
     // implementation(project(':react-native-onesignal')){
     //     exclude group: 'com.google.android.gms'
     // }
