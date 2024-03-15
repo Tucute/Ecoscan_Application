@@ -1,29 +1,40 @@
-import {useQuery} from '@tanstack/react-query';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import {Url} from '../url/Url';
+import { Url } from '../url/Url';
+import useGetUser from './useGetUser';
 
 const useGetHistory = () => {
-  const userId = '65d6b7a042ef2f2889ee3637';
+  const { user } = useGetUser();
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
-  const {data, isLoading, isError} = useQuery({
-    queryKey: ['getHistory'],
-    queryFn: async () => {
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!user) return;
+      setIsLoading(true);
+      setIsError(false);
       try {
-        const response = await axios.get(
-          `${Url}/history/getHistorybyId/${userId}`,
-        );
+        const response = await axios.get(`${Url}/history/getHistorybyId/${user._id}`);
         if (response.status === 200) {
-          return response.data;
+          setData(response.data);
+        } else if (response.status === 204) {
+          setData(null);
         } else {
-          throw new Error("Failed to fetch data");
+          setIsError(true);
         }
       } catch (error) {
         console.error('Lỗi: ', error);
-        throw new Error("Lỗi rồi");
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
       }
-    },
-  });
-  return {data, isLoading, isError};
+    };
+
+    fetchData();
+  }, [user]);
+
+  return { data, isLoading, isError };
 };
 
 export default useGetHistory;

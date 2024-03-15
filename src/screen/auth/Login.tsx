@@ -12,17 +12,31 @@ import {
   Platform,
   Keyboard,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import { Formik } from 'formik';
 import { LoginSchema } from './LoginValidation';
 import useLogin from '../../hook/useLogin';
 import useGoogleSignin from '../../hook/useGoogleSignin';
 
-const Login = ({ navigation }: any) => {
+const Login = ({navigation}: any) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [textEntry, setTextEntry] = useState(true);
   const passwordRef: any = useRef();
-  const { handleLogin } = useLogin({ navigation });
-  const { onGoogleButtonPress } = useGoogleSignin({ navigation });
+  const {handleLogin} = useLogin({navigation});
+  const {onGoogleButtonPress} = useGoogleSignin({navigation});
+  const handleGoogleSignin = async () => {
+    await onGoogleButtonPress();
+    setIsLoading(true);
+    navigation.navigate('Root');
+  };
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="#00ff00" />
+      </View>
+    );
+  }
 
   return (
     <Formik
@@ -70,7 +84,6 @@ const Login = ({ navigation }: any) => {
                 <View style={styles.passwordContainer}>
                   <TextInput
                     ref={passwordRef}
-                    style={styles.inputPass}
                     placeholder="Enter Password"
                     placeholderTextColor={'black'}
                     enterKeyHint={'done'}
@@ -102,16 +115,14 @@ const Login = ({ navigation }: any) => {
                 <View style={styles.viewAsocia}>
                   <TouchableOpacity
                     style={styles.viewIcon}
-                    onPress={onGoogleButtonPress}>
+                    onPress={handleGoogleSignin}>
                     <Image
                       style={styles.iconFacebook}
                       source={require('../../assets/iconAuth/iconGoogle.png')}
                     />
                     <Text style={styles.textIcon}>Google</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity
-                    style={styles.viewIcon}
-                  >
+                  <TouchableOpacity style={styles.viewIcon}>
                     <Image
                       style={styles.iconFacebook}
                       source={require('../../assets/iconAuth/iconFacebook.png')}

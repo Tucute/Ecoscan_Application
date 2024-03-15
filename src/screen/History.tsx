@@ -35,7 +35,7 @@ interface History {
 
 const History = ({navigation}: any) => {
   const {data, isLoading, isError} = useGetHistory();
-  const [itemHistory, setItemHistory] = useState<History[]>(useGetHistory().data);
+  const [itemHistory, setItemHistory] = useState<History[]>(data);
   const {handleDeleteHistory} = useDeleteHistory();
   
   const handleDelete = (historyId: String) => {
@@ -66,6 +66,9 @@ const History = ({navigation}: any) => {
           <Text style={styles.textError}>Đã xảy ra lỗi! Vui lòng thử lại</Text>
         ) : (
           <FlatList
+          ListEmptyComponent={
+            <Text style={styles.textError}>List is empty</Text>
+          }
             data={itemHistory}
             keyExtractor={item => item.historyId}
             renderItem={({item}) => (
