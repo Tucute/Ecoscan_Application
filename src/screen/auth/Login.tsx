@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   ImageBackground,
   StyleSheet,
@@ -13,20 +13,20 @@ import {
   Keyboard,
   Alert,
 } from 'react-native';
-import {Formik} from 'formik';
-import {LoginSchema} from './LoginValidation';
+import { Formik } from 'formik';
+import { LoginSchema } from './LoginValidation';
 import useLogin from '../../hook/useLogin';
 import useGoogleSignin from '../../hook/useGoogleSignin';
 
-const Login = ({navigation}: any) => {
+const Login = ({ navigation }: any) => {
   const [textEntry, setTextEntry] = useState(true);
   const passwordRef: any = useRef();
-  const {handleLogin} = useLogin({navigation});
-  const {onGoogleButtonPress} = useGoogleSignin({navigation});
+  const { handleLogin } = useLogin({ navigation });
+  const { onGoogleButtonPress } = useGoogleSignin({ navigation });
 
   return (
     <Formik
-      initialValues={{email: '', password: ''}}
+      initialValues={{ email: '', password: '' }}
       validationSchema={LoginSchema}
       onSubmit={values => {
         setTimeout(() => {
@@ -37,7 +37,7 @@ const Login = ({navigation}: any) => {
           handleLogin(account);
         }, 100);
       }}>
-      {({errors, touched, handleChange, handleBlur, values, handleSubmit}) => (
+      {({ errors, touched, handleChange, handleBlur, values, handleSubmit }) => (
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={styles.container}>
@@ -125,14 +125,16 @@ const Login = ({navigation}: any) => {
                     onPress={handleSubmit}>
                     <Text style={styles.textStartBtn}>Login</Text>
                   </TouchableOpacity>
-                  <Text style={styles.textTransfor}>
-                    Don't have an account?{' '}
+                  <View style={styles.isAccount}>
+                    <Text style={styles.textTransfor}>
+                      Don't have an account?{' '}
+                    </Text>
                     <Text
                       style={styles.textSignup}
                       onPress={() => navigation.navigate('Register')}>
                       Signup
                     </Text>
-                  </Text>
+                  </View>
                 </View>
               </View>
             </ImageBackground>
@@ -183,7 +185,6 @@ const styles = StyleSheet.create({
   },
   textTransfor: {
     textAlign: 'center',
-    marginVertical: 5,
   },
   textSignup: {
     fontWeight: 'bold',
@@ -282,6 +283,11 @@ const styles = StyleSheet.create({
     color: '#22242E',
     marginLeft: 15,
   },
+  isAccount: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginVertical: 5
+  }
 });
 export default Login;
 function setState(arg0: {

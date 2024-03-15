@@ -1,7 +1,6 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity, Image, Text } from "react-native";
 import useGetUser from "../hook/useGetUser";
-// import { AntDesign } from "react-native-vector-icons/AntDesign";
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -32,7 +31,7 @@ const ViewProfile = ({ navigation, route }: any) => {
                 <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
                     <Text style={styles.edit}>Edit</Text>
                 </TouchableOpacity>
-                <View style={styles.userName}>
+                <View>
                     <Text style={{ fontSize: 26, color: '#fff', fontWeight: 'bold' }}>{user?.name}</Text>
                 </View>
             </View>
