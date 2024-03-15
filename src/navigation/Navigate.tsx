@@ -16,6 +16,7 @@ import Profile from '../Profile';
 import ViewProfile from '../screen/ViewProfile';
 import EditProfile from '../screen/EditProfile';
 import Maps from '../screen/store/Map';
+import MapsView from '../screen/store/MapView';
 
 const Stack = createNativeStackNavigator();
 
