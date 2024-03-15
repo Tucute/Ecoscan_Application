@@ -14,6 +14,7 @@ import {
 // import {NavigateType} from '../../models/Navigations';
 import ItemStore from './ItemStore';
 import Map from './Map';
+import MapsView from './MapView';
 // import ReviewScreen from './ReviewScreen';
 
 export default function Store({ navigation }: any) {
@@ -68,7 +69,7 @@ export default function Store({ navigation }: any) {
                     <Text style={styles.titleLarge}>ITEM STORE</Text>
                 </TouchableOpacity>
             </View>
-            {selectedTab === 'MAP' && <Map />}
+            {selectedTab === 'MAP' && <MapsView />}
             {selectedTab === 'ITEMSTORE' && <ItemStore />}
         </View>
     );

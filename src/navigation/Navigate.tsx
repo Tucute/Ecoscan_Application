@@ -25,11 +25,6 @@ const Navigate = () => {
     <GestureHandlerRootView style={{ flex: 1 }}>
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen
-          name="Map"
-          component={MapsView}
-          options={{ headerShown: false }}
-        />
         <Stack.Screen
           name="LandingPage"
           component={LandingPage}

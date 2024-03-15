@@ -10,9 +10,18 @@ import {
   View,
 } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
-
+import MapViewDirections from 'react-native-maps-directions';
+interface Location {
+  latitude: number;
+  longitude: number;
+}
 const MapsView = () => {
-  const [currentLocation, setCurrentLocation] = useState();
+  const GOOGLE_MAPS_APIKEY = 'AIzaSyB39iGJdn-YNRymVVQ1xX09KP3VaAjhk74';
+  const [currentLocation, setCurrentLocation] = useState<Location>();
+  const [destination, setDestination] = useState({
+    latitude: 16.06249,
+    longitude: 108.24196,
+  });
 
   const requestCameraPermission = async () => {
     try {
@@ -41,16 +50,21 @@ const MapsView = () => {
     Geolocation.getCurrentPosition(
       position => {
         const {latitude, longitude} = position.coords;
+        console.log('coords', position.coords);
+
         setCurrentLocation({latitude, longitude});
         console.log('data ở đây: ', latitude, longitude);
       },
       error => Alert.alert('Error', error.message),
-      {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+      {enableHighAccuracy: true, maximumAge: 10000},
     );
   };
 
   useEffect(() => {
     requestCameraPermission();
+    Geolocation.getCurrentPosition(info => {
+      setCurrentLocation(info.coords);
+    });
   }, []);
   console.log('currentLocation: ', currentLocation);
 
@@ -69,11 +83,23 @@ const MapsView = () => {
             longitudeDelta: 0.0421,
           }}>
           <Marker
-            key={12222}
             coordinate={{
               latitude: currentLocation.latitude,
               longitude: currentLocation.longitude,
             }}
+          />
+          <Marker
+            coordinate={{
+              latitude: destination.latitude,
+              longitude: destination.longitude,
+            }}
+          />
+          <MapViewDirections
+            origin={currentLocation}
+            destination={destination}
+            apikey={GOOGLE_MAPS_APIKEY}
+            strokeWidth={3}
+            strokeColor="hotpink"
           />
         </MapView>
       ) : (
