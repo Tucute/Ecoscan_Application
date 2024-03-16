@@ -2,6 +2,8 @@ import React from "react";
 import { View, StyleSheet, TouchableOpacity, Image, Text } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import useGetUser from "../hook/useGetUser";
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Entypo from 'react-native-vector-icons/Entypo'
 
 const EditProfile = ({navigation, route}:any) => {
     const {user} = useGetUser();
@@ -30,31 +32,33 @@ const EditProfile = ({navigation, route}:any) => {
                     <Image style={styles.edit} source={require('../assets/ViewProfile/cameraIcon.png')}></Image>
                 </TouchableOpacity>
                 <View>
-                    <Text style={{ fontSize: 26, color: '#fff', fontWeight: 'bold' }}>Ho Thi Kieu</Text>
+                    <Text style={{ fontSize: 26, color: '#fff', fontWeight: 'bold' }}>{user?.name}</Text>
                 </View>
             </View>
             <View style={styles.componentInfo}>
                 <View style={styles.componentUserName}>
-                    <Image style={styles.userNameIcon}
-                        source={require('../assets/ViewProfile/userIcon.png')}></Image>
+                    <AntDesign style={styles.userNameIcon} name="user" size={30} color="#B3CB1D"></AntDesign>
                     <View style={styles.userNameGroup}>
                         <TextInput style={{color: '#C3C7C7'}}>{user?.name}</TextInput>
                     </View>
                 </View>
                 <View style={styles.componentUserName}>
-                    <Image style={styles.userNameIcon}
-                        source={require('../assets/ViewProfile/emailIcon.png')}></Image>
+                    <Entypo style={styles.userNameIcon} name="mail" size={30} color="#B3CB1D"></Entypo>
                     <View style={styles.userNameGroup}>
                         <TextInput numberOfLines={1} style={{color: '#C3C7C7', width: '90%'}}>{user?.email}</TextInput>
                     </View>
                 </View>
                 <View style={styles.componentUserName}>
-                    <Image style={styles.userNameIcon}
-                        source={require('../assets/ViewProfile/passwordIcon.png')}></Image>
+                    <AntDesign style={styles.userNameIcon} name="phone" size={30} color="#B3CB1D" />
                     <View style={styles.userNameGroup}>
                         <TextInput style={{color: '#C3C7C7'}}>08754566878</TextInput>
                     </View>
                 </View>
+            </View>
+            <View style={styles.fcUpdate}>
+                <TouchableOpacity>
+                    <Text style={styles.textUpdate}>Update</Text>
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -121,10 +125,23 @@ const styles = StyleSheet.create({
         left: 15
     },
     userNameGroup: {
-        left: 30,
+        marginHorizontal: 25,
         marginVertical: 10,
         width: '90%'
     },
+    fcUpdate: {
+        bottom: 60,
+        borderRadius: 10,
+        position: 'absolute',
+        alignSelf: 'center',
+        backgroundColor: '#B2CA1F',
+    },
+    textUpdate: {
+        fontWeight: 'bold',
+        fontSize: 18,
+        marginVertical: 10,
+        marginHorizontal: 30,
+    }
 });
 
 export default EditProfile;
