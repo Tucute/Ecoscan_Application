@@ -7,34 +7,39 @@ import {
   ScrollView,
 } from 'react-native';
 
-const SimilarStore = ({navigation}: any) => {
+interface ShopData {
+  _id: string;
+  shopName: string;
+  phone: number;
+  address: string;
+  latitude: number;
+  longitude: number;
+  price: string;
+}
+interface Item {
+  data: ShopData[];
+  navigation: any;
+}
+
+const SimilarStore = ({navigation, data}: Item) => {
   return (
     <View style={styles.container}>
       <View style={styles.separator} />
-      <TouchableOpacity onPress={() => navigation.navigate('Store')}>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginHorizontal: 10,
-            marginVertical: 5,
-          }}>
-          <Text style={{marginRight: 10}}>•</Text>
-          <Text style={{color: 'blue'}}>Vinmart</Text>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('Store')}>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginHorizontal: 10,
-            marginVertical: 5,
-          }}>
-          <Text style={{marginRight: 10}}>•</Text>
-          <Text style={{color: 'blue'}}>Family</Text>
-        </View>
-      </TouchableOpacity>
+      {data?.map(item => (
+              <TouchableOpacity onPress={() => navigation.navigate('Store', {data: item})}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  marginHorizontal: 10,
+                  marginVertical: 5,
+                }}>
+                <Text style={{marginRight: 10}}>•</Text>
+                <Text style={{color: 'blue'}}>{item.shopName}</Text>
+              </View>
+            </TouchableOpacity>
+      ))}
+
     </View>
   );
 };

@@ -15,6 +15,7 @@ interface Location {
   latitude: number;
   longitude: number;
 }
+
 const MapsView = () => {
   const GOOGLE_MAPS_APIKEY = 'AIzaSyB39iGJdn-YNRymVVQ1xX09KP3VaAjhk74';
   const [currentLocation, setCurrentLocation] = useState<Location>();

@@ -14,7 +14,6 @@ import TheOrigin from '../component/ComponentCompare/TheOrigin';
 
 const CompareInterface = ({ navigation, route }: any) => {
   const item = route.params.item;
-
   return (
     <ScrollView style={styles.container}>
       <View style={styles.componentCompare}>
@@ -64,7 +63,7 @@ const CompareInterface = ({ navigation, route }: any) => {
             <TheOrigin />
           </View>
           <View>
-            <SimilarStore navigation={navigation} />
+            <SimilarStore key={item.item1._id} data={item.item1.shopsData} navigation={navigation} />
           </View>
         </View>
         <View style={styles.secondProductDetail}>
@@ -83,7 +82,7 @@ const CompareInterface = ({ navigation, route }: any) => {
             <TheOrigin />
           </View>
           <View>
-            <SimilarStore navigation={navigation} />
+            <SimilarStore key={item.item2._id} data={item.item2.shopsData} navigation={navigation} />
           </View>
         </View>
       </View>

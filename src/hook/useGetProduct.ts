@@ -2,11 +2,14 @@ import {useMutation, useQuery} from '@tanstack/react-query';
 import axios from 'axios';
 import {Url} from '../url/Url';
 import useGetUser from './useGetUser';
+import { useState } from 'react';
 interface Code {
   barcodeNumber: number;
 }
 const useGetProduct = ({navigation}: any) => {
   const {user} = useGetUser();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
   const mutationProduct = useMutation({
     mutationFn: async (Barcode: Code) => {
         axios
@@ -21,6 +24,8 @@ const useGetProduct = ({navigation}: any) => {
             axios.post(`${Url}/history/postHistory`, history)
             .then(async () => {
               if (res.status === 200) {
+                setIsLoading(false);
+                console.log('sau khi post thành công', isLoading);
                 navigation.navigate('DetailProduct', {data});
               }
             })
@@ -31,13 +36,14 @@ const useGetProduct = ({navigation}: any) => {
         })
         .catch(e => {
           console.log(e.response.data.message);
+          setIsError(true);
         })
     },
   });
   const handleBarcode = (data: Code) => {
     mutationProduct.mutate(data);
   };
-  return {handleBarcode};
+  return {handleBarcode, isLoading, setIsLoading, isError};
 };
 
 export default useGetProduct;

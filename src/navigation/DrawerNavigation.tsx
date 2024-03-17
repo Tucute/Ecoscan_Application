@@ -64,7 +64,7 @@ const DrawerNavigator = () => {
           backgroundColor: 'white',
         })}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="My QRCode"
         component={MyQRCode}
         options={optionsScreen({
@@ -72,7 +72,7 @@ const DrawerNavigator = () => {
           backgroundColor: 'white',
           size: 22,
         })}
-      />
+      /> */}
       <Drawer.Screen
         name="ViewProfile"
         component={ViewProfile}
