@@ -11,9 +11,8 @@ import {RNCamera} from 'react-native-camera';
 import useGetProduct from '../hook/useGetProduct';
 
 const Home = ({navigation}: any) => {
-  const [isLoading, setIsLoading] = useState(false);
   const [flashMode, setFlashMode] = useState<boolean>(false);
-  const {handleBarcode} = useGetProduct({navigation});
+  const {handleBarcode, isLoading, setIsLoading, isError} = useGetProduct({navigation});
   const setFlash = () => {
     setFlashMode(!flashMode);
   };
@@ -100,7 +99,8 @@ const styles = StyleSheet.create({
     width: 250,
     height: 360,
     alignItems: 'center',
-    rowGap: 70,
+    justifyContent: 'center',
+    rowGap: 30,
     columnGap: 40,
   },
   markerTopLeftBox: {
@@ -137,8 +137,9 @@ const styles = StyleSheet.create({
   },
   line: {
     borderColor: '#B3CB1D',
-    borderWidth: 3,
+    borderWidth: 4,
     width: 300,
+    height: 0,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
