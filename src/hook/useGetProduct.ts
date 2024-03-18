@@ -11,7 +11,7 @@ const useGetProduct = ({navigation}: any) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const mutationProduct = useMutation({
-    mutationFn: async (Barcode: Code) => {
+    mutationFn: async (Barcode: Code, ) => {
         axios
         .post(`${Url}/product/getProductByBarcode`, Barcode)
         .then(async res => {

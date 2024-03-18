@@ -30,13 +30,6 @@ const CompareInterface = ({ navigation, route }: any) => {
               <Text style={styles.text}>Choose</Text>
             </TouchableOpacity>
           </View>
-          {/* <View>
-            <Image
-              style={styles.iconCompare}
-              source={{
-                uri: 'https://static.thenounproject.com/png/71604-200.png',
-              }}></Image>
-          </View> */}
           <View style={styles.secondProduct}>
             <Image
               style={styles.componentImage}
