@@ -25,8 +25,8 @@ const SimilarStore = ({navigation, data}: Item) => {
   return (
     <View style={styles.container}>
       <View style={styles.separator} />
-      {data?.map(item => (
-              <TouchableOpacity onPress={() => navigation.navigate('Store', {data: item})}>
+      {data?.map((item, index: number) => (
+              <TouchableOpacity key={index.toString()} onPress={() => navigation.navigate('Store', {data: item})}>
               <View
                 style={{
                   flexDirection: 'row',

@@ -61,7 +61,7 @@ const DetailProduct = ({navigation, route}: any) => {
     <ScrollView style={styles.container}>
       <TouchableOpacity
         style={styles.iconBack}
-        onPress={() => navigation.goBack()}>
+        onPress={() => setI}>
         <Image
           source={require('../assets/CompareInterface-icon/Iconback.png')}></Image>
       </TouchableOpacity>
@@ -89,6 +89,7 @@ const DetailProduct = ({navigation, route}: any) => {
       <View style={styles.viewSimilarProduct}>
         {listItem.map(item => (
           <TouchableOpacity
+            key={item._id}
             style={styles.item}
             onPress={() => Compare(navigation, item)}>
             <TouchableOpacity style={styles.btnCompare} onPress={() => Compare(navigation, item)}>

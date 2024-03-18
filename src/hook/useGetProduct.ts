@@ -25,7 +25,6 @@ const useGetProduct = ({navigation}: any) => {
             .then(async () => {
               if (res.status === 200) {
                 setIsLoading(false);
-                console.log('sau khi post thành công', isLoading);
                 navigation.navigate('DetailProduct', {data});
               }
             })
@@ -35,7 +34,8 @@ const useGetProduct = ({navigation}: any) => {
           }
         })
         .catch(e => {
-          console.log(e.response.data.message);
+          console.log('No result: ', e.response.data.message);
+          setIsLoading(false);
           setIsError(true);
         })
     },
@@ -43,7 +43,7 @@ const useGetProduct = ({navigation}: any) => {
   const handleBarcode = (data: Code) => {
     mutationProduct.mutate(data);
   };
-  return {handleBarcode, isLoading, setIsLoading, isError};
+  return {handleBarcode, isLoading, setIsLoading, isError, setIsError};
 };
 
 export default useGetProduct;

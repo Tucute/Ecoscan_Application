@@ -4,6 +4,7 @@ import {
   View,
   Image,
   ActivityIndicator,
+  Text,
 } from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import QRCodeScanner from 'react-native-qrcode-scanner';
@@ -12,7 +13,9 @@ import useGetProduct from '../hook/useGetProduct';
 
 const Home = ({navigation}: any) => {
   const [flashMode, setFlashMode] = useState<boolean>(false);
-  const {handleBarcode, isLoading, setIsLoading, isError} = useGetProduct({navigation});
+  const {handleBarcode, isLoading, setIsLoading, isError, setIsError} = useGetProduct({
+    navigation,
+  });
   const setFlash = () => {
     setFlashMode(!flashMode);
   };
@@ -20,7 +23,6 @@ const Home = ({navigation}: any) => {
     setIsLoading(true);
     const barcode = e.data.toString();
     const data = {barcodeNumber: barcode};
-    console.log(data);
     if (flashMode) {
       setFlashMode(false);
     }
@@ -30,6 +32,27 @@ const Home = ({navigation}: any) => {
     return (
       <View style={styles.container}>
         <ActivityIndicator size="large" color="#00ff00" />
+      </View>
+    );
+  }
+  if (isError) {
+    return (
+      <View style={styles.viewNoResult}>
+        <TouchableOpacity
+          style={styles.iconBack}
+          onPress={() => setIsError(false)}>
+          <Image
+            source={require('../assets/CompareInterface-icon/Iconback.png')}></Image>
+        </TouchableOpacity>
+        <View style={styles.container}>
+          <Image
+            style={styles.imgNoResult}
+            source={{
+              uri: 'https://cdn-icons-png.flaticon.com/512/6134/6134065.png',
+            }}
+          />
+          <Text style={styles.textNoResult}>No result</Text>
+        </View>
       </View>
     );
   }
@@ -88,6 +111,27 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
+  },
+  viewNoResult: {
+    flex: 0.8,
+  },
+  iconBack: {
+    justifyContent: 'flex-start',
+    width: '100%',
+    marginTop: 10,
+    marginLeft: 20,
+  },
+  textNoResult: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  imgNoResult: {
+    width: 100,
+    height: 100,
+    objectFit: 'contain',
+    marginBottom: 20,
   },
   centerText: {
     flex: 1,
