@@ -25,7 +25,7 @@ const CompareInterface = ({ navigation, route }: any) => {
           <View style={styles.firstProduct}>
             <Image
               style={styles.componentImage}
-              source={{ uri: item.item1.image[2].url }}></Image>
+              source={{ uri: item.item1.image[0].url }}></Image>
             <TouchableOpacity style={styles.componentText} onPress={() => navigation.navigate('Recycle')}>
               <Text style={styles.text}>Choose</Text>
             </TouchableOpacity>
@@ -44,7 +44,7 @@ const CompareInterface = ({ navigation, route }: any) => {
         <View style={styles.firstProductDetail}>
           <Image
             style={{ width: 50, height: 50, marginTop: 20, marginLeft: 50, borderRadius: 15, objectFit: 'contain' }}
-            source={{ uri: item.item1.image[2].url }}></Image>
+            source={{ uri: item.item1.image[0].url }}></Image>
           <Text numberOfLines={1} style={styles.leftProductlText}>{item.item1.name}</Text>
           <View>
             <PriceProductCompare price={item.item1.price} />

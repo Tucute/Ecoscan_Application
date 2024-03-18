@@ -61,7 +61,7 @@ const DetailProduct = ({navigation, route}: any) => {
     <ScrollView style={styles.container}>
       <TouchableOpacity
         style={styles.iconBack}
-        onPress={() => setI}>
+        onPress={() => navigation.goBack()}>
         <Image
           source={require('../assets/CompareInterface-icon/Iconback.png')}></Image>
       </TouchableOpacity>
