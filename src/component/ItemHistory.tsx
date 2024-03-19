@@ -33,7 +33,7 @@ const ItemHistory = ({method, data, navigation}: Item) => {
   const {handleBarcode} = useGetProduct({navigation});
 
   const getDetail = () => {
-    const barcode = {barcodeNumber: data.productData.barcode_number};
+    const barcode = {barcodeNumber: data.productData.barcode_number, condition: false}
     handleBarcode(barcode);
   }
   return (

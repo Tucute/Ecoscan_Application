@@ -25,21 +25,23 @@ const SimilarStore = ({navigation, data}: Item) => {
   return (
     <View style={styles.container}>
       <View style={styles.separator} />
+      <Text style={styles.textSale}>On sales: </Text>
       {data?.map((item, index: number) => (
-              <TouchableOpacity key={index.toString()} onPress={() => navigation.navigate('Store', {data: item})}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  marginHorizontal: 10,
-                  marginVertical: 5,
-                }}>
-                <Text style={{marginRight: 10}}>•</Text>
-                <Text style={{color: 'blue'}}>{item.shopName}</Text>
-              </View>
-            </TouchableOpacity>
+        <TouchableOpacity
+          key={index.toString()}
+          onPress={() => navigation.navigate('Store', {data: item})}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginHorizontal: 10,
+              marginVertical: 5,
+            }}>
+            <Text style={{marginRight: 10}}>•</Text>
+            <Text style={{color: 'blue', fontStyle: 'italic', textDecorationLine: 'underline',}}>{item.shopName}</Text>
+          </View>
+        </TouchableOpacity>
       ))}
-
     </View>
   );
 };
@@ -47,6 +49,10 @@ const SimilarStore = ({navigation, data}: Item) => {
 const styles = StyleSheet.create({
   container: {
     flex: 0,
+  },
+  textSale: {
+    paddingLeft: 10,
+    fontWeight: 'bold',
   },
   separator: {
     borderBottomColor: '#BA8F8F',

@@ -1,188 +1,61 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-
-
-export default function Map() {
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  ActivityIndicator,
+  FlatList,
+} from 'react-native';
+import useGetProductShop from '../../hook/useGetProductShop';
+import ItemProduct from '../../component/itemProduct';
+interface DataShop {
+  _id: string;
+  shopName?: string;
+  address?: string | undefined;
+  latitude: number;
+  longitude: number;
+}
+interface Shop {
+  data: DataShop;
+}
+const ItemStore = ({data}: Shop) => {
+  const {data: productShop, isError, isLoading} = useGetProductShop(data._id);
+  if (isError) {
+    <View style={styles.container}>
+      <Text>Have any error! Try again</Text>
+    </View>;
+  }
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="#00ff00" />
+      </View>
+    );
+  }
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.listItems}>
-        <View style={styles.section}>
-          <Text style={styles.sectionName}>Pending</Text>
-          <TouchableOpacity style={styles.seeAll}>
-            <Text>View Only</Text>
-            <Image source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}} />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.listItems}>
-          <View style={styles.item}>
-            <Image
-              style={styles.image}
-              source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}}
-            />
-            <View style={styles.detailItems}>
-              <Text style={styles.time}>Wed, Apr 10 •8:30AM - 17:30 PM</Text>
-              <View style={styles.times_group}>
-                <View style={styles.listItemDetail}>
-                  <Text style={styles.detail}>Challenge: Clear the city</Text>
-                  <View style={styles.times_group}>
-                    <Image source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}} />
-                    <Text style={{
-                      fontSize: 12,
-                      color: "#363636"
-                    }}>Phuoc My • Son Tra • Da Nang</Text>
-                  </View>
-                </View>
-                <View style={styles.displayCenter}>
-                  <Image source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}} style={styles.editGroup} />
-                </View>
-              </View>
-
-              <Text style={styles.hour}>1m ago.</Text>
-            </View>
-          </View>
-          <View style={styles.item}>
-            <Image
-              style={styles.image}
-              source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}}
-            />
-            <View style={styles.detailItems}>
-              <Text style={styles.time}>Wed, Apr 28 •8:30AM - 17:30 PM</Text>
-              <View style={styles.times_group}>
-                <View style={styles.listItemDetail}>
-                  <Text style={styles.detail}>Challenge: Clean the beach</Text>
-                  <View style={styles.times_group}>
-                    <Image source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}} />
-                    <Text style={{
-                      fontSize: 12,
-                      color: "#363636"
-                    }}>Phuoc My • Son Tra • Da Nang</Text>
-                  </View>
-                </View>
-                <View style={styles.displayCenter}>
-                  <Image source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}} style={styles.editGroup} />
-                </View>
-              </View>
-
-              <Text style={styles.hour}>1m ago.</Text>
-            </View>
-          </View>
-          <View style={styles.item}>
-            <Image
-              style={styles.image}
-              source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}}
-            />
-            <View style={styles.detailItems}>
-              <Text style={styles.time}>Wed, Apr 10 •8:30AM - 17:30 PM</Text>
-              <View style={styles.times_group}>
-                <View style={styles.listItemDetail}>
-                  <Text style={styles.detail}>Challenge: Clear the city</Text>
-                  <View style={styles.times_group}>
-                    <Image source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}} />
-                    <Text style={{
-                      fontSize: 12,
-                      color: "#363636"
-                    }}>Phuoc My • Son Tra • Da Nang</Text>
-                  </View>
-                </View>
-                <View style={styles.displayCenter}>
-                  <Image source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}} style={styles.editGroup} />
-                </View>
-              </View>
-
-              <Text style={styles.hour}>1m ago.</Text>
-            </View>
-          </View>
-          <View style={styles.item}>
-            <Image
-              style={styles.image}
-              source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}}
-            />
-            <View style={styles.detailItems}>
-              <Text style={styles.time}>Wed, Apr 28 •8:30AM - 17:30 PM</Text>
-              <View style={styles.times_group}>
-                <View style={styles.listItemDetail}>
-                  <Text style={styles.detail}>Challenge: Clean the beach</Text>
-                  <View style={styles.times_group}>
-                    <Image source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}} />
-                    <Text style={{
-                      fontSize: 12,
-                      color: "#363636"
-                    }}>Phuoc My • Son Tra • Da Nang</Text>
-                  </View>
-                </View>
-                <View style={styles.displayCenter}>
-                  <Image source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}} style={styles.editGroup} />
-                </View>
-              </View>
-
-              <Text style={styles.hour}>1m ago.</Text>
-            </View>
-          </View>
-          <View style={styles.item}>
-            <Image
-              style={styles.image}
-              source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}}
-            />
-            <View style={styles.detailItems}>
-              <Text style={styles.time}>Wed, Apr 10 •8:30AM - 17:30 PM</Text>
-              <View style={styles.times_group}>
-                <View style={styles.listItemDetail}>
-                  <Text style={styles.detail}>Challenge: Clear the city</Text>
-                  <View style={styles.times_group}>
-                    <Image source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}} />
-                    <Text style={{
-                      fontSize: 12,
-                      color: "#363636"
-                    }}>Phuoc My • Son Tra • Da Nang</Text>
-                  </View>
-                </View>
-                <View style={styles.displayCenter}>
-                  <Image source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}} style={styles.editGroup} />
-                </View>
-              </View>
-
-              <Text style={styles.hour}>1m ago.</Text>
-            </View>
-          </View>
-          <View style={styles.item}>
-            <Image
-              style={styles.image}
-              source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}}
-            />
-            <View style={styles.detailItems}>
-              <Text style={styles.time}>Wed, Apr 28 •8:30AM - 17:30 PM</Text>
-              <View style={styles.times_group}>
-                <View style={styles.listItemDetail}>
-                  <Text style={styles.detail}>Challenge: Clean the beach</Text>
-                  <View style={styles.times_group}>
-                    <Image source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}} />
-                    <Text style={{
-                      fontSize: 12,
-                      color: "#363636"
-                    }}>Phuoc My • Son Tra • Da Nang</Text>
-                  </View>
-                </View>
-                <View style={styles.displayCenter}>
-                  <Image source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6VTfyJC1TR_CSoCs22ivd2eT5ZI3U7Qt8tw&usqp=CAU'}} style={styles.editGroup} />
-                </View>
-              </View>
-
-              <Text style={styles.hour}>1m ago.</Text>
-            </View>
-          </View>
-        </View>
-      </ScrollView>
+      <FlatList
+        contentContainerStyle={styles.listItems}
+        data={productShop}
+        keyExtractor={item => item._id}
+        renderItem={({item}) => <ItemProduct key={item._id} dataProductShop={item} />}
+      />
     </View>
   );
-}
-
+};
+export default ItemStore;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     top: 10,
+    marginHorizontal: 10,
   },
   listItems: {
-    rowGap: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   displayCenter: {
     justifyContent: 'center',
@@ -195,7 +68,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 110,
     borderRadius: 15,
-
   },
   listItemDetail: {
     width: '80%',
@@ -230,7 +102,7 @@ const styles = StyleSheet.create({
   address: {
     fontSize: 13,
     marginLeft: 4,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     color: '#747688',
   },
   editGroup: {
@@ -239,7 +111,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
     alignSelf: 'flex-end',
-    paddingVertical: 5
+    paddingVertical: 5,
   },
   times_group: {
     flexDirection: 'row',
@@ -253,7 +125,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     paddingHorizontal: 20,
-
   },
   seeAll: {
     flexDirection: 'row',

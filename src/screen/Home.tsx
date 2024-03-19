@@ -5,6 +5,7 @@ import {
   Image,
   ActivityIndicator,
   Text,
+  Animated,
 } from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import QRCodeScanner from 'react-native-qrcode-scanner';
@@ -12,22 +13,41 @@ import {RNCamera} from 'react-native-camera';
 import useGetProduct from '../hook/useGetProduct';
 
 const Home = ({navigation}: any) => {
+  const moveAnimation = useRef(new Animated.Value(70)).current;
   const [flashMode, setFlashMode] = useState<boolean>(false);
-  const {handleBarcode, isLoading, setIsLoading, isError, setIsError} = useGetProduct({
-    navigation,
-  });
+  const {handleBarcode, isLoading, setIsLoading, isError, setIsError} =
+    useGetProduct({
+      navigation,
+    });
   const setFlash = () => {
     setFlashMode(!flashMode);
   };
   const onSuccess = (e: any) => {
     setIsLoading(true);
     const barcode = e.data.toString();
-    const data = {barcodeNumber: barcode};
+    const data = {barcodeNumber: barcode, condition: true};
     if (flashMode) {
       setFlashMode(false);
     }
     handleBarcode(data);
   };
+  useEffect(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(moveAnimation, {
+          toValue: -100, // Move up
+          duration: 1000,
+          useNativeDriver: true,
+        }),
+        Animated.timing(moveAnimation, {
+          toValue: 70, // Move back to the original position
+          duration: 1000,
+          useNativeDriver: true,
+        }),
+      ]),
+    ).start();
+  }, [moveAnimation]);
+
   if (isLoading) {
     return (
       <View style={styles.container}>
@@ -59,6 +79,8 @@ const Home = ({navigation}: any) => {
   return (
     <QRCodeScanner
       onRead={onSuccess}
+      cameraTimeout={0}
+      reactivateTimeout={0}
       flashMode={flashMode ? RNCamera.Constants.FlashMode.torch : null}
       showMarker={true}
       customMarker={
@@ -67,7 +89,17 @@ const Home = ({navigation}: any) => {
             <View style={styles.markerTopLeftBox} />
             <View style={styles.markerTopRightBox} />
           </View>
-          <View style={styles.line} />
+          <Animated.View
+            style={[
+              styles.animatedView,
+              {
+                transform: [
+                  {
+                    translateY: moveAnimation,
+                  },
+                ],
+              },
+            ]}></Animated.View>
           <View style={{flexDirection: 'row', columnGap: 50}}>
             <View style={styles.markerLeftBottomBox} />
             <View style={styles.markerRightBottomBox} />
@@ -112,6 +144,21 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  animatedView: {
+    borderColor: '#B3CB1D',
+    borderWidth: 4,
+    width: 300,
+    height: 0,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 3.84,
+    elevation: 5,
+    backgroundColor: '#333333',
   },
   viewNoResult: {
     flex: 0.8,

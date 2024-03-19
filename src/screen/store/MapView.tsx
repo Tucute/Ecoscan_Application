@@ -11,17 +11,30 @@ import {
 } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import MapViewDirections from 'react-native-maps-directions';
-interface Location {
+import axios from 'axios';
+import {boolean} from 'yup';
+interface ShopLocation {
+  shopName?: string;
+  address?: string | undefined;
+  latitude: string;
+  longitude: string;
+}
+interface CurrentLocation {
   latitude: number;
   longitude: number;
 }
+interface MapsView {
+  data: ShopLocation;
+}
 
-const MapsView = () => {
+const MapsView = ({data}: MapsView) => {
   const GOOGLE_MAPS_APIKEY = 'AIzaSyB39iGJdn-YNRymVVQ1xX09KP3VaAjhk74';
-  const [currentLocation, setCurrentLocation] = useState<Location>();
+  const [currentLocation, setCurrentLocation] = useState<CurrentLocation>();
   const [destination, setDestination] = useState({
-    latitude: 16.06249,
-    longitude: 108.24196,
+    address: data.address,
+    shopName: data.shopName,
+    latitude: parseInt(data.latitude),
+    longitude: parseInt(data.longitude),
   });
 
   const requestCameraPermission = async () => {
@@ -37,7 +50,6 @@ const MapsView = () => {
         },
       );
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log('You can use the Location');
         getCurrentLocation();
       } else {
         console.log('Location permission denied');
@@ -49,25 +61,38 @@ const MapsView = () => {
 
   const getCurrentLocation = () => {
     Geolocation.getCurrentPosition(
-      position => {
-        const {latitude, longitude} = position.coords;
-        console.log('coords', position.coords);
-
+      (info: any) => {
+        const {latitude, longitude} = info.coords;
+        console.log(info);
         setCurrentLocation({latitude, longitude});
-        console.log('data ở đây: ', latitude, longitude);
       },
-      error => Alert.alert('Error', error.message),
-      {enableHighAccuracy: true, maximumAge: 10000},
-    );
+      (error: any) => Alert.alert('Error', error.message),
+      {enableHighAccuracy: false, setTimeout: 3000, maximumAge: 10000},
+      )
+  };
+
+  const fetchCurrentLocation = async () => {
+    try {
+      const respon = await axios.get(
+        `https://us1.locationiq.com/v1/reverse?key=pk.8d9318f063a56e90900ec9c914c24baf&lat=${destination.latitude}&lon=${destination.longitude}&format=json&`,
+      );
+      console.log('DATA', respon.data.display_name);
+      const {lat, lon, display_name, type} = respon.data;
+      setDestination(pre => ({
+        ...pre,
+        address: display_name,
+      }));
+    } catch (error) {
+      
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     requestCameraPermission();
-    Geolocation.getCurrentPosition(info => {
-      setCurrentLocation(info.coords);
-    });
+    getCurrentLocation();
+    fetchCurrentLocation();
   }, []);
-  console.log('currentLocation: ', currentLocation);
 
   return (
     <View style={{flex: 1}}>
@@ -88,8 +113,14 @@ const MapsView = () => {
               latitude: currentLocation.latitude,
               longitude: currentLocation.longitude,
             }}
-          />
+            title="Current your location"
+            description={currentLocation.address}>
+            <View style={styles.imageMarkerContainers}>
+              <View style={styles.address}></View>
+            </View>
+          </Marker>
           <Marker
+            title={destination.address}
             coordinate={{
               latitude: destination.latitude,
               longitude: destination.longitude,
@@ -104,10 +135,30 @@ const MapsView = () => {
           />
         </MapView>
       ) : (
-        <Text>Không có dữ liệu</Text>
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>
+            Please grant access to use the map
+          </Text>
+        </View>
       )}
     </View>
   );
 };
+const styles = StyleSheet.create({
+  imageMarkerContainers: {
+    width: 30,
+    height: 30,
+    borderRadius: 30,
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  address: {
+    width: 20,
+    height: 20,
+    borderRadius: 30,
+    backgroundColor: 'red',
+  },
+});
 
 export default MapsView;
