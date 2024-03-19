@@ -21,7 +21,7 @@ const DetailRecycle = () => {
         </Text>
       </View>
       <View style={style.toolsnecessary}>
-        <Text style={[style.recycleText, {flexWrap: 'wrap'}]}>
+        <Text style={[style.recycleText, {flexWrap: 'wrap', fontWeight: 'bold'}]}>
           Bạn sẽ cần: {'\n'}
           <View>
             <Text style={{marginVertical: 5, color: '#FFFFFF'}}>
@@ -35,27 +35,25 @@ const DetailRecycle = () => {
         </Text>
       </View>
       <View style={style.making}>
-        <Text style={[style.instruction, {flexWrap: 'wrap'}]}>
+        <Text style={[style.instruction, {flexWrap: 'wrap', fontWeight: 'bold'}]}>
           Cách làm: {'\n'}
-          <View>
+          <View style={style.stepsRecycle}>
             <Text style={{marginVertical: 5, color: '#FFFFFF'}}>
               Step 1:
-              <Text> Dùng dao rọc giấy cắt chai nhựa 1,5l làm đôi.</Text>
+              <Text> Dùng dao rọc giấy cắt chai nhựa 1,5l làm đôi. </Text>
             </Text>
             <Text style={{marginBottom: 5, color: '#FFFFFF'}}>
               Step 2:
-              <Text>
+              <Text style={[style.recycleText, {flexWrap: 'wrap'}]}>
                 {' '}
-                Dùng bút vẽ phác họa hình mèo hoặc thỏ rồi sau đó bạn cắt theo
-                đường vẽ..{' '}
+                Dùng bút vẽ phác họa hình mèo hoặc thỏ rồi {'\n'}sau đó bạn cắt theo đường vẽ..{' '}
               </Text>
             </Text>
             <Text style={{marginBottom: 5, color: '#FFFFFF'}}>
               Step 3:
               <Text>
                 {' '}
-                Sơn màu trắng cho chai nhựa rồi dùng bút khắc gỗ để trang trí
-                hình mèo theo ý thích.
+                Sơn màu trắng cho chai nhựa rồi dùng bút khắc {'\n'}gỗ để trang trí hình mèo theo ý thích.
               </Text>
             </Text>
           </View>
@@ -74,12 +72,12 @@ const DetailRecycle = () => {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 10,
+    paddingHorizontal: 5,
     backgroundColor: '#333333',
   },
   title: {
     marginHorizontal: 20,
-    marginVertical: 20,
+    marginVertical: 15,
   },
   titleText: {
     color: '#FFFFFF',
@@ -94,16 +92,18 @@ const style = StyleSheet.create({
   instruction: {
     color: '#FFFFFF',
     display: 'flex',
+    marginVertical: 10
   },
   making: {
     marginHorizontal: 20,
     marginVertical: 5,
-    width: '90%',
   },
   summary: {
     marginHorizontal: 20,
-    marginVertical: 5,
   },
+  firstStep: {
+    flexWrap: 'wrap'
+  }
 });
 
 export default DetailRecycle;
