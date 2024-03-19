@@ -4,11 +4,13 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import LandingPage from '../screen/auth/LandingPage';
 import Login from '../screen/auth/Login';
 import Register from '../screen/auth/Register';
+import UploadImage from '../screen/UploadImage';
 import DetailProduct from '../screen/DetailProduct';
 import CompareInterface from '../screen/CompareInterface';
 import DrawerNavigator from './DrawerNavigation';
 import RecyclingIns from '../screen/RecycleIns';
 import Store from '../screen/store/Index';
+import Notification from '../screen/Notification';
 import Setting from '../screen/Setting';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Notification from '../screen/Notification';
@@ -35,6 +37,16 @@ const Navigate = () => {
         <Stack.Screen
           name="Register"
           component={Register}
+          options={{headerShown: false}}
+        /> 
+        <Stack.Screen
+          name="store"
+          component={Store}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="RecycleIns"
+          component={RecyclingIns}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -86,6 +98,16 @@ const Navigate = () => {
           name="EditProfile"
           component={EditProfile}
           options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Setting"
+          component={Setting}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Notification"
+          component={Notification}
+          options={{headerShown: true}}
         />
       </Stack.Navigator>
     </NavigationContainer>

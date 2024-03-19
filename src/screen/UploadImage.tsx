@@ -14,9 +14,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import DocumentPicker from 'react-native-document-picker';
 
-
 const UploadImage = ({ route }: any) => {
-
     const [url, setUrl] = useState('');
     const [selectedImageUri, setSelectedImageUri] = useState<string | null>(null);
     const [imageSelected, setImageSelected] = useState(false);

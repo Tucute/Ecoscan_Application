@@ -103,7 +103,7 @@ const DetailProduct = ({navigation, route}: any) => {
           </TouchableOpacity>
         ))}
       </View>
-    </ScrollView>
+    </View>
   );
 };
 const styles = StyleSheet.create({
@@ -111,7 +111,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#333333',
   },
-
   iconBack: {
     justifyContent: 'flex-start',
     width: '100%',

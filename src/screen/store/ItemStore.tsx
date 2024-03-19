@@ -82,7 +82,6 @@ const styles = StyleSheet.create({
     height: 79,
     borderRadius: 10,
   },
-
   time: {
     color: '#216C53',
     fontSize: 12,
@@ -117,7 +116,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 5,
-    gap: 12,
   },
   section: {
     flexDirection: 'row',
