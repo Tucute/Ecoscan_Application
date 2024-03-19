@@ -56,6 +56,11 @@ const EditProfile = ({navigation, route}:any) => {
                     </View>
                 </View>
             </View>
+            <View style={styles.componentUpdate}>
+                <TouchableOpacity>
+                    <Text style={styles.update}>Update</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };
@@ -125,6 +130,19 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         width: '90%'
     },
+    componentUpdate: {
+        backgroundColor: '#B3CB1D',
+        alignSelf: 'center',
+        bottom: 230,
+        width: 120,
+        borderRadius: 10,
+    },
+    update: {
+        textAlign: 'center',
+        marginVertical: 12,
+        fontSize: 18,
+        fontWeight: 'bold',
+    }
 });
 
 export default EditProfile;
