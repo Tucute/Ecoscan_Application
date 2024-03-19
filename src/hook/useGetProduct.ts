@@ -5,6 +5,7 @@ import useGetUser from './useGetUser';
 import { useState } from 'react';
 interface Code {
   barcodeNumber: number;
+  condition: boolean;
 }
 const useGetProduct = ({navigation}: any) => {
   const {user} = useGetUser();
@@ -21,21 +22,25 @@ const useGetProduct = ({navigation}: any) => {
               barcodeNumber: Barcode.barcodeNumber,
             };
             const data = res.data;
-            axios.post(`${Url}/history/postHistory`, history)
-            .then(async () => {
-              if (res.status === 200) {
-                setIsLoading(false);
-                console.log('sau khi post thành công', isLoading);
-                navigation.navigate('DetailProduct', {data});
-              }
-            })
-            .catch(e => {
-              console.log(e.response.data.message);
-            });
+            if (Barcode.condition) {
+              await axios.post(`${Url}/history/postHistory`, history)
+              .then(() => {
+                if (res.status === 200) {
+                  console.log('Added history');
+                }
+              })
+              .catch(e => {
+                console.log(e.response.data.message);
+                setIsError(true);
+              });
+            }
+            setIsLoading(false);
+            navigation.navigate('DetailProduct', {data});
           }
         })
         .catch(e => {
-          console.log(e.response.data.message);
+          console.log('No result: ', e.response.data.message);
+          setIsLoading(false);
           setIsError(true);
         })
     },
@@ -43,7 +48,7 @@ const useGetProduct = ({navigation}: any) => {
   const handleBarcode = (data: Code) => {
     mutationProduct.mutate(data);
   };
-  return {handleBarcode, isLoading, setIsLoading, isError};
+  return {handleBarcode, isLoading, setIsLoading, isError, setIsError};
 };
 
 export default useGetProduct;

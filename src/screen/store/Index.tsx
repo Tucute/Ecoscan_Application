@@ -63,8 +63,8 @@ export default function Store({ navigation, route }: any) {
                     <Text style={styles.titleLarge}>ITEM STORE</Text>
                 </TouchableOpacity>
             </View>
-            {selectedTab === 'MAP' && <MapsView />}
-            {selectedTab === 'ITEMSTORE' && <ItemStore />}
+            {selectedTab === 'MAP' && <MapsView data={data}/>}
+            {selectedTab === 'ITEMSTORE' && <ItemStore data={data}/>}
         </View>
     );
 }

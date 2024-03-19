@@ -77,18 +77,12 @@ const DetailProduct = ({navigation, route}: any) => {
       </View>
       <View style={styles.titleList}>
         <Text style={styles.textTitleList}>Similar products</Text>
-        {/* <View style={styles.viewDropdown}>
-          <Text style={styles.textTitleSoft}>Soft by price</Text>
-          <Image
-            source={require('../assets/iconGeneral/chevron_down.png')}
-            resizeMode="cover"
-          />
-        </View> */}
       </View>
 
       <View style={styles.viewSimilarProduct}>
         {listItem.map(item => (
           <TouchableOpacity
+            key={item._id}
             style={styles.item}
             onPress={() => Compare(navigation, item)}>
             <TouchableOpacity style={styles.btnCompare} onPress={() => Compare(navigation, item)}>
@@ -108,40 +102,6 @@ const DetailProduct = ({navigation, route}: any) => {
             </View>
           </TouchableOpacity>
         ))}
-        {/* <FlatList
-          contentContainerStyle={styles.listSimilarProduct}
-          ListEmptyComponent={() => (
-            <View style={styles.listSimilarProduct}>
-              <Text style={styles.emptyProduct}>
-                There are no related products
-              </Text>
-            </View>
-          )}
-          numColumns={2}
-          data={listItem}
-          keyExtractor={item => item._id}
-          renderItem={({item}) => (
-            <View style={styles.item}>
-              <TouchableOpacity
-                style={styles.btnCompare}
-                onPress={() => Compare(navigation, item)}>
-                <Text style={styles.textBtn}>Compare</Text>
-              </TouchableOpacity>
-              <Image
-                style={styles.imageItem}
-                source={{
-                  uri: item.image[0].url,
-                }}
-              />
-              <View style={styles.viewInfoItem}>
-                <Text numberOfLines={1} style={styles.nameItem}>
-                  {item.name}
-                </Text>
-                <Text style={styles.priceItem}>{item.price} VND</Text>
-              </View>
-            </View>
-          )}
-        /> */}
       </View>
     </ScrollView>
   );

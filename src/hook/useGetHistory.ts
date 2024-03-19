@@ -30,7 +30,6 @@ const useGetHistory = () => {
         setIsLoading(false);
       }
     };
-
     fetchData();
   }, [user]);
 
