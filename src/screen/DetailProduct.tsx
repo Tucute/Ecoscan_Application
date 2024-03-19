@@ -11,6 +11,8 @@ import {
   ImageBackground,
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
+import ItemShop from '../component/ItemShop';
+import ItemDetail from '../component/ItemDetail';
 interface ImageSource {
   _id: string;
   url: string;
@@ -24,18 +26,27 @@ interface Item {
   name: string;
   subCategoryId: string;
   origin: string;
+  shopsData: Shop[];
+}
+interface Shop {
+  _id: string;
+  shopName: string;
+  phone: number;
+  address: string;
+  latitude: number;
+  longitude: number;
+  price: string;
 }
 interface ItemImage {
   id: string;
   url: string;
 }
-const {width} = Dimensions.get('window');
 
 const DetailProduct = ({navigation, route}: any) => {
   const [itemProduct, setItemProduct] = useState(route.params.data);
-  const itemImage = itemProduct.data.image;
+  const stores: Shop[] = itemProduct.data.shopsData;
+  const itemImage: ItemImage[] = itemProduct.data.image;
   const listItem: Item[] = itemProduct.relatedProduct;
-  const carouselRef = useRef<Carousel<ItemImage>>(null);
 
   const Compare = (navigaiton: any, data: Item) => {
     const item1: Item = itemProduct.data;
@@ -47,73 +58,50 @@ const DetailProduct = ({navigation, route}: any) => {
     navigaiton.navigate('Compare', {item});
   };
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <TouchableOpacity
         style={styles.iconBack}
         onPress={() => navigation.goBack()}>
         <Image
           source={require('../assets/CompareInterface-icon/Iconback.png')}></Image>
       </TouchableOpacity>
-      <Carousel
-        data={itemImage}
-        renderItem={({item}) => (
-          <View style={styles.viewImage}>
-            <Image
-              source={{uri: item.url}}
-              style={styles.imgProduct}
-              resizeMode="cover"></Image>
-          </View>
-        )}
-        ref={carouselRef}
-        sliderWidth={width}
-        itemWidth={width - 20}
-        enableSnap
-      />
+      <ItemDetail itemImage={itemImage} />
       <View style={styles.viewDetail}>
         <Text style={styles.nameProduct}>{itemProduct.data.name}</Text>
         <Text style={styles.ingredient}>{itemProduct.data.ingredient}</Text>
-        <Text style={styles.price}>{itemProduct.data.price} đ</Text>
+        <Text style={styles.price}>{itemProduct.data.price} VND</Text>
+        <View style={styles.viewRecommentStore}>
+          <Text style={styles.price}>On sale in stores: </Text>
+          <ItemShop dataShop={stores} navigation={navigation} />
+        </View>
       </View>
       <View style={styles.titleList}>
         <Text style={styles.textTitleList}>Similar products</Text>
-        <View style={styles.viewDropdown}>
-          <Text style={styles.textTitleSoft}>Soft by price</Text>
-          <Image
-            source={require('../assets/iconGeneral/chevron_down.png')}
-            resizeMode="cover"
-          />
-        </View>
       </View>
 
       <View style={styles.viewSimilarProduct}>
-        <FlatList
-          contentContainerStyle={styles.listSimilarProduct}
-          numColumns={2}
-          data={listItem}
-          keyExtractor={item => item._id}
-          renderItem={({item}) => (
-            <View style={styles.item}>
-              <TouchableOpacity
-                style={styles.btnCompare}
-                onPress={() => Compare(navigation, item)}>
-                <Text style={styles.textBtn}>Compare</Text>
-              </TouchableOpacity>
-              <Image
-                style={styles.imageItem}
-                source={{
-                  uri: item.image[0].url,
-                }}
-              />
-              <View style={styles.viewInfoItem}>
-                <Text style={styles.nameItem}>{item.name}</Text>
-                <Text numberOfLines={2} style={styles.originItem}>
-                  {item.origin}
-                </Text>
-                <Text style={styles.priceItem}>{item.price} VND</Text>
-              </View>
+        {listItem.map(item => (
+          <TouchableOpacity
+            key={item._id}
+            style={styles.item}
+            onPress={() => Compare(navigation, item)}>
+            <TouchableOpacity style={styles.btnCompare} onPress={() => Compare(navigation, item)}>
+              <Text style={styles.textBtn}>Compare</Text>
+            </TouchableOpacity>
+            <Image
+              style={styles.imageItem}
+              source={{
+                uri: item.image[0].url,
+              }}
+            />
+            <View style={styles.viewInfoItem}>
+              <Text numberOfLines={1} style={styles.nameItem}>
+                {item.name}
+              </Text>
+              <Text style={styles.priceItem}>{item.price} VND</Text>
             </View>
-          )}
-        />
+          </TouchableOpacity>
+        ))}
       </View>
     </View>
   );
@@ -123,28 +111,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#333333',
   },
-  viewImage: {
-    flex: 1,
-    borderRadius: 15,
-    margin: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   iconBack: {
     justifyContent: 'flex-start',
     width: '100%',
     marginTop: 10,
     marginLeft: 20,
   },
-  imgProduct: {
-    borderRadius: 15,
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-    backgroundColor: 'red',
-  },
   viewDetail: {
-    marginHorizontal: 20,
+    marginHorizontal: 15,
   },
   nameProduct: {
     color: '#fff',
@@ -160,8 +134,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
   },
+  viewRecommentStore: {
+    // justifyContent: 'space-between',
+  },
+  storeName: {
+    color: 'blue',
+    fontSize: 12,
+  },
   viewSimilarProduct: {
-    flex: 1,
+    flexDirection: 'row',
+    marginHorizontal: 15,
+    flexGrow: 1,
   },
   titleList: {
     flexDirection: 'row',
@@ -187,7 +170,7 @@ const styles = StyleSheet.create({
   listSimilarProduct: {
     flexDirection: 'column',
     flex: 1,
-    marginHorizontal: 10,
+    rowGap: 20,
   },
   item: {
     width: 150,
@@ -211,7 +194,7 @@ const styles = StyleSheet.create({
     height: 'auto',
     backgroundColor: '#fff',
     borderRadius: 10,
-    marginTop: 10,
+    marginTop: 3,
     paddingHorizontal: 5,
     bottom: -5,
   },
@@ -240,6 +223,11 @@ const styles = StyleSheet.create({
   textBtn: {
     color: '#fff',
     padding: 1,
+  },
+  emptyProduct: {
+    color: '#fff',
+    fontSize: 24,
+    fontWeight: 'bold',
   },
 });
 export default DetailProduct;

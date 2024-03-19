@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react';
 import {ImageBackground, StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import useGetUser from '../../hook/useGetUser';
 interface User {
   name: string;
   email: string;
@@ -9,21 +10,7 @@ interface User {
   phone?: string;
 }
 const LandingPage = ({navigation}: any) => {
-  const [user, setUser] = useState<User>();
-  useEffect(() => {
-    const getUser = async () => {
-      try {
-        const jsonValue = await AsyncStorage.getItem('user');
-        if (jsonValue) {
-          setUser(JSON.parse(jsonValue));
-        }
-      } catch (e) {
-        console.log('Not login yet: ', e);
-      }
-    };
-    getUser();
-  }, [user])
-
+  const {user} = useGetUser();
   return (
       <ImageBackground
         resizeMode="cover"
@@ -57,6 +44,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logo: {
+    width: 250,
+    height: 250,
+    objectFit: 'contain',
     justifyContent: 'center',
     alignItems: 'center',
   },

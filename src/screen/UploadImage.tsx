@@ -7,11 +7,11 @@ import {
     Image,
     Alert,
     Modal,
-    ScrollView
+    ScrollView,
+    TextInput
 } from 'react-native';
 import axios from 'axios';
 import React, { useState } from 'react';
-import { TextInput,Button } from 'react-native-paper';
 import DocumentPicker from 'react-native-document-picker';
 
 const UploadImage = ({ route }: any) => {

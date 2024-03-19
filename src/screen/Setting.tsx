@@ -2,7 +2,7 @@ import { useState } from "react";
 import { View, StyleSheet, TouchableOpacity, Image, Dimensions, Text } from "react-native";
 import { Switch } from "react-native-gesture-handler";
 
-const Setting = () => {
+const Setting = ({navigation, route}: any) => {
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
@@ -11,7 +11,7 @@ const Setting = () => {
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.iconBack}>
+            <TouchableOpacity style={styles.iconBack} onPress={() => navigation.goBack()}>
                 <Image
                     style={styles.icBack}
                     source={require('../assets/CompareInterface-icon/Iconback.png')}>

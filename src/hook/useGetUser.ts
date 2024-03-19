@@ -1,14 +1,38 @@
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useEffect, useState} from 'react';
+
+interface User {
+  _id: string;
+  name: string;
+  email: string;
+}
 
 const useGetUser = () => {
-    const {data} = useQuery({
-        queryKey: ['getUser'],
-        queryFn: () => {
-            axios.get('https://6471cfab6a9370d5a41ab469.mockapi.io/user')
+  const [user, setUser] = useState<User | null>(null);
+  const [isFetchingUser, setIsFetchingUser] = useState<boolean>(true);
+  const [fetchedOnce, setFetchedOnce] = useState<boolean>(false);
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const jsonValue = await AsyncStorage.getItem('user');        
+        if (jsonValue) {
+          setUser(JSON.parse(jsonValue));
         }
-    })
-    return {data}
+      } catch (e) {
+        console.log('Not login yet: ', e);
+      } finally {
+        setIsFetchingUser(false);
+        setFetchedOnce(true);
+      }
+    };
+
+    if (!fetchedOnce) {
+      getUser();
+    }
+  }, []);
+
+  return {user, isFetchingUser};
 };
 
 export default useGetUser;

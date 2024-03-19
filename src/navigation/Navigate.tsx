@@ -1,15 +1,11 @@
 import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Home from '../screen/Home';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import LandingPage from '../screen/auth/LandingPage';
 import Login from '../screen/auth/Login';
 import Register from '../screen/auth/Register';
 import UploadImage from '../screen/UploadImage';
 import DetailProduct from '../screen/DetailProduct';
-import Test from '../Profile';
-import History from '../screen/History';
-import BottomTab from './BottomTab';
 import CompareInterface from '../screen/CompareInterface';
 import DrawerNavigator from './DrawerNavigation';
 import RecyclingIns from '../screen/RecycleIns';
@@ -17,19 +13,17 @@ import Store from '../screen/store/Index';
 import Notification from '../screen/Notification';
 import Setting from '../screen/Setting';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-
+import Notification from '../screen/Notification';
+import Profile from '../Profile';
+import ViewProfile from '../screen/ViewProfile';
+import EditProfile from '../screen/EditProfile';
 const Stack = createNativeStackNavigator();
 
 const Navigate = () => {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='uploadImage'>
-      <Stack.Screen
-          name="uploadImage"
-          component={UploadImage}
-          options={{headerShown: false}}
-        />
+      <Stack.Navigator>
         <Stack.Screen
           name="LandingPage"
           component={LandingPage}
@@ -56,11 +50,6 @@ const Navigate = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Bottomtab"
-          component={BottomTab}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
           name="Root"
           component={DrawerNavigator}
           options={{headerShown: false}}
@@ -76,7 +65,7 @@ const Navigate = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="store"
+          name="Store"
           component={Store}
           options={{ headerShown: false }}
         />
@@ -86,13 +75,28 @@ const Navigate = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="BottomTab"
-          component={BottomTab}
+          name="profile"
+          component={Profile}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="test"
-          component={Test}
+          name="Setting"
+          component={Setting}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Notification"
+          component={Notification}
+          options={{headerShown: true}}
+        />
+        <Stack.Screen
+          name="ViewProfile"
+          component={ViewProfile}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="EditProfile"
+          component={EditProfile}
           options={{ headerShown: false }}
         />
         <Stack.Screen

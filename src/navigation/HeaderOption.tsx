@@ -13,8 +13,7 @@ const HeaderOptions = ({navigation}: any) => {
         <TouchableOpacity
         style={{
             alignItems: 'center',
-            marginLeft: 38,
-            width: '50%',
+            width: '71%',
         }}
           onPress={() => {
             navigation.navigate('Main');
@@ -32,7 +31,7 @@ const HeaderOptions = ({navigation}: any) => {
       <View
         style={{
           flexDirection: 'row',
-          marginRight: 10,
+          marginRight: 6,
           justifyContent: 'flex-end',
         }}>
         <TouchableOpacity

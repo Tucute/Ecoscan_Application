@@ -8,26 +8,21 @@ import {
     Alert,
     Button,
 } from 'react-native';
-// import ButtonProfile from '../../components/ButtonProfile';
-// import ButtonProfile2 from '../../components/ButtonProfile2';
-// import HeaderProfile from '../../components/HeaderProfile';
-// import {NavigateType} from '../../models/Navigations';
 import ItemStore from './ItemStore';
-import Map from './Map';
-// import ReviewScreen from './ReviewScreen';
+import MapsView from './MapView';
 
-export default function Store({ navigation }: any) {
+export default function Store({ navigation, route }: any) {
+    const {data} = route.params;
     const handleFllow = () => {
         Alert.alert('Oke m');
     };
-    const [selectedTab, setSelectedTab] = useState('ABOUT');
+    const [selectedTab, setSelectedTab] = useState('MAP');
     const handleMessage = () => {
-        console.log('fsdfsdfsd');
+        Alert.alert('Oke m');
     };
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                {/* <HeaderProfile navigation={navigation} /> */}
                 <TouchableOpacity onPress={() => navigation.goBack()}>
                     <Image source={require('../../assets/CompareInterface-icon/Iconback.png')}></Image>
                 </TouchableOpacity>
@@ -35,23 +30,21 @@ export default function Store({ navigation }: any) {
 
             <View style={styles.profile}>
             <Image style={{ width: 100, height: 100, borderRadius: 100, }} source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1CKV1qQbHFwMNC86w5HKXruYHMEQip5rHYAgqfdSH732oRE8LIYLSF3VelgvVf0P8OtQ&usqp=CAU' }} />
-                <Text style={styles.profileName}>Vinmart</Text>
+                <Text style={styles.profileName}>{data.shopName}</Text>
                 <Text style={styles.itemNumber}>
-                    <Text style={{fontWeight: 'bold'}}>Phone:</Text> 0344463243
+                    <Text style={{fontWeight: 'bold'}}>Phone:</Text> {data.phone}
                 </Text>
                 <Text style={styles.titleMedium}>
-                    <Text style={{fontWeight: 'bold'}}>Address:</Text> 101B, Le Huu Trac, Phuoc My, Sơn Tra, Da Nang
+                    <Text style={{fontWeight: 'bold'}}>Address:</Text> {data.address}
                 </Text>
             </View>
             <View style={styles.actionInteraction}>
                 <Button
                     title="Rating"
-                    // icon={require('../../assets/CompareInterface-icon/Iconback.png')}
                     onPress={handleFllow}
                 />
                 <Button
                     title="Message"
-                    // icon={require('../../assets/CompareInterface-icon/Iconback.png')}
                     onPress={handleMessage}
                 />
             </View>
@@ -69,16 +62,9 @@ export default function Store({ navigation }: any) {
                     ]}>
                     <Text style={styles.titleLarge}>ITEM STORE</Text>
                 </TouchableOpacity>
-                {/* <TouchableOpacity
-          onPress={() => setSelectedTab('REVIEWS')}
-          style={[styles.tab, selectedTab === 'REVIEWS' && styles.selectedTab]}>
-          <Text style={styles.titleLarge}>REVIEWS</Text>
-        </TouchableOpacity> */}
             </View>
-
-            {selectedTab === 'MAP' && <Map />}
-            {selectedTab === 'ITEMSTORE' && <ItemStore />}
-            {/* {selectedTab === 'REVIEWS' && <ReviewScreen />} */}
+            {selectedTab === 'MAP' && <MapsView data={data}/>}
+            {selectedTab === 'ITEMSTORE' && <ItemStore data={data}/>}
         </View>
     );
 }

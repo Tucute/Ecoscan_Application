@@ -1,130 +1,61 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-
-
-export default function Map() {
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  ActivityIndicator,
+  FlatList,
+} from 'react-native';
+import useGetProductShop from '../../hook/useGetProductShop';
+import ItemProduct from '../../component/itemProduct';
+interface DataShop {
+  _id: string;
+  shopName?: string;
+  address?: string | undefined;
+  latitude: number;
+  longitude: number;
+}
+interface Shop {
+  data: DataShop;
+}
+const ItemStore = ({data}: Shop) => {
+  const {data: productShop, isError, isLoading} = useGetProductShop(data._id);
+  if (isError) {
+    <View style={styles.container}>
+      <Text>Have any error! Try again</Text>
+    </View>;
+  }
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="#00ff00" />
+      </View>
+    );
+  }
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.listItems}>
-        <View style={styles.section}>
-          <Text style={styles.sectionName}>Product</Text>
-        </View>
-        <View style={styles.listItems}>
-          <View style={styles.item}>
-            <Image
-              style={styles.image}
-              source={{uri: 'https://res.cloudinary.com/djveiec3v/image/upload/v1708920769/Ecoscan/nuoc-suoi-aquafina-chai-500ml-3_mqrrz6.jpg'}}
-            />
-            <View style={styles.detailItems}>
-              <View style={styles.times_group}>
-                <View style={styles.listItemDetail}>
-                  <Text style={styles.detail}>Aquafina</Text>
-                  <View style={styles.times_group}>
-                    <Text style={{
-                      fontSize: 12,
-                      color: "#363636"
-                    }}>Thùng nước Aquafina 335ml</Text>
-                  </View>
-                  <Text style={styles.hour}>109.000đ</Text>
-                </View>
-              </View>
-            </View>
-            <View style={{borderRightWidth: 1, borderColor: 'black'}} />
-          </View>
-          <View style={styles.item}>
-            <Image
-              style={styles.image}
-              source={{uri: 'https://res.cloudinary.com/djveiec3v/image/upload/v1708920769/Ecoscan/nuoc-suoi-aquafina-chai-500ml-3_mqrrz6.jpg'}}
-            />
-            <View style={styles.detailItems}>
-              <View style={styles.times_group}>
-                <View style={styles.listItemDetail}>
-                  <Text style={styles.detail}>Aquafina</Text>
-                  <View style={styles.times_group}>
-                    <Text style={{
-                      fontSize: 12,
-                      color: "#363636"
-                    }}>Thùng nước Aquafina 335ml</Text>
-                  </View>
-                  <Text style={styles.hour}>109.000đ</Text>
-                </View>
-              </View>
-            </View>
-          </View>
-          <View style={styles.item}>
-            <Image
-              style={styles.image}
-              source={{uri: 'https://res.cloudinary.com/djveiec3v/image/upload/v1708920769/Ecoscan/nuoc-suoi-aquafina-chai-500ml-3_mqrrz6.jpg'}}
-            />
-            <View style={styles.detailItems}>
-              <View style={styles.times_group}>
-                <View style={styles.listItemDetail}>
-                  <Text style={styles.detail}>Aquafina</Text>
-                  <View style={styles.times_group}>
-                    <Text style={{
-                      fontSize: 12,
-                      color: "#363636"
-                    }}>Thùng nước Aquafina 335ml</Text>
-                  </View>
-                  <Text style={styles.hour}>109.000đ</Text>
-                </View>
-              </View>
-            </View>
-          </View>
-
-          <View style={styles.item}>
-            <Image
-              style={styles.image}
-              source={{uri: 'https://res.cloudinary.com/djveiec3v/image/upload/v1708920769/Ecoscan/nuoc-suoi-aquafina-chai-500ml-3_mqrrz6.jpg'}}
-            />
-            <View style={styles.detailItems}>
-              <View style={styles.times_group}>
-                <View style={styles.listItemDetail}>
-                  <Text style={styles.detail}>Aquafina</Text>
-                  <View style={styles.times_group}>
-                    <Text style={{
-                      fontSize: 12,
-                      color: "#363636"
-                    }}>Thùng nước Aquafina 335ml</Text>
-                  </View>
-                  <Text style={styles.hour}>109.000đ</Text>
-                </View>
-              </View>
-            </View>
-          </View>
-          <View style={styles.item}>
-            <Image
-              style={styles.image}
-              source={{uri: 'https://res.cloudinary.com/djveiec3v/image/upload/v1708920769/Ecoscan/nuoc-suoi-aquafina-chai-500ml-3_mqrrz6.jpg'}}
-            />
-            <View style={styles.detailItems}>
-              <View style={styles.times_group}>
-                <View style={styles.listItemDetail}>
-                  <Text style={styles.detail}>Aquafina</Text>
-                  <View style={styles.times_group}>
-                    <Text style={{
-                      fontSize: 12,
-                      color: "#363636"
-                    }}>Thùng nước Aquafina 335ml</Text>
-                  </View>
-                  <Text style={styles.hour}>109.000đ</Text>
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
-      </ScrollView>
+      <FlatList
+        contentContainerStyle={styles.listItems}
+        data={productShop}
+        keyExtractor={item => item._id}
+        renderItem={({item}) => <ItemProduct key={item._id} dataProductShop={item} />}
+      />
     </View>
   );
-}
-
+};
+export default ItemStore;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     top: 10,
+    marginHorizontal: 10,
   },
   listItems: {
-    rowGap: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   displayCenter: {
     justifyContent: 'center',
@@ -137,7 +68,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 110,
     borderRadius: 15,
-
   },
   listItemDetail: {
     width: '80%',
@@ -171,7 +101,7 @@ const styles = StyleSheet.create({
   address: {
     fontSize: 13,
     marginLeft: 4,
-    fontWeight: "bold",
+    fontWeight: 'bold',
     color: '#747688',
   },
   editGroup: {
@@ -180,7 +110,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
     alignSelf: 'flex-end',
-    paddingVertical: 5
+    paddingVertical: 5,
   },
   times_group: {
     flexDirection: 'row',
@@ -193,7 +123,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     paddingHorizontal: 20,
-
   },
   seeAll: {
     flexDirection: 'row',

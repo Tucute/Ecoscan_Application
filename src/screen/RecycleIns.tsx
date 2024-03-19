@@ -37,7 +37,8 @@ const style = StyleSheet.create({
         height,
     },
     componentRecycle: {
-        flex: 1.5,
+        // flex: 1,
+        marginBottom: 20,
         backgroundColor: '#fff',
     },
     iconBack: {
