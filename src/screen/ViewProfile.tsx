@@ -73,6 +73,11 @@ const ViewProfile = ({ navigation, route }: any) => {
                     </View>
                 </View>
             </View>
+            <View style={styles.componentLogout}>
+                <TouchableOpacity>
+                    <Text style={styles.logout}>Log out</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };
@@ -147,6 +152,19 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#fff',
         fontWeight: 'bold'
+    },
+    componentLogout: {
+        backgroundColor: '#B3CB1D',
+        alignSelf: 'center',
+        bottom: 140,
+        width: 120,
+        borderRadius: 10,
+    },
+    logout: {
+        textAlign: 'center',
+        marginVertical: 12,
+        fontSize: 18,
+        fontWeight: 'bold',
     }
 });
 
