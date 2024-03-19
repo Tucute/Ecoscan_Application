@@ -2,6 +2,7 @@ import React from "react";
 import { View, StyleSheet, TouchableOpacity, Image, Text } from "react-native";
 import useGetUser from "../hook/useGetUser";
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import Entypo from 'react-native-vector-icons/AntDesign'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const ViewProfile = ({ navigation, route }: any) => {
@@ -50,7 +51,7 @@ const ViewProfile = ({ navigation, route }: any) => {
                     </View>
                 </View>
                 <View style={styles.componentUserName}>
-                    <AntDesign style={styles.iconInfo} name="email" size={30} color="#B3CB1D" />
+                    <Entypo style={styles.iconInfo} name="mail" size={30} color="#B3CB1D" />
                     <View style={styles.userNameGroup}>
                         <Text style={styles.userNameTitle}>Email</Text>
                         {user && user.email ? (
@@ -71,6 +72,11 @@ const ViewProfile = ({ navigation, route }: any) => {
                         )}
                     </View>
                 </View>
+            </View>
+            <View style={styles.componentLogout}>
+                <TouchableOpacity>
+                    <Text style={styles.logout}>Log out</Text>
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -146,6 +152,19 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#fff',
         fontWeight: 'bold'
+    },
+    componentLogout: {
+        backgroundColor: '#B3CB1D',
+        alignSelf: 'center',
+        bottom: 140,
+        width: 120,
+        borderRadius: 10,
+    },
+    logout: {
+        textAlign: 'center',
+        marginVertical: 12,
+        fontSize: 18,
+        fontWeight: 'bold',
     }
 });
 
