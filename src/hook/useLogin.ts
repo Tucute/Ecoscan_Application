@@ -23,6 +23,7 @@ const useLogin = ({navigation}: any) => {
         })
         .catch(e => {
           console.log(e);
+          Alert.alert('Error', 'Email or password is invalid');
         });
     },
   })

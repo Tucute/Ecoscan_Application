@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import MapView, {Marker} from 'react-native-maps';
 import {
+  ActivityIndicator,
   Alert,
   Button,
   PermissionsAndroid,
@@ -29,6 +30,7 @@ interface MapsView {
 
 const MapsView = ({data}: MapsView) => {
   const GOOGLE_MAPS_APIKEY = 'AIzaSyB39iGJdn-YNRymVVQ1xX09KP3VaAjhk74';
+  const [isLoading, setIsLoading] = useState(false);
   const [currentLocation, setCurrentLocation] = useState<CurrentLocation>();
   const [destination, setDestination] = useState({
     address: data.address,
@@ -39,6 +41,7 @@ const MapsView = ({data}: MapsView) => {
 
   const requestCameraPermission = async () => {
     try {
+      setIsLoading(true);
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
         {
@@ -68,7 +71,8 @@ const MapsView = ({data}: MapsView) => {
       },
       (error: any) => Alert.alert('Error', error.message),
       {enableHighAccuracy: false, setTimeout: 3000, maximumAge: 10000},
-      )
+    );
+    setIsLoading(false);
   };
 
   const fetchCurrentLocation = async () => {
@@ -83,7 +87,6 @@ const MapsView = ({data}: MapsView) => {
         address: display_name,
       }));
     } catch (error) {
-      
       console.log(error);
     }
   };
@@ -94,6 +97,13 @@ const MapsView = ({data}: MapsView) => {
     fetchCurrentLocation();
   }, []);
 
+  if (isLoading) {
+    return (
+      <View style={{flex: 1}}>
+        <ActivityIndicator size="large" color="#00ff00" />
+      </View>
+    );
+  }
   return (
     <View style={{flex: 1}}>
       {currentLocation ? (
@@ -136,9 +146,12 @@ const MapsView = ({data}: MapsView) => {
         </MapView>
       ) : (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>
+          {/* <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>
             Please grant access to use the map
-          </Text>
+          </Text> */}
+          <View style={{flex: 1}}>
+            <ActivityIndicator size="large" color="#00ff00" />
+          </View>
         </View>
       )}
     </View>
