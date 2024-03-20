@@ -39,14 +39,14 @@ export default function Store({ navigation, route }: any) {
                 </Text>
             </View>
             <View style={styles.actionInteraction}>
-                <Button
+                {/* <Button
                     title="Rating"
                     onPress={handleFllow}
                 />
                 <Button
                     title="Message"
                     onPress={handleMessage}
-                />
+                /> */}
             </View>
             <View style={styles.listActions}>
                 <TouchableOpacity
@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
     },
     profile: {
         alignItems: 'center',
+        paddingHorizontal: 5,
         marginBottom: 16,
     },
     profileImage: {
