@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { View, StyleSheet, TouchableOpacity, Image, Dimensions, Text } from "react-native";
 import { Switch } from "react-native-gesture-handler";
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import IconMaterial from 'react-native-vector-icons/MaterialIcons'
 
 const Setting = ({navigation, route}: any) => {
     const [isEnabled, setIsEnabled] = useState(false);
@@ -12,44 +14,39 @@ const Setting = ({navigation, route}: any) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.iconBack} onPress={() => navigation.goBack()}>
-                <Image
-                    style={styles.icBack}
-                    source={require('../assets/CompareInterface-icon/Iconback.png')}>
-                </Image>
+                <Icon name="chevron-left-circle" style={styles.icBack}/>
             </TouchableOpacity>
             <View>
                 <View>
-                    <Text style={styles.setting}>Settings</Text>
+                    <Text style={styles.setting}>Setting</Text>
                 </View>
                 <View style={styles.componentVibrate}>
-                    <Image style={styles.iconVibrate}
-                        source={require('../assets/IconSetting/Vibrate.png')}></Image>
+                    <Icon name="vibrate" style={styles.iconVibrate} />
                     <View style={styles.textVibrate}>
                         <Text style={styles.Vibrate}>Vibate</Text>
                         <Text style={styles.textContent}>Vibration when scan is done.</Text>
                     </View>
                     <Switch
-                    style={{marginHorizontal: 100}}
-                        trackColor={{ false: '#767577', true: '#81b0ff' }}
-                        thumbColor={isEnabled ? '#f5dd4b' : '#fff'}
+                    style={{marginHorizontal: 80}}
+                        trackColor={{ false: '#767577', true: '#B3CB1D' }}
+                        thumbColor={isEnabled ? '#B3CB1D' : '#fff'}
                         ios_backgroundColor="#3e3e3e"
                         onValueChange={toggleSwitch}
                         value={isEnabled}
                     />
                 </View>
                 <View style={styles.componentBeep}>
-                    <Image style={styles.iconVibrate}
-                        source={require('../assets/IconSetting/Beep.png')}></Image>
+                    <Icon name="bell-ring-outline" style={styles.iconVibrate}/>
                     <View style={styles.textVibrate}>
                         <Text style={styles.Vibrate}>Beep</Text>
                         <Text style={styles.textContent}>Beep when scan is done.</Text>
                     </View>
                     <Switch
-                        style={{marginHorizontal: 120}}
-                        trackColor={{ false: '#767577', true: '#81b0ff' }}
-                        thumbColor={isBeepEnabled ? '#f5dd4b' : '#fff'}
+                        style={{marginHorizontal: 107}}
+                        trackColor={{ false: '#767577', true: '#B3CB1D' }}
+                        thumbColor={isBeepEnabled ? '#B3CB1D' : '#fff'}
                         ios_backgroundColor="#3e3e3e"
-                        onValueChange={beepSwitch}
+                        onValue      Change={beepSwitch}
                         value={isBeepEnabled}
                     />
                 </View>
@@ -67,8 +64,7 @@ const Setting = ({navigation, route}: any) => {
                 </View>
                 <View style={styles.bodySupport}>
                     <View style={styles.rateUs}>
-                        <Image style={styles.iconVibrate}
-                            source={require('../assets/IconSetting/completed.png')}></Image>
+                        <Icon name="check-decagram" style={styles.iconVibrate}/>
                         <View style={styles.textVibrate}>
                             <Text style={styles.Vibrate}>Rate Us</Text>
                             <Text style={styles.textContent}>Your best reward to us.</Text>
@@ -76,8 +72,7 @@ const Setting = ({navigation, route}: any) => {
                     </View>
                     <View style={{ borderBottomWidth: 1, borderBottomColor: '#C3C7C7', width: '100%' }}></View>
                     <View style={styles.share}>
-                        <Image style={styles.iconVibrate}
-                            source={require('../assets/IconSetting/ic-share.png')}></Image>
+                        <Icon name="share-variant" style={styles.iconVibrate}/>
                         <View style={styles.textVibrate}>
                             <Text style={styles.Vibrate}>Share</Text>
                             <Text style={styles.textContent}>Share app with others.</Text>
@@ -85,8 +80,7 @@ const Setting = ({navigation, route}: any) => {
                     </View>
                     <View style={{ borderBottomWidth: 1, borderBottomColor: '#C3C7C7', width: '100%' }}></View>
                     <View style={styles.privacyPolicy}>
-                        <Image style={styles.iconVibrate}
-                            source={require('../assets/IconSetting/privacy.png')}></Image>
+                        <IconMaterial name="privacy-tip" style={styles.iconVibrate}/>
                         <View style={styles.textVibrate}>
                             <Text style={styles.Vibrate}>Privacy Policy</Text>
                             <Text style={styles.textContent}>Follow our policies that benefits you.</Text>
@@ -109,8 +103,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 30,
     },
     icBack: {
-        backgroundColor: '#B3CB1D',
-        borderRadius: 100
+        fontSize:40,
+        color:'#B3CB1D'
     },
     setting: {
         color: '#B3CB1D',
@@ -130,7 +124,9 @@ const styles = StyleSheet.create({
     },
     iconVibrate: {
         alignSelf: 'center',
-        left: 15
+        left: 15,
+        color:'#B3CB1D',
+        fontSize:25,
     },
     textVibrate: {
         left: 30,
