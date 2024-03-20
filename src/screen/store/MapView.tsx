@@ -21,6 +21,7 @@ interface ShopLocation {
   longitude: string;
 }
 interface CurrentLocation {
+  address?: string;
   latitude: number;
   longitude: number;
 }
