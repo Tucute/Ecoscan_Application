@@ -42,7 +42,7 @@ const DrawerNavigator = () => {
 
   return (
     <Drawer.Navigator
-      initialRouteName="Main"
+      initialRouteName="Home"
       screenOptions={{headerShown: true}}>
       <Drawer.Screen
         name="Home"

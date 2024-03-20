@@ -12,7 +12,7 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 import {RNCamera} from 'react-native-camera';
 import useGetProduct from '../hook/useGetProduct';
 
-const Home = ({navigation}: any) => {
+const HomeScreen = ({navigation}: any) => {
   const moveAnimation = useRef(new Animated.Value(70)).current;
   const [flashMode, setFlashMode] = useState<boolean>(false);
   const {handleBarcode, isLoading, setIsLoading, isError, setIsError} =
@@ -278,4 +278,4 @@ const styles = StyleSheet.create({
   iconFlash: {},
 });
 
-export default Home;
+export default HomeScreen;
