@@ -25,7 +25,7 @@ interface Item {
   ingredient: string;
   name: string;
   subCategoryId: string;
-  origin: string;
+  manufacturer: string;
   shopsData: Shop[];
 }
 interface Shop {
@@ -98,6 +98,7 @@ const DetailProduct = ({navigation, route}: any) => {
               <Text numberOfLines={1} style={styles.nameItem}>
                 {item.name}
               </Text>
+              <Text style={styles.manufacturer}>Manufacturer: {item.manufacturer}</Text>
               <Text style={styles.priceItem}>{item.price} VND</Text>
             </View>
           </TouchableOpacity>
@@ -200,12 +201,16 @@ const styles = StyleSheet.create({
     bottom: -5,
   },
   nameItem: {
-    fontSize: 16,
+    fontSize: 12,
     color: '#000',
     fontWeight: 'bold',
     paddingTop: 5,
   },
   originItem: {
+    color: '#000',
+  },
+  manufacturer: {
+    fontSize: 12,
     color: '#000',
   },
   priceItem: {

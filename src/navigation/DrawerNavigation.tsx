@@ -4,7 +4,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import {useNavigation} from '@react-navigation/native';
 import HeaderOptions from './HeaderOption';
 import BottomTab from './BottomTab';
-import Profile from '../Profile';
+import Profile from '../screen/Profile';
 import History from '../screen/History';
 import Setting from '../screen/Setting';
 import MyQRCode from '../screen/MyQRCode';
@@ -75,7 +75,7 @@ const DrawerNavigator = () => {
       /> */}
       <Drawer.Screen
         name="ViewProfile"
-        component={ViewProfile}
+        component={Profile}
         options={optionsScreen({
           drawerIcon: require('../assets/iconDrawerNavigation/profile.png'),
           backgroundColor: 'white',
