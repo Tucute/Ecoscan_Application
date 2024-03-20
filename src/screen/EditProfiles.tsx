@@ -38,7 +38,7 @@ const EditProfiles = ({ navigation }: any) => {
                 </Image>
             </TouchableOpacity>
             <View style={styles.headerProfile}>
-                <View style={styles.profileTitle}>
+                <View>
                     <Text style={styles.profileText}>Account</Text>
                 </View>
                 <View style={styles.profileImage}>
@@ -66,25 +66,25 @@ const EditProfiles = ({ navigation }: any) => {
                     </View>
                 </View>
                 <View style={styles.componentUserName}>
-                    <Zocial style={styles.userNameIcon} name="email" size={30} color="#B3CB1D"></Zocial>
+                    <Zocial style={styles.userNameIcon} name="email" size={30} color="#7052ff"></Zocial>
                     <View style={styles.userNameGroup}>
                         <TextInput numberOfLines={1} style={{ color: '#C3C7C7', width: '90%' }}>{user?.email}</TextInput>
                     </View>
                 </View>
                 <View style={styles.componentUserName}>
-                    <AntDesign style={styles.userNameIcon} name="phone" size={30} color="#B3CB1D" />
+                    <AntDesign style={styles.userNameIcon} name="phone" size={30} color="#7052ff" />
                     <View style={styles.userNameGroup}>
                         <TextInput style={{ color: '#C3C7C7' }}>08754566878</TextInput>
                     </View>
                 </View>
+                <View style={styles.fcUpdate}>
+                    <TouchableOpacity style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                        <Text style={styles.textUpdate}>Update</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
 
-            <View style={styles.fcUpdate}>
-                <TouchableOpacity style={{ flexDirection: 'row', alignSelf: 'center' }}>
-                    <Text style={styles.textUpdate}>Sign out</Text>
-                    <FontAwesome style={{ alignSelf: 'center', marginLeft: 10 }} name='sign-out' size={30} />
-                </TouchableOpacity>
-            </View>
+
         </View>
     );
 };
@@ -135,37 +135,11 @@ const styles = StyleSheet.create({
         fontSize: 22,
         fontWeight: 'bold',
     },
-    // componentInfo: {
-    //   top: 260,
-    // },
-    styleUser: {
-        borderRadius: 100,
-        width: 100,
-        alignSelf: 'center',
-    },
-    componentAccount: {
-        backgroundColor: '#3E3D3D',
-        flexDirection: 'row',
-        borderRadius: 15,
-        width: "85%",
-        height: 60,
-        shadowColor: 'rgba(0, 0, 0, 0.5)',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 1,
-        shadowRadius: 4,
-        elevation: 4,
-        marginVertical: 10,
-        justifyContent: 'space-evenly',
-        marginHorizontal: 30,
-    },
     fcUpdate: {
-        top: 300,
         borderRadius: 25,
         alignSelf: 'center',
-        backgroundColor: '#fff',
+        backgroundColor: '#156CF7',
+        marginVertical: 35,
         width: '85%',
     },
     textUpdate: {
@@ -173,6 +147,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         marginVertical: 15,
         textAlign: 'center',
+        color: '#fff'
     },
     componentUserName: {
         display: 'flex',
@@ -185,7 +160,7 @@ const styles = StyleSheet.create({
     componentInfo: {
         display: 'flex',
         flexDirection: 'column',
-        marginVertical: 350,
+        marginVertical: 280,
         marginHorizontal: 20,
         width: 350,
         borderRadius: 10,

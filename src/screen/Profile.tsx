@@ -115,11 +115,13 @@ const Profile = ({ navigation }: any) => {
             <Feather style={{ marginLeft: 120, bottom: 20 }} name='edit' size={20} color='#32ff7e' />
           </TouchableOpacity>
         </View>
-        <View style={styles.profileName}>
-          <Text style={styles.textName}>{user?.name}</Text>
-        </View>
-        <View style={styles.profileEmail}>
-          <Text style={styles.email}>{user?.email}</Text>
+        <View style={{bottom: 10}}>
+          <View style={styles.profileName}>
+            <Text style={styles.textName}>{user?.name}</Text>
+          </View>
+          <View style={styles.profileEmail}>
+            <Text style={styles.email}>{user?.email}</Text>
+          </View>
         </View>
       </View>
 
@@ -143,9 +145,9 @@ const Profile = ({ navigation }: any) => {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.fcUpdate}>
+      <View style={styles.fcSignOut}>
         <TouchableOpacity style={{ flexDirection: 'row', alignSelf: 'center' }}>
-          <Text style={styles.textUpdate}>Sign out</Text>
+          <Text style={styles.textSignOut}>Sign out</Text>
           <FontAwesome style={{ alignSelf: 'center', marginLeft: 10 }} name='sign-out' size={30} />
         </TouchableOpacity>
       </View>
@@ -173,7 +175,7 @@ const styles = StyleSheet.create({
   },
   profileText: {
     color: "#fff",
-    fontSize: 18,
+    fontSize: 20,
     textAlign: 'center'
   },
   profileImage: {
@@ -227,14 +229,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     marginHorizontal: 30,
   },
-  fcUpdate: {
+  fcSignOut: {
     top: 300,
     borderRadius: 25,
     alignSelf: 'center',
     backgroundColor: '#fff',
     width: '85%',
   },
-  textUpdate: {
+  textSignOut: {
     fontWeight: 'bold',
     fontSize: 18,
     marginVertical: 15,
