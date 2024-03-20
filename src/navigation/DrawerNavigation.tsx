@@ -9,6 +9,7 @@ import History from '../screen/History';
 import Setting from '../screen/Setting';
 import MyQRCode from '../screen/MyQRCode';
 import ViewProfile from '../screen/ViewProfile';
+ 
 
 interface OptionsScreenProps {
   drawerIcon: any;
@@ -44,7 +45,7 @@ const DrawerNavigator = () => {
       initialRouteName="Main"
       screenOptions={{headerShown: true}}>
       <Drawer.Screen
-        name="Main"
+        name="Home"
         component={BottomTab}
         options={headerOptions}
       />
@@ -57,7 +58,7 @@ const DrawerNavigator = () => {
         })}
       />
       <Drawer.Screen
-        name="Setting"
+        name="Settings"
         component={Setting}
         options={optionsScreen({
           drawerIcon: require('../assets/iconDrawerNavigation/setting.png'),

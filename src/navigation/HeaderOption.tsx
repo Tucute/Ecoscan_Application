@@ -26,7 +26,7 @@ const HeaderOptions = ({navigation}: any) => {
                 alignItems: 'center',
               }}
           />
-          <Text>Ecoscan Application</Text>
+          <Text style= {{color:'#000'}}>Ecoscan Application</Text>
         </TouchableOpacity>
       <View
         style={{
