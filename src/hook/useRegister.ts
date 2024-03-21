@@ -15,7 +15,7 @@ const useRegister = ({navigation}: any) => {
       axios
         .post(`${Url}/user/sign-up`, data)
         .then(res => {
-          if (res.status === 200) {
+          if (res.status === 201) {
             Alert.alert('Success', 'Register successfully', [
               {text: 'OK', onPress: () => navigation.navigate('Login')},
             ]);
