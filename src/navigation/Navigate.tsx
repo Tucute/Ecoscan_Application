@@ -15,6 +15,7 @@ import Notification from '../screen/Notification';
 import Profile from '../Profile';
 import ViewProfile from '../screen/ViewProfile';
 import EditProfile from '../screen/EditProfile';
+import UploadImage from '../screen/UploadImage';
 const Stack = createNativeStackNavigator();
 
 const Navigate = () => {
@@ -45,6 +46,11 @@ const Navigate = () => {
         <Stack.Screen
           name="DetailProduct"
           component={DetailProduct}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="UploadImage"
+          component={UploadImage}
           options={{ headerShown: false }}
         />
         <Stack.Screen

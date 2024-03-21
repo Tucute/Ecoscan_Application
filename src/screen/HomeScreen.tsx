@@ -22,6 +22,7 @@ const HomeScreen = ({navigation}: any) => {
   const setFlash = () => {
     setFlashMode(!flashMode);
   };
+  
   const onSuccess = (e: any) => {
     setIsLoading(true);
     const barcode = e.data.toString();
@@ -114,7 +115,7 @@ const HomeScreen = ({navigation}: any) => {
               source={require('../assets/iconScanScreen/home.png')}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('UploadImage')}>
             <Image
               style={styles.icon}
               source={require('../assets/iconScanScreen/library.png')}
