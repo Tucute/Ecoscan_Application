@@ -15,10 +15,10 @@ interface Account {
 
 const useLogout = ({ navigation }: any) => {
   const [initializing, setInitializing] = useState(true);
-  const [user, setUser] = useState<Account | null>(null);
+  const [user, setUser] = useState();
 
-  function onAuthStateChanged(account: Account | null) {
-    setUser(account);
+  function onAuthStateChanged(user) {
+    setUser(user);
     if (initializing) setInitializing(false);
   }
 
@@ -26,18 +26,23 @@ const useLogout = ({ navigation }: any) => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber;
   }, []);
-
+  
+  console.log(user);
+  
   const Logout = async () => {
     try {
       if (user) {
-        await auth().signOut();
+        await GoogleSignin.signOut();
       }
-      await axios.post(`${Url}/user/logout`);
+      else {
+        await axios.post(`${Url}/user/logout`);
+      }
       await AsyncStorage.removeItem('user');
       Alert.alert('Success', 'Logged out successfully', [
         { text: 'OK', onPress: () => navigation.navigate('LandingPage') },
       ]);
     } catch (error) {
+      console.log(error);
       Alert.alert('Error', 'An error occurred while logging out');
     }
   };

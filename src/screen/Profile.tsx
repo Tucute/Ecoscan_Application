@@ -8,12 +8,17 @@ import {
   Alert,
   TextInput,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useQuery, useMutation} from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-// import useUser from '../../hooks/useUser';
 import useGetUser from '../hook/useGetUser';
+import Entypo from 'react-native-vector-icons/Entypo';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Feather from 'react-native-vector-icons/Feather';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import useLogout from '../hook/useLogout';
+
 interface getProfile {
   id: number;
   email: string;
@@ -21,191 +26,132 @@ interface getProfile {
   avatar: string;
   phone: string;
 }
-const Profile = ({navigation}: any) => {
-  const [userData, setUserData] = useState<getProfile | undefined>();
-  const [modalVisible, setModalVisible] = useState(false);
-  const [newUser, setNewUser] = useState<getProfile>();
-  const {user} = useGetUser();
-  useEffect(() => {
-    if (user) {
-      setUserData(user);
-    }
-  }, [user]);
+const Profile = ({ navigation }: any) => {
 
-  const mutation = useMutation({
-    mutationFn: async (data: getProfile) => {
-      try {
-        const jsonValue = await AsyncStorage.getItem('user');
-        const value = jsonValue != null ? JSON.parse(jsonValue) : null;
-        const token = value.token;
-        const response = await axios.post(
-          `https://2cf2-14-176-231-248.ngrok-free.app/api/update-user/`,
-          data,
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        );
-        if (response.status === 200) {
-          Alert.alert('Success', 'Update successfully');
-        } else {
-          Alert.alert('Invalid information!');
-        }
-        return response.data;
-      } catch (error) {
-        console.error(error);
-      }
-    },
-  });
+  const { user } = useGetUser();
+  const {Logout} = useLogout({ navigation });
+  //   const [userData, setUserData] = useState<getProfile | undefined>();
+  //   const [modalVisible, setModalVisible] = useState(false);
+  //   const [newUser, setNewUser] = useState<getProfile>();
+  //   const {user} = useGetUser();
+  //   useEffect(() => {
+  //     if (user) {
+  //       setUserData(user);
+  //     }
+  //   }, [user]);
 
-  const handleLogout = async () => {
-    await AsyncStorage.removeItem('user');
-    const user = await AsyncStorage.getItem('user');
-    if (user === null) {
-      navigation.navigate('LandingPage');
-    }
-  };
+  //   const mutation = useMutation({
+  //     mutationFn: async (data: getProfile) => {
+  //       try {
+  //         const jsonValue = await AsyncStorage.getItem('user');
+  //         const value = jsonValue != null ? JSON.parse(jsonValue) : null;
+  //         const token = value.token;
+  //         const response = await axios.post(
+  //           `https://2cf2-14-176-231-248.ngrok-free.app/api/update-user/`,
+  //           data,
+  //           {
+  //             headers: {
+  //               'Content-Type': 'application/json',
+  //               Authorization: `Bearer ${token}`,
+  //             },
+  //           },
+  //         );
+  //         if (response.status === 200) {
+  //           Alert.alert('Success', 'Update successfully');
+  //         } else {
+  //           Alert.alert('Invalid information!');
+  //         }
+  //         return response.data;
+  //       } catch (error) {
+  //         console.error(error);
+  //       }
+  //     },
+  //   });
 
-  const handleOnChange = (key: string, value: string) => {
-    setNewUser(prevUserData => ({
-      ...prevUserData,
-      [key]: value,
-    }));
-  };
-  const handleEditProfile = async () => {
-    try {
-      if (data) {
-        setNewUser({...data});
-      }
-      setModalVisible(true);
-    } catch (e) {
-      console.log('Error: ', e);
-    }
-  };
-  const handleSaveProfile = () => {
-    setUserData(newUser);
-    mutation.mutate(newUser);
-    setModalVisible(!modalVisible);
-  };
+  //   const handleLogout = async () => {
+  //     await AsyncStorage.removeItem('user');
+  //     const user = await AsyncStorage.getItem('user');
+  //     if (user === null) {
+  //       navigation.navigate('LandingPage');
+  //     }
+  //   };
+
+  //   const handleOnChange = (key: string, value: string) => {
+  //     setNewUser(prevUserData => ({
+  //       ...prevUserData,
+  //       [key]: value,
+  //     }));
+  //   };
+  //   const handleEditProfile = async () => {
+  //     try {
+  //       if (data) {
+  //         setNewUser({...data});
+  //       }
+  //       setModalVisible(true);
+  //     } catch (e) {
+  //       console.log('Error: ', e);
+  //     }
+  //   };
+  //   const handleSaveProfile = () => {
+  //     setUserData(newUser);
+  //     mutation.mutate(newUser);
+  //     setModalVisible(!modalVisible);
+  //   };
   return (
     <View style={styles.profileContainer}>
-      <View style={styles.profile}>
-        <View style={styles.img}>
-          <View style={{alignItems: 'center', justifyContent: 'center'}}>
-            <Modal
-              animationType="slide"
-              transparent={true}
-              visible={modalVisible}
-              onRequestClose={() => {
-                Alert.alert('Modal has been closed.');
-                setModalVisible(!modalVisible);
-              }}>
-              <View style={styles.centeredView}>
-                <View style={styles.modalView}>
-                  <TextInput
-                    placeholderTextColor={'black'}
-                    style={styles.contenttext}
-                    placeholder="New Name"
-                    value={newUser?.name}
-                    onChangeText={text => handleOnChange('name', text)}
-                  />
-                  <TextInput
-                    placeholderTextColor={'black'}
-                    style={styles.contenttext}
-                    placeholder="New email"
-                    value={newUser?.email}
-                    onChangeText={text => handleOnChange('email', text)}
-                  />
-                  <TextInput
-                    placeholder="New phone"
-                    style={styles.contenttext}
-                    placeholderTextColor={'black'}
-                    value={newUser?.phone}
-                    onChangeText={text => handleOnChange('phone', text)}
-                  />
-                  <TouchableOpacity
-                    style={[styles.button, styles.buttonClose]}
-                    onPress={handleSaveProfile}>
-                    <Text style={styles.textStyle}>Save</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </Modal>
-            <View style={styles.bgImg}>
-              {userData?.avatar ? (
-                <Image style={styles.avatar} source={{uri: userData.avatar}} />
-              ) : null}
-            </View>
-            <Text style={styles.contentImg}>{userData?.name}</Text>
+      <TouchableOpacity style={styles.iconBack} onPress={() => navigation.goBack()}>
+        <Image
+          source={require('../assets/CompareInterface-icon/Iconback.png')}>
+        </Image>
+      </TouchableOpacity>
+      <View style={styles.headerProfile}>
+        <View style={styles.profileTitle}>
+          <Text style={styles.profileText}>Profile</Text>
+        </View>
+        <View style={styles.profileImage}>
+          <Image
+            style={styles.userProfileImage}
+            source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-gcQt4cLfOtecrvODooKFD6cRWVUsX5yGjQ&usqp=CAU' }}
+          />
+          <TouchableOpacity onPress={() => navigation.navigate('EditProfiles')}>
+            <Feather style={{ marginLeft: 120, bottom: 20 }} name='edit' size={20} color='#32ff7e' />
+          </TouchableOpacity>
+        </View>
+        <View style={{bottom: 10}}>
+          <View style={styles.profileName}>
+            <Text style={styles.textName}>{user?.name}</Text>
           </View>
-          <View style={{marginHorizontal: 10}}>
-            <Text style={styles.contentImg}>{userData?.email}</Text>
-            <Text style={styles.contentImg}>{userData?.phone}</Text>
-            <TouchableOpacity
-              style={styles.preventProfile}
-              onPress={handleEditProfile}>
-              <Text style={styles.contentPrevent}>Edit Profile</Text>
-            </TouchableOpacity>
+          <View style={styles.profileEmail}>
+            <Text style={styles.email}>{user?.email}</Text>
           </View>
         </View>
-        <View>
-          <View>
-            <TouchableOpacity onPress={() => navigation.navigate('Your Order')}>
-              <View style={styles.namecontain}>
-                <Image
-                  source={require('../assets/img_profile/balance.png')}
-                />
-                <Text style={styles.name}>Your order</Text>
-                <Image source={require('../assets/img_profile/large.png')} />
-              </View>
-            </TouchableOpacity>
-            <View style={styles.namecontain}>
-              <Image source={require('../assets/img_profile/data.png')} />
-              <Text style={styles.name}>Sync</Text>
-              <Image source={require('../assets/img_profile/large.png')} />
-            </View>
-          </View>
-          <View style={styles.line}></View>
-          <View>
-            <View style={styles.namecontain}>
-              <Image
-                source={require('../assets/img_profile/language.png')}
-              />
-              <Text style={styles.name}>Language</Text>
-              <Image source={require('../assets/img_profile/large.png')} />
-            </View>
-            <View style={styles.namecontain}>
-              <Image source={require('../assets/img_profile/sync.png')} />
-              <Text style={styles.name}>Security</Text>
-              <Image source={require('../assets/img_profile/large.png')} />
-            </View>
-          </View>
-          <View style={styles.line}></View>
-          <View>
-            <View style={styles.namecontain}>
-              <Image source={require('../assets/img_profile/any.png')} />
-              <Text style={styles.name}>About</Text>
-              <Image source={require('../assets/img_profile/large.png')} />
-            </View>
-            <View style={styles.namecontain}>
-              <Image
-                source={require('../assets/img_profile/feedback.png')}
-              />
-              <Text style={styles.name}>Feedback</Text>
-              <Image source={require('../assets/img_profile/large.png')} />
-            </View>
-          </View>
-          <View style={styles.line}></View>
-          <View>
-            <TouchableOpacity style={styles.namecontain} onPress={handleLogout}>
-              <Image source={require('../assets/img_profile/logout.png')} />
-              <Text style={styles.name}>Log out</Text>
-              <Image source={require('../assets/img_profile/large.png')} />
-            </TouchableOpacity>
-          </View>
-        </View>
+      </View>
+
+      <View style={styles.componentInfo}>
+        <TouchableOpacity style={styles.componentAccount}>
+          <Entypo style={{ alignSelf: 'center' }} name='user' size={25} color={'#7052ff'} />
+          <Text style={{ color: '#fff', fontSize: 20, alignSelf: 'center', marginRight: 130 }}>Account</Text>
+          <MaterialIcons style={{ alignSelf: 'center' }} name='navigate-next' size={30} color='#fff' />
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.componentAccount}>
+          <Feather style={{ alignSelf: 'center' }} name='settings' size={25} color={'#7052ff'} />
+          <Text style={{ color: '#fff', fontSize: 20, alignSelf: 'center', marginRight: 130 }}>Settings</Text>
+          <MaterialIcons style={{ alignSelf: 'center' }} name='navigate-next' size={30} color='#fff' />
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.componentAccount}>
+          <Entypo style={{ alignSelf: 'center' }} name='users' size={25} color={'#7052ff'} />
+          <Text style={{ color: '#fff', fontSize: 20, alignSelf: 'center', marginRight: 130 }}>About Us</Text>
+          <MaterialIcons style={{ alignSelf: 'center' }} name='navigate-next' size={30} color='#fff' />
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.fcSignOut}>
+        <TouchableOpacity onPress={Logout} style={{ flexDirection: 'row', alignSelf: 'center' }}>
+          <Text style={styles.textSignOut}>Sign out</Text>
+          <FontAwesome style={{ alignSelf: 'center', marginLeft: 10 }} name='sign-out' size={30} />
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -216,108 +162,86 @@ export default Profile;
 const styles = StyleSheet.create({
   profileContainer: {
     flex: 1,
+    backgroundColor: '#333',
   },
-  profile: {
-    marginHorizontal: 40,
+  iconBack: {
+    marginHorizontal: 20,
+    marginTop: 20,
+    borderRadius: 15,
+  },
+  headerProfile: {
+    width: 200,
+    alignSelf: 'center',
+    position: 'absolute',
+    marginVertical: 30
+  },
+  profileText: {
+    color: "#fff",
+    fontSize: 20,
+    textAlign: 'center'
+  },
+  profileImage: {
     marginVertical: 20,
   },
-  img: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  bgImg: {
+  userProfileImage: {
     width: 120,
     height: 120,
-    borderRadius: 50,
-    backgroundColor: '#0D986A',
-    alignItems: 'center',
-    justifyContent: 'center',
+    borderRadius: 100,
+    alignSelf: 'center'
   },
-  contentImg: {
-    fontSize: 16,
-    color: '#000000',
-    fontWeight: 'bold',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: 10,
+  profileName: {
+    alignItems: 'center'
   },
-  preventProfile: {
-    width: 126,
-    height: 38,
-    backgroundColor: '#0D986A',
-    borderRadius: 10,
+  profileEmail: {
     alignItems: 'center',
-    justifyContent: 'center',
+    marginVertical: 5
   },
-  contentPrevent: {
-    fontSize: 16,
-    color: '#ffffff',
+  email: {
+    color: '#C3C7C7'
+  },
+  textName: {
+    color: '#fff',
+    fontSize: 22,
     fontWeight: 'bold',
   },
-  name: {
-    fontSize: 14,
-    color: '#000000',
+  componentInfo: {
+    top: 260,
   },
-  line: {
-    width: '100%',
-    height: 1,
-    backgroundColor: 'black',
-    marginVertical: 10,
-  },
-  namecontain: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginVertical: 10,
-  },
-  avatar: {
-    width: '100%',
-    height: '100%',
-    borderRadius: 50,
-  },
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
-  },
-  modalView: {
-    margin: 10,
-    backgroundColor: '#BDBDBD',
-    borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
-    width: 360,
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: 'center',
-  },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  buttonOpen: {
-    backgroundColor: '#F194FF',
-  },
-  buttonClose: {
-    backgroundColor: '#2196F3',
-  },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
+  styleUser: {
+    borderRadius: 100,
     width: 100,
+    alignSelf: 'center',
+    // marginLeft: 60
   },
-  textColor: {
-    color: '#000',
-  },
-  contenttext: {
-    borderWidth: 1,
-    width: '100%',
+  componentAccount: {
+    backgroundColor: '#3E3D3D',
+    flexDirection: 'row',
+    borderRadius: 15,
+    width: "85%",
+    height: 60,
+    shadowColor: 'rgba(0, 0, 0, 0.5)',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 4,
+    elevation: 4,
     marginVertical: 10,
-    borderRadius: 12,
-    paddingLeft: 10,
+    justifyContent: 'space-evenly',
+    marginHorizontal: 30,
   },
+  fcSignOut: {
+    top: 300,
+    borderRadius: 25,
+    alignSelf: 'center',
+    backgroundColor: '#fff',
+    width: '85%',
+  },
+  textSignOut: {
+    fontWeight: 'bold',
+    fontSize: 18,
+    marginVertical: 15,
+    textAlign: 'center',
+  }
 });
