@@ -29,7 +29,7 @@ interface getProfile {
 const Profile = ({ navigation }: any) => {
 
   const { user } = useGetUser();
-  const {Logout} = useLogout({ navigation });
+  const { Logout } = useLogout({ navigation });
   //   const [userData, setUserData] = useState<getProfile | undefined>();
   //   const [modalVisible, setModalVisible] = useState(false);
   //   const [newUser, setNewUser] = useState<getProfile>();
@@ -105,7 +105,7 @@ const Profile = ({ navigation }: any) => {
         </Image>
       </TouchableOpacity>
       <View style={styles.headerProfile}>
-        <View style={styles.profileTitle}>
+        <View>
           <Text style={styles.profileText}>Profile</Text>
         </View>
         <View style={styles.profileImage}>
@@ -113,13 +113,14 @@ const Profile = ({ navigation }: any) => {
             style={styles.userProfileImage}
             source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-gcQt4cLfOtecrvODooKFD6cRWVUsX5yGjQ&usqp=CAU' }}
           />
-          <TouchableOpacity onPress={() => navigation.navigate('EditProfiles')}>
-            <Feather style={{ marginLeft: 120, bottom: 20 }} name='edit' size={20} color='#32ff7e' />
+          <TouchableOpacity>
+            <Entypo style={{ marginLeft: 120, bottom: 25 }} name='camera' size={25} color='#32ff7e' />
           </TouchableOpacity>
         </View>
-        <View style={{bottom: 10}}>
+        <View style={{ bottom: 10 }}>
           <View style={styles.profileName}>
             <Text style={styles.textName}>{user?.name}</Text>
+            <Feather style={{marginLeft: 10}} name='edit' size={20} color='#32ff7e'/>
           </View>
           <View style={styles.profileEmail}>
             <Text style={styles.email}>{user?.email}</Text>
@@ -190,7 +191,9 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   profileName: {
-    alignItems: 'center'
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginLeft: 20
   },
   profileEmail: {
     alignItems: 'center',
