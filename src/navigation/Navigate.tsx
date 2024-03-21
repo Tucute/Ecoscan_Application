@@ -48,6 +48,11 @@ const Navigate = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
+          name="UploadImage"
+          component={UploadImage}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
           name="Compare"
           component={CompareInterface}
           options={{ headerShown: false }}
