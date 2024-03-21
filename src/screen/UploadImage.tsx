@@ -14,9 +14,6 @@ import {launchImageLibrary} from 'react-native-image-picker';
 const UploadImage = () => {
   const [url, setUrl] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
-  console.log(selectedImage);
-  
-
   const openImagePicker = () => {
     const options = {
       mediaType: 'photo',
