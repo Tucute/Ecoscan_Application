@@ -17,6 +17,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import useLogout from '../hook/useLogout';
 
 interface getProfile {
   id: number;
@@ -28,6 +29,7 @@ interface getProfile {
 const Profile = ({ navigation }: any) => {
 
   const { user } = useGetUser();
+  const {Logout} = useLogout({ navigation });
   //   const [userData, setUserData] = useState<getProfile | undefined>();
   //   const [modalVisible, setModalVisible] = useState(false);
   //   const [newUser, setNewUser] = useState<getProfile>();
@@ -146,7 +148,7 @@ const Profile = ({ navigation }: any) => {
       </View>
 
       <View style={styles.fcSignOut}>
-        <TouchableOpacity style={{ flexDirection: 'row', alignSelf: 'center' }}>
+        <TouchableOpacity onPress={Logout} style={{ flexDirection: 'row', alignSelf: 'center' }}>
           <Text style={styles.textSignOut}>Sign out</Text>
           <FontAwesome style={{ alignSelf: 'center', marginLeft: 10 }} name='sign-out' size={30} />
         </TouchableOpacity>
