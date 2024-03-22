@@ -11,6 +11,8 @@ interface User {
 }
 const LandingPage = ({navigation}: any) => {
   const {user} = useGetUser();
+  console.log(user);
+  
   return (
       <ImageBackground
         resizeMode="cover"

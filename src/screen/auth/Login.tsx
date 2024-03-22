@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   ImageBackground,
   StyleSheet,
@@ -14,10 +14,12 @@ import {
   Alert,
   ActivityIndicator,
 } from 'react-native';
-import { Formik } from 'formik';
-import { LoginSchema } from './LoginValidation';
+import {Formik} from 'formik';
+import {LoginSchema} from './LoginValidation';
 import useLogin from '../../hook/useLogin';
 import useGoogleSignin from '../../hook/useGoogleSignin';
+import useLoginFacebook from '../../hook/useLoginFacebook';
+import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk-next';
 
 const Login = ({navigation}: any) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -25,6 +27,9 @@ const Login = ({navigation}: any) => {
   const passwordRef: any = useRef();
   const {handleLogin} = useLogin({navigation});
   const {onGoogleButtonPress} = useGoogleSignin({navigation});
+
+  const {onFacebookButtonPress} = useLoginFacebook({navigation});
+
   const handleGoogleSignin = async () => {
     await onGoogleButtonPress();
     setIsLoading(true);
@@ -40,7 +45,7 @@ const Login = ({navigation}: any) => {
 
   return (
     <Formik
-      initialValues={{ email: '', password: '' }}
+      initialValues={{email: '', password: ''}}
       validationSchema={LoginSchema}
       onSubmit={values => {
         setTimeout(() => {
@@ -51,7 +56,7 @@ const Login = ({navigation}: any) => {
           handleLogin(account);
         }, 100);
       }}>
-      {({ errors, touched, handleChange, handleBlur, values, handleSubmit }) => (
+      {({errors, touched, handleChange, handleBlur, values, handleSubmit}) => (
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={styles.container}>
@@ -122,12 +127,14 @@ const Login = ({navigation}: any) => {
                     />
                     <Text style={styles.textIcon}>Google</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.viewIcon}>
+                  <TouchableOpacity
+                    style={styles.viewIcon}
+                    onPress={onFacebookButtonPress}>
                     <Image
                       style={styles.iconFacebook}
                       source={require('../../assets/iconAuth/iconFacebook.png')}
                     />
-                    <Text style={styles.textIcon}>Google</Text>
+                    <Text style={styles.textIcon}>Facebook</Text>
                   </TouchableOpacity>
                 </View>
                 <View style={styles.viewFooter}>
@@ -297,8 +304,8 @@ const styles = StyleSheet.create({
   isAccount: {
     display: 'flex',
     flexDirection: 'row',
-    marginVertical: 5
-  }
+    marginVertical: 5,
+  },
 });
 export default Login;
 function setState(arg0: {

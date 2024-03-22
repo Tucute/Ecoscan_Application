@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useEffect, useState} from 'react';
+import { Profile } from "react-native-fbsdk-next";
 
 interface User {
   _id: string;
