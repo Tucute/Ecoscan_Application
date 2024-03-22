@@ -118,6 +118,8 @@ dependencies {
     implementation("com.facebook.react:react-android")
     implementation("com.facebook.react:flipper-integration")
     implementation project(':react-native-vector-icons')
+    
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
 
     // implementation(project(':react-native-onesignal')){
     //     exclude group: 'com.google.android.gms'
