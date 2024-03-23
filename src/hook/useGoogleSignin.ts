@@ -23,7 +23,7 @@ const useGoogleSignin = ({navigation}: any) => {
       email: user.email,
       photo: user.photo,
     }
-    handleLoginGoogle(account);
+    handleLoginGoogle(account);    
   }
     return {onGoogleButtonPress};
 };

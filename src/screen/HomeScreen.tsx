@@ -120,7 +120,8 @@ const HomeScreen = ({navigation}: any) => {
             <View style={styles.upload}>
               <View style={styles.headerUpload}>
                 <Text style={styles.uploadText}>Upload Image</Text>
-                <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+                <TouchableOpacity
+                  onPress={() => setModalVisible(!modalVisible)}>
                   <Image
                     style={styles.iconX}
                     source={require('../assets/iconUploadImage/Icon-X.png')}></Image>

@@ -10,12 +10,11 @@ interface User {
 const useGetUser = () => {
   const [user, setUser] = useState<User | null>(null);
   const [isFetchingUser, setIsFetchingUser] = useState<boolean>(true);
-  const [fetchedOnce, setFetchedOnce] = useState<boolean>(false);
 
   useEffect(() => {
     const getUser = async () => {
       try {
-        const jsonValue = await AsyncStorage.getItem('user');        
+        const jsonValue = await AsyncStorage.getItem('user');
         if (jsonValue) {
           setUser(JSON.parse(jsonValue));
         }
@@ -23,15 +22,11 @@ const useGetUser = () => {
         console.log('Not login yet: ', e);
       } finally {
         setIsFetchingUser(false);
-        setFetchedOnce(true);
       }
     };
-
-    if (!fetchedOnce) {
-      getUser();
-    }
-  }, []);
-
+    getUser();
+  }, [10001]);
+  console.log('user ở đây: ',user);
   return {user, isFetchingUser};
 };
 
