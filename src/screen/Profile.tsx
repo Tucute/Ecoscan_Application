@@ -152,6 +152,7 @@ const styles = StyleSheet.create({
   },
   profileName: {
     alignItems: 'center',
+    justifyContent: 'center',
     flexDirection: 'row',
     marginLeft: 20
   },
