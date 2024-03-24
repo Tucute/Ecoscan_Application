@@ -27,8 +27,6 @@ const useLogout = ({ navigation }: any) => {
     return subscriber;
   }, []);
   
-  console.log(user);
-  
   const Logout = async () => {
     try {
       if (user) {

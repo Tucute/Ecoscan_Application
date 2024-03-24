@@ -27,76 +27,24 @@ interface getProfile {
   phone: string;
 }
 const Profile = ({ navigation }: any) => {
-
   const { user } = useGetUser();
   const { Logout } = useLogout({ navigation });
-  //   const [userData, setUserData] = useState<getProfile | undefined>();
-  //   const [modalVisible, setModalVisible] = useState(false);
-  //   const [newUser, setNewUser] = useState<getProfile>();
-  //   const {user} = useGetUser();
-  //   useEffect(() => {
-  //     if (user) {
-  //       setUserData(user);
-  //     }
-  //   }, [user]);
 
-  //   const mutation = useMutation({
-  //     mutationFn: async (data: getProfile) => {
-  //       try {
-  //         const jsonValue = await AsyncStorage.getItem('user');
-  //         const value = jsonValue != null ? JSON.parse(jsonValue) : null;
-  //         const token = value.token;
-  //         const response = await axios.post(
-  //           `https://2cf2-14-176-231-248.ngrok-free.app/api/update-user/`,
-  //           data,
-  //           {
-  //             headers: {
-  //               'Content-Type': 'application/json',
-  //               Authorization: `Bearer ${token}`,
-  //             },
-  //           },
-  //         );
-  //         if (response.status === 200) {
-  //           Alert.alert('Success', 'Update successfully');
-  //         } else {
-  //           Alert.alert('Invalid information!');
-  //         }
-  //         return response.data;
-  //       } catch (error) {
-  //         console.error(error);
-  //       }
-  //     },
-  //   });
+  const [editting, setEditting] = useState(false);
+  const [nameUser, setNameUser] = useState(user?.name);  
+  
+  useEffect(() => {
+    setNameUser(user?.name);
+  },[user])
 
-  //   const handleLogout = async () => {
-  //     await AsyncStorage.removeItem('user');
-  //     const user = await AsyncStorage.getItem('user');
-  //     if (user === null) {
-  //       navigation.navigate('LandingPage');
-  //     }
-  //   };
+  const handleSavePess = () => {
+    setEditting(false);
+  }
 
-  //   const handleOnChange = (key: string, value: string) => {
-  //     setNewUser(prevUserData => ({
-  //       ...prevUserData,
-  //       [key]: value,
-  //     }));
-  //   };
-  //   const handleEditProfile = async () => {
-  //     try {
-  //       if (data) {
-  //         setNewUser({...data});
-  //       }
-  //       setModalVisible(true);
-  //     } catch (e) {
-  //       console.log('Error: ', e);
-  //     }
-  //   };
-  //   const handleSaveProfile = () => {
-  //     setUserData(newUser);
-  //     mutation.mutate(newUser);
-  //     setModalVisible(!modalVisible);
-  //   };
+  const handleSetEdit = () => {
+    setEditting(true)
+  }
+
   return (
     <View style={styles.profileContainer}>
       <TouchableOpacity style={styles.iconBack} onPress={() => navigation.goBack()}>
@@ -119,8 +67,20 @@ const Profile = ({ navigation }: any) => {
         </View>
         <View style={{ bottom: 10 }}>
           <View style={styles.profileName}>
-            <Text style={styles.textName}>{user?.name}</Text>
-            <Feather style={{marginLeft: 10}} name='edit' size={20} color='#32ff7e'/>
+            {editting ? (
+              <TextInput
+                style={styles.textName}
+                value={nameUser}
+                onChangeText={(text) => setNameUser(text)}
+                onBlur={handleSavePess}
+                autoFocus={true}
+              />
+            ) : (
+              <Text style={styles.textName}>{nameUser}</Text>
+            )}
+            <TouchableOpacity onPress={editting ? handleSavePess : handleSetEdit}>
+              <Feather style={{ marginLeft: 10 }} name={editting ? 'check' : 'edit'} size={20} color='#32ff7e' />
+            </TouchableOpacity>
           </View>
           <View style={styles.profileEmail}>
             <Text style={styles.email}>{user?.email}</Text>
