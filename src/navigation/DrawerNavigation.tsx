@@ -32,8 +32,7 @@ interface OptionsScreenProps {
   size?: number;
 }
 
-const CustomDrawer = (props: any, {navigation}: any) => {
-  const {Logout} = useLogout({navigation});
+const CustomDrawer = (props: any) => {
   const {user, isFetchingUser} = useGetUser();
 
   const [userInfo, setUserInfo] = useState(useGetUser().user);
@@ -52,17 +51,14 @@ const CustomDrawer = (props: any, {navigation}: any) => {
     <DrawerContentScrollView {...props}>
       <View style={styles.containerHeaderDrawer}>
         <Image source={require('../assets/iconAuth/logo.png')}></Image>
-        {/* {user != null ? ( */}
         <>
           <View style={styles.contanierUser}>
             <MaterialCommunityIcons
               name="account-circle"
-              // color={mainColor}
               size={80}></MaterialCommunityIcons>
             <Text style={styles.nameUser}>{user?.name}</Text>
           </View>
         </>
-        {/* ) : null} */}
       </View>
       <DrawerItemList {...props} />
     </DrawerContentScrollView>
@@ -91,7 +87,7 @@ const DrawerNavigator = () => {
       initialRouteName="Home"
       screenOptions={{headerShown: true}}
       drawerContent={(props: any) => (
-        <CustomDrawer navigation={navigation} {...props} />
+        <CustomDrawer {...props} />
       )}>
       <Drawer.Screen
         name="Home"

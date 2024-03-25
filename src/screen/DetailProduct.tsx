@@ -102,7 +102,7 @@ const DetailProduct = ({navigation, route}: any) => {
               <Text numberOfLines={1} style={styles.nameItem}>
                 {item.name}
               </Text>
-              <Text style={styles.manufacturer}>
+              <Text numberOfLines={2} style={styles.manufacturer}>
                 Manufacturer: {item.manufacturer}
               </Text>
               <Text style={styles.priceItem}>
@@ -151,12 +151,6 @@ const styles = StyleSheet.create({
     color: 'blue',
     fontSize: 12,
   },
-  viewSimilarProduct: {
-    // flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginHorizontal: 15,
-    flexGrow: 1,
-  },
   titleList: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -178,23 +172,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  listSimilarProduct: {
-    flex: 1,
-    rowGap: 20,
+  viewSimilarProduct: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
   },
   item: {
-    width: 150,
+    width: '40%',
     backgroundColor: '#D9D9D9',
     borderRadius: 15,
     padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    marginHorizontal: 10,
     marginBottom: 10,
   },
   imageItem: {
-    width: 120,
+    width: '100%',
     height: 120,
     borderRadius: 15,
     objectFit: 'cover',
@@ -202,7 +195,7 @@ const styles = StyleSheet.create({
   viewInfoItem: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: 140,
+    width: '100%',
     height: 'auto',
     backgroundColor: '#fff',
     borderRadius: 10,
@@ -225,6 +218,7 @@ const styles = StyleSheet.create({
   },
   priceItem: {
     color: '#000',
+    fontSize: 12,
     fontWeight: '700',
   },
   btnCompare: {
