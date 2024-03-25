@@ -5,7 +5,7 @@ interface Price {
 }
 const PriceProductCompare = ({price}: Price) => {
     return (
-        <View style={styles.container}>
+        <View>
             <View
                 style={{
                     borderBottomColor: '#BA8F8F',
@@ -14,7 +14,9 @@ const PriceProductCompare = ({price}: Price) => {
                 }}
             />
             <View style={styles.priceItem}>
-                <Text style={styles.leftProductPrice}>Giá: {price}</Text>
+                <Text style={styles.leftProductPrice}>Giá: 
+                    <Text style={{color: '#000'}}>{' '} {price} VND</Text>
+                </Text>
             </View>
             <View
                 style={{
@@ -30,7 +32,8 @@ const PriceProductCompare = ({price}: Price) => {
 const styles = StyleSheet.create({
     leftProductPrice: {
         marginHorizontal: 20,
-        marginVertical: 5
+        marginVertical: 5,
+        color: '#000',
     },
 });
 

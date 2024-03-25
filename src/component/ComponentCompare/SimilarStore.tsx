@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
   textSale: {
     paddingLeft: 10,
     fontWeight: 'bold',
+    color: '#000',
   },
   separator: {
     borderBottomColor: '#BA8F8F',

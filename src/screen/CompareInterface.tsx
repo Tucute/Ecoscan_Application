@@ -47,13 +47,13 @@ const CompareInterface = ({ navigation, route }: any) => {
             source={{ uri: item.item1.image[0].url }}></Image>
           <Text numberOfLines={1} style={styles.leftProductlText}>{item.item1.name}</Text>
           <View>
-            <PriceProductCompare price={item.item1.price} />
+            <PriceProductCompare price={item.item1.shopsData[0].price} />
           </View>
           <View style={styles.infoProduct}>
             <InfoProduct ingredient={item.item1.ingredient} />
           </View>
           <View>
-            <TheOrigin />
+            <TheOrigin manufacturer={item.item1.manufacturer}/>
           </View>
           <View>
             <SimilarStore key={item.item1._id} data={item.item1.shopsData} navigation={navigation} />
@@ -65,14 +65,14 @@ const CompareInterface = ({ navigation, route }: any) => {
             source={{ uri: item.item2.image[0].url }}></Image>
           <Text numberOfLines={1} style={styles.rightProductText}>{item.item2.name}</Text>
           <View>
-            <PriceProductCompare price={item.item2.price} />
+            <PriceProductCompare price={item.item2.shopsData[0].price} />
           </View>
           <View style={styles.infoProduct}>
             <InfoProduct ingredient={item.item2.ingredient} />
           </View>
 
           <View>
-            <TheOrigin />
+            <TheOrigin manufacturer={item.item2.manufacturer}/>
           </View>
           <View>
             <SimilarStore key={item.item2._id} data={item.item2.shopsData} navigation={navigation} />
@@ -176,11 +176,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   infoProduct: {
-    height: 300,
+    minHeight: 450,
+    maxHeight: 600,
   }
-  // leftProductPrice: {
-  //     marginHorizontal: 20,
-  // },
 });
 
 export default CompareInterface;

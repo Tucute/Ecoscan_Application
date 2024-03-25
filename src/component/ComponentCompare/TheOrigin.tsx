@@ -1,7 +1,7 @@
 import { Image, View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 
 
-const TheOrigin = () => {
+const TheOrigin = ({manufacturer}: any) => {
     return (
         <View style={styles.container}>
             <View
@@ -12,7 +12,9 @@ const TheOrigin = () => {
                 }}
             />
             <Text style={styles.ingredient}>
-                <Text style={{ fontWeight: 'bold' }}>Nguồn gốc xuất xứ:</Text> {'\n'}Hà Lan {'\n'}
+                <Text style={{ fontWeight: 'bold', color: '#000' }}>Nhà sản xuất:
+                    <Text style={{fontWeight: '400'}}>{'\n'}{manufacturer}</Text>
+                </Text>
                 <View style={styles.separator} />
             </Text>
         </View>
