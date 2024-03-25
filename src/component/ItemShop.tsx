@@ -34,6 +34,7 @@ export default function ItemShop({dataShop, navigation}: ItemStores) {
         }}
       />
       <Text style={styles.name}>{data.shopName}</Text>
+      <Text style={styles.price}>{data.price} VND</Text>
     </TouchableOpacity>
   );
 
@@ -85,7 +86,11 @@ const styles = StyleSheet.create({
   imageItem: {
     width: 60,
     height: 60,
-    marginBottom: 6,
+    marginBottom: 2,
     borderRadius: 50,
   },
+  price: {
+    color: '#fff',
+    fontSize: 12,
+  }
 });
