@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Ecoscan_Application</string>
+    <string name="facebook_app_id">219638961237304</string>
+    <string name="fb_login_protocol_scheme">fb219638961237304</string>
+    <string name="facebook_client_token">04ae198934fc750ae98b8a38286c388d</string>
 </resources>

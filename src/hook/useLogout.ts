@@ -29,14 +29,13 @@ const useLogout = ({navigation}: any) => {
 
   const Logout = async () => {
     try {
-      if (user) {
-        await auth()
+      if (user) {        
+        auth()
           .signOut()
           .then(() => console.log('User signed out!'));
         await GoogleSignin.signOut();
-      } else {
-        await axios.post(`${Url}/user/logout`);
       }
+      await axios.post(`${Url}/user/logout`);
       await AsyncStorage.removeItem('user');
       Alert.alert('Success', 'Logged out successfully', [
         {text: 'OK', onPress: () => navigation.navigate('LandingPage')},

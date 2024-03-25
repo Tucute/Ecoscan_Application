@@ -5,9 +5,9 @@ import {Alert} from 'react-native';
 import {Url} from '../url/Url';
 interface Account {
     username: string | null;
-    email: string;
-    photo: string | null;
-    phone?: string;
+    email: string | null;
+    photo?: string | null;
+    phone?: string | null;
 }
 const useLoginGoogle = ({navigation}: any) => {
   const mutation = useMutation({
