@@ -69,7 +69,9 @@ const DetailProduct = ({navigation, route}: any) => {
       <View style={styles.viewDetail}>
         <Text style={styles.nameProduct}>{itemProduct.data.name}</Text>
         <Text style={styles.ingredient}>{itemProduct.data.ingredient}</Text>
-        <Text style={styles.price}>{itemProduct.data.price} VND</Text>
+        <Text style={styles.price}>
+          {itemProduct.data.shopsData[0].price} VND
+        </Text>
         <View style={styles.viewRecommentStore}>
           <Text style={styles.price}>On sale in stores: </Text>
           <ItemShop dataShop={stores} navigation={navigation} />
@@ -85,7 +87,9 @@ const DetailProduct = ({navigation, route}: any) => {
             key={item._id}
             style={styles.item}
             onPress={() => Compare(navigation, item)}>
-            <TouchableOpacity style={styles.btnCompare} onPress={() => Compare(navigation, item)}>
+            <TouchableOpacity
+              style={styles.btnCompare}
+              onPress={() => Compare(navigation, item)}>
               <Text style={styles.textBtn}>Compare</Text>
             </TouchableOpacity>
             <Image
@@ -98,8 +102,12 @@ const DetailProduct = ({navigation, route}: any) => {
               <Text numberOfLines={1} style={styles.nameItem}>
                 {item.name}
               </Text>
-              <Text style={styles.manufacturer}>Manufacturer: {item.manufacturer}</Text>
-              <Text style={styles.priceItem}>{item.price} VND</Text>
+              <Text style={styles.manufacturer}>
+                Manufacturer: {item.manufacturer}
+              </Text>
+              <Text style={styles.priceItem}>
+                {item.shopsData[0].price} VND
+              </Text>
             </View>
           </TouchableOpacity>
         ))}
@@ -144,7 +152,8 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   viewSimilarProduct: {
-    flexDirection: 'row',
+    // flexDirection: 'row',
+    flexWrap: 'wrap',
     marginHorizontal: 15,
     flexGrow: 1,
   },
@@ -170,9 +179,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   listSimilarProduct: {
-    flexDirection: 'column',
     flex: 1,
     rowGap: 20,
+    flexDirection: 'row',
   },
   item: {
     width: 150,
@@ -182,6 +191,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginHorizontal: 10,
+    marginBottom: 10,
   },
   imageItem: {
     width: 120,
@@ -222,7 +232,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#201DAE',
     paddingHorizontal: 5,
-    borderRadius: 10,
+    borderRadius: 6,
     left: '25%',
     marginBottom: 10,
   },

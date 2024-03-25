@@ -2,6 +2,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../screen/HomeScreen';
 import History from '../screen/History';
 import {Image, StyleSheet, Text, View} from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import HomeScreen from '../screen/HomeScreen';
 
 const Tab = createBottomTabNavigator();
@@ -23,15 +24,13 @@ export default function BottomTab() {
           tabBarIcon: ({color, size, focused}) => (
             <View style={styles.viewOption}>
               {focused ? (
-                <Image
-                  style={styles.imageOption}
-                  source={require('../assets/iconScanScreen/generate-focused.png')}
-                />
+                // <Image
+                //   style={styles.imageOption}
+                //   source={require('../assets/iconScanScreen/generate-focused.png')}
+                // />
+                <MaterialCommunityIcons name='barcode-scan' color={'#B3CB1D'} size={30}></MaterialCommunityIcons>
               ) : (
-                <Image
-                  style={styles.imageOption}
-                  source={require('../assets/iconScanScreen/generate.png')}
-                />
+                <MaterialCommunityIcons name='barcode-scan' color={'#fff'} size={30}></MaterialCommunityIcons>
               )}
               <Text style={styles.textOption}>Generate</Text>
             </View>
@@ -61,15 +60,9 @@ export default function BottomTab() {
           tabBarIcon: ({color, size, focused}) => (
             <View style={styles.viewOption}>
               {focused ? (
-                <Image
-                  style={styles.imageOption}
-                  source={require('../assets/iconScanScreen/history-focused.png')}
-                />
+                <MaterialCommunityIcons name='history' color={'#B3CB1D'} size={30}></MaterialCommunityIcons>
               ) : (
-                <Image
-                  style={styles.imageOption}
-                  source={require('../assets/iconScanScreen/history.png')}
-                />
+                <MaterialCommunityIcons name='history' color={'#fff'} size={30}></MaterialCommunityIcons>
               )}
               <Text style={styles.textOption}>History</Text>
             </View>
@@ -100,7 +93,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#333333',
   },
   viewOption: {
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
   imageOption: {

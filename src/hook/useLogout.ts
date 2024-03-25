@@ -27,15 +27,13 @@ const useLogout = ({navigation}: any) => {
     return subscriber;
   }, []);
 
-  console.log(user);
-
   const Logout = async () => {
     try {
       if (user) {
-        auth()
+        await auth()
           .signOut()
           .then(() => console.log('User signed out!'));
-        // await GoogleSignin.signOut();
+        await GoogleSignin.signOut();
       } else {
         await axios.post(`${Url}/user/logout`);
       }

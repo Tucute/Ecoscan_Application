@@ -1,1 +1,1 @@
-export const Url = 'https://383b-59-153-247-182.ngrok-free.app';
+export const Url = 'http://ecoscanapp-env.eba-q5cvc7vp.ap-southeast-2.elasticbeanstalk.com';

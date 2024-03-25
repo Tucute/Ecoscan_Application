@@ -6,7 +6,7 @@ import {
   Text,
   ActivityIndicator,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   DrawerContentScrollView,
   DrawerItemList,
@@ -24,7 +24,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import useLogout from '../hook/useLogout';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import useGetUser from '../hook/useGetUser';
-import { ItemDrawer } from '../component/IteamDrawer';
+import {ItemDrawer} from '../component/IteamDrawer';
 interface OptionsScreenProps {
   drawerIcon: any;
   backgroundColor?: string;
@@ -36,57 +36,35 @@ const CustomDrawer = (props: any, {navigation}: any) => {
   const {Logout} = useLogout({navigation});
   const {user, isFetchingUser} = useGetUser();
 
+  const [userInfo, setUserInfo] = useState(useGetUser().user);
+
+  useEffect(() => {
+    if (user) {
+      setUserInfo(user);
+    }
+  }, []);
+
   if (isFetchingUser) {
     return <ActivityIndicator size="large" color="#00ff00" />;
   }
-  console.log('user log ở drawer: ', user);
+  //   console.log('user log ở drawer: ', user);
   return (
     <DrawerContentScrollView {...props}>
       <View style={styles.containerHeaderDrawer}>
         <Image source={require('../assets/iconAuth/logo.png')}></Image>
-        {user != null ? (
-          <>
-            <View style={styles.contanierUser}>
-              <MaterialCommunityIcons
-                name="account-circle"
-                // color={mainColor}
-                size={30}></MaterialCommunityIcons>
-              <Text style={styles.nameUser}>{user ? user.name : null}</Text>
-            </View>
-            <TouchableOpacity>
-              <Text>Xem trang cá nhân</Text>
-            </TouchableOpacity>
-          </>
-        ) : null}
+        {/* {user != null ? ( */}
+        <>
+          <View style={styles.contanierUser}>
+            <MaterialCommunityIcons
+              name="account-circle"
+              // color={mainColor}
+              size={80}></MaterialCommunityIcons>
+            <Text style={styles.nameUser}>{user?.name}</Text>
+          </View>
+        </>
+        {/* ) : null} */}
       </View>
       <DrawerItemList {...props} />
-      {user != null ? (
-        <TouchableOpacity
-          onPress={() => {
-            Logout();
-          }}>
-          <View style={styles.containerLogout}>
-            <MaterialCommunityIcons
-              name="logout"
-              color={'#30A2FF'}
-              size={20}></MaterialCommunityIcons>
-            <Text style={styles.nameFeature}>Log out</Text>
-          </View>
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('Login');
-          }}>
-          <View style={styles.containerLogout}>
-            <MaterialCommunityIcons
-              name="login"
-              color={'#30A2FF'}
-              size={20}></MaterialCommunityIcons>
-            <Text style={styles.nameFeature}>Login</Text>
-          </View>
-        </TouchableOpacity>
-      )}
     </DrawerContentScrollView>
   );
 };
@@ -94,74 +72,61 @@ const CustomDrawer = (props: any, {navigation}: any) => {
 const DrawerNavigator = () => {
   const navigation = useNavigation();
   const Drawer = createDrawerNavigator();
-  const headerOptions = {
+  const headerOptionsDrawer = {
     headerStyle: {
       backgroundColor: 'white',
     },
+    drawerLabel: () => null,
+    drawerIcon: () => (
+        <ItemDrawer nameIcon="home" nameFeature="Home" />
+      ),
     headerTitleStyle: {
       display: 'none',
     },
     headerRight: () => <HeaderOptions navigation={navigation} />,
   };
-  const optionsScreen = ({drawerIcon, size = 24}: OptionsScreenProps) => ({
-    drawerIcon: ({color}: {color: string}) => (
-      <Image
-        source={drawerIcon}
-        style={{width: size, height: size, tintColor: color}}
-      />
-    ),
-    ...headerOptions,
-  });
 
   return (
     <Drawer.Navigator
       initialRouteName="Home"
       screenOptions={{headerShown: true}}
-      drawerContent={(props: any) => <CustomDrawer navigation={navigation} {...props} />}
-    >
+      drawerContent={(props: any) => (
+        <CustomDrawer navigation={navigation} {...props} />
+      )}>
       <Drawer.Screen
         name="Home"
         component={BottomTab}
-        options={headerOptions, {
-          drawerLabel: () => (
-            <ItemDrawer nameIcon="home" nameFeature="Trang chủ" />
-          ),
-        }}
-        
+        options={headerOptionsDrawer}
       />
       <Drawer.Screen
         name="History"
         component={History}
-        options={optionsScreen({
-          drawerIcon: require('../assets/iconDrawerNavigation/history.png'),
-          backgroundColor: 'white',
-        })}
+        options={{
+          drawerLabel: () => null,
+          drawerIcon: () => (
+            <ItemDrawer nameIcon="history" nameFeature="History" />
+          ),
+        }}
       />
       <Drawer.Screen
         name="Settings"
         component={Setting}
-        options={optionsScreen({
-          drawerIcon: require('../assets/iconDrawerNavigation/setting.png'),
-          backgroundColor: 'white',
-        })}
+        options={{
+          drawerLabel: () => null,
+          drawerIcon: () => (
+            <ItemDrawer nameIcon="cog" nameFeature="Settings" />
+          ),
+        }}
       />
-      {/* <Drawer.Screen
-        name="My QRCode"
-        component={MyQRCode}
-        options={optionsScreen({
-          drawerIcon: require('../assets/iconDrawerNavigation/MyQRcode.png'),
-          backgroundColor: 'white',
-          size: 22,
-        })}
-      /> */}
       <Drawer.Screen
         name="ViewProfile"
         component={Profile}
-        options={optionsScreen({
-          drawerIcon: require('../assets/iconDrawerNavigation/profile.png'),
-          backgroundColor: 'white',
-          size: 30,
-        })}
+        options={{
+            drawerLabel: () => null,
+            drawerIcon: () => (
+              <ItemDrawer nameIcon="account" nameFeature="Account" />
+            ),
+          }}
       />
     </Drawer.Navigator>
   );
@@ -200,17 +165,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   contanierUser: {
-    flexDirection: 'row',
+    marginVertical: 20,
+    // flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
   nameUser: {
-    fontSize: 15,
+    marginTop: 10,
+    fontSize: 20,
     fontWeight: 'bold',
     color: 'black',
   },
   nameFeature: {
     fontSize: 15,
+    marginLeft: 10,
     color: 'black',
     fontWeight: 'bold',
   },

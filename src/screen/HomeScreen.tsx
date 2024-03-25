@@ -16,13 +16,14 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 import {RNCamera} from 'react-native-camera';
 import {launchImageLibrary} from 'react-native-image-picker';
 import useGetProduct from '../hook/useGetProduct';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const HomeScreen = ({navigation}: any) => {
   const moveAnimation = useRef(new Animated.Value(70)).current;
   const [flashMode, setFlashMode] = useState<boolean>(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [url, setUrl] = useState('');
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState<string>();
   const {handleBarcode, isLoading, setIsLoading, isError, setIsError} =
     useGetProduct({
       navigation,
@@ -75,6 +76,22 @@ const HomeScreen = ({navigation}: any) => {
         setSelectedImage(imageUri);
       }
     });
+  };
+
+  const scanBarcode = async () => {
+    try {
+      // // const result = await ScanbotBarcodeSdk.detectBarcodesOnImage({
+      //   imageFileUri: selectedImage
+      // // });
+      // if (result.status === "OK") {
+      //   console.log('Barcode đây:', result.barcodes); 
+      // }
+      console.log('chơi');
+      
+    } catch (e) {
+      console.log(e);
+      
+    }
   };
 
   if (isLoading) {
@@ -182,14 +199,7 @@ const HomeScreen = ({navigation}: any) => {
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={styles.submitButton}
-                    onPress={() => {
-                      if (url !== '' || true) {
-                        console.log('Submit button clicked!');
-                      } else {
-                        console.log('Cannot submit without URL or file!');
-                      }
-                    }}
-                    disabled={url === ''}>
+                    onPress={scanBarcode}>
                     <Text style={styles.submitText}>Submit</Text>
                   </TouchableOpacity>
                 </View>
@@ -230,28 +240,16 @@ const HomeScreen = ({navigation}: any) => {
         topContent={
           <View style={styles.topContent}>
             <TouchableOpacity onPress={() => navigation.navigate('drawer')}>
-              <Image
-                style={styles.icon}
-                source={require('../assets/iconScanScreen/home.png')}
-              />
+              <MaterialCommunityIcons name='home' color={'#B3CB1D'} size={30}></MaterialCommunityIcons>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => setModalVisible(true)}>
-              <Image
-                style={styles.icon}
-                source={require('../assets/iconScanScreen/library.png')}
-              />
+              <MaterialCommunityIcons name='file-upload' color={'#fff'} size={30}></MaterialCommunityIcons>
             </TouchableOpacity>
             <TouchableOpacity onPress={setFlash}>
               {flashMode ? (
-                <Image
-                  style={styles.iconFlash}
-                  source={require('../assets/iconScanScreen/flash-focused.png')}
-                />
+                <MaterialCommunityIcons name='flash' color={'#B3CB1D'} size={30}></MaterialCommunityIcons>
               ) : (
-                <Image
-                  style={styles.iconFlash}
-                  source={require('../assets/iconScanScreen//flash.png')}
-                />
+                <MaterialCommunityIcons name='flash' color={'#fff'} size={30}></MaterialCommunityIcons>
               )}
             </TouchableOpacity>
           </View>
@@ -461,6 +459,7 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     objectFit: 'cover',
+    borderRadius: 15,
   },
 
   uploadPlaceholder: {
@@ -475,7 +474,7 @@ const styles = StyleSheet.create({
     height: 150,
     marginHorizontal: 30,
     marginBottom: 8,
-    borderRadius: 20,
+    borderRadius: 15,
     borderWidth: 1,
     borderStyle: 'dashed',
     alignItems: 'center',

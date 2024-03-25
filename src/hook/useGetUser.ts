@@ -25,8 +25,9 @@ const useGetUser = () => {
       }
     };
     getUser();
-  }, [10001]);
-  console.log('user ở đây: ',user);
+  }, []);
+  console.log('user ở đây: ', user);
+  
   return {user, isFetchingUser};
 };
 
