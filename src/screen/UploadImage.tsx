@@ -34,43 +34,6 @@ const UploadImage = () => {
     });
   };
 
-//   const handleSelectButtonClick = async () => {
-//     try {
-//       if (selectedImageUri) {
-//         const formData = new FormData();
-//         formData.append('file', {
-//           uri: selectedImageUri,
-//           type: 'image/jpeg',
-//           name: 'upload.jpg',
-//         });
-
-//         const cloudinaryURL =
-//           'https://api.cloudinary.com/v1_1/djveiec3v/image/upload';
-//         const cloudName = 'djveiec3v';
-//         const apiKey = '974191498252429';
-
-//         const response = await axios.post(cloudinaryURL, formData, {
-//           headers: {
-//             'Content-Type': 'multipart/form-data',
-//             'X-Requested-With': 'XMLHttpRequest',
-//           },
-//           params: {
-//             upload_preset: `EcoscanApp`,
-//             cloud_name: djveiec3v,
-//             api_key: 974191498252429,
-//           },
-//         });
-
-//         const imageUrl = response.data.secure_url;
-//         console.log('Image uploaded to Cloudinary:', imageUrl);
-//       } else {
-//         console.log('No image selected to upload');
-//       }
-//     } catch (error) {
-//       console.error('Error uploading image to Cloudinary:', error);
-//     }
-//   };
-
   return (
     <View style={styles.container}>
       <View style={styles.upload}>

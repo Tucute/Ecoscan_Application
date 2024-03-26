@@ -57,10 +57,18 @@ const Profile = ({ navigation }: any) => {
           <Text style={styles.profileText}>Profile</Text>
         </View>
         <View style={styles.profileImage}>
-          <Image
+          {user?.avatar? (
+            <Image
             style={styles.userProfileImage}
-            source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-gcQt4cLfOtecrvODooKFD6cRWVUsX5yGjQ&usqp=CAU' }}
+            source={{ uri: user.avatar }}
           />
+          ): (
+            <Image
+            style={styles.userProfileImage}
+            source={{ uri: 'https://static-00.iconduck.com/assets.00/profile-circle-icon-2048x2048-cqe5466q.png' }}
+          />
+          )
+          }
           <TouchableOpacity>
             <Entypo style={{ marginLeft: 120, bottom: 25 }} name='camera' size={25} color='#32ff7e' />
           </TouchableOpacity>
