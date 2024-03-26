@@ -6,6 +6,7 @@ interface User {
   _id: string;
   name: string;
   email: string;
+  avatar?: string;
 }
 
 const useGetUser = () => {
@@ -26,9 +27,7 @@ const useGetUser = () => {
       }
     };
     getUser();
-  }, []);
-  console.log('user ở đây: ', user);
-  
+  }, []);  
   return {user, isFetchingUser};
 };
 

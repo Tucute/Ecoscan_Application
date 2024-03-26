@@ -12,7 +12,6 @@ import Store from '../screen/store/Index';
 import Setting from '../screen/Setting';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Notification from '../screen/Notification';
-import Profile from '../Profile';
 import ViewProfile from '../screen/ViewProfile';
 import EditProfiles from '../screen/EditProfiles';
 const Stack = createNativeStackNavigator();
@@ -60,11 +59,6 @@ const Navigate = () => {
         <Stack.Screen
           name="Recycle"
           component={RecyclingIns}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="profile"
-          component={Profile}
           options={{ headerShown: false }}
         />
         <Stack.Screen

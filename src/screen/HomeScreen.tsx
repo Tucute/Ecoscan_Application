@@ -15,6 +15,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {RNCamera} from 'react-native-camera';
 import {launchImageLibrary} from 'react-native-image-picker';
+import {QRreader} from 'react-native-qr-decode-image-camera';
 import useGetProduct from '../hook/useGetProduct';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -24,6 +25,10 @@ const HomeScreen = ({navigation}: any) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [url, setUrl] = useState('');
   const [selectedImage, setSelectedImage] = useState<string>();
+  const [reader, setReader] = useState({
+    message: null,
+    data: null,
+  });
   const {handleBarcode, isLoading, setIsLoading, isError, setIsError} =
     useGetProduct({
       navigation,
@@ -77,21 +82,21 @@ const HomeScreen = ({navigation}: any) => {
       }
     });
   };
+  console.log(reader);
 
   const scanBarcode = async () => {
     try {
-      // // const result = await ScanbotBarcodeSdk.detectBarcodesOnImage({
-      //   imageFileUri: selectedImage
-      // // });
-      // if (result.status === "OK") {
-      //   console.log('Barcode đây:', result.barcodes); 
-      // }
-      console.log('chơi');
-      
+      QRreader(selectedImage)
+        .then(data => {
+          console.log('QR code data:', data);
+        })
+        .catch(err => {
+          console.log('Error reading QR code:', err);
+        });
     } catch (e) {
       console.log(e);
-      
     }
+    setSelectedImage(null);
   };
 
   if (isLoading) {
@@ -147,6 +152,7 @@ const HomeScreen = ({navigation}: any) => {
               <View style={styles.uploadFile}>
                 {selectedImage ? (
                   <View style={styles.selectedImageContainer}>
+                    <QRCodeScanner onRead={onSuccess} />
                     <Image
                       style={styles.selectedImage}
                       source={{uri: selectedImage}}
@@ -240,16 +246,28 @@ const HomeScreen = ({navigation}: any) => {
         topContent={
           <View style={styles.topContent}>
             <TouchableOpacity onPress={() => navigation.navigate('drawer')}>
-              <MaterialCommunityIcons name='home' color={'#B3CB1D'} size={30}></MaterialCommunityIcons>
+              <MaterialCommunityIcons
+                name="home"
+                color={'#B3CB1D'}
+                size={30}></MaterialCommunityIcons>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => setModalVisible(true)}>
-              <MaterialCommunityIcons name='file-upload' color={'#fff'} size={30}></MaterialCommunityIcons>
+              <MaterialCommunityIcons
+                name="file-upload"
+                color={'#fff'}
+                size={30}></MaterialCommunityIcons>
             </TouchableOpacity>
             <TouchableOpacity onPress={setFlash}>
               {flashMode ? (
-                <MaterialCommunityIcons name='flash' color={'#B3CB1D'} size={30}></MaterialCommunityIcons>
+                <MaterialCommunityIcons
+                  name="flash"
+                  color={'#B3CB1D'}
+                  size={30}></MaterialCommunityIcons>
               ) : (
-                <MaterialCommunityIcons name='flash' color={'#fff'} size={30}></MaterialCommunityIcons>
+                <MaterialCommunityIcons
+                  name="flash"
+                  color={'#fff'}
+                  size={30}></MaterialCommunityIcons>
               )}
             </TouchableOpacity>
           </View>

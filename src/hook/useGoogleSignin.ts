@@ -14,7 +14,7 @@ const useGoogleSignin = ({navigation}: any) => {
   });
   
   async function onGoogleButtonPress() {
-    await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
+    await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: false});
     const {idToken, user} = await GoogleSignin.signIn();
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
     await auth().signInWithCredential(googleCredential);

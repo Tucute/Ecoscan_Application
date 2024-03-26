@@ -10,8 +10,19 @@ interface User {
   phone?: string;
 }
 const LandingPage = ({navigation}: any) => {
-  const {user} = useGetUser();
-  console.log(user);
+  const handleGetStart = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('user');
+      const value = jsonValue != null ? JSON.parse(jsonValue) : null;
+      if (value !== null) {
+        navigation.navigate('Root');
+      } else {
+        navigation.navigate('Login');
+      }
+    } catch (error) {
+      console.log('lỗi', error);
+    }
+  };
   
   return (
       <ImageBackground
@@ -28,7 +39,7 @@ const LandingPage = ({navigation}: any) => {
           <Text style={styles.textStart}>Get Started </Text>
             <Text style={styles.textIntro}>Go and enjoy our features for free and make your life easy with us.</Text>
           </View>
-            <TouchableOpacity style={styles.btnStart} onPress={() => {user? navigation.navigate('Root'): navigation.navigate('Login')}}>
+            <TouchableOpacity style={styles.btnStart} onPress={handleGetStart}>
                 <Text style={styles.textStartBtn}>Let's Start</Text>
             </TouchableOpacity>
         </View>

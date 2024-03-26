@@ -46,19 +46,19 @@ const CustomDrawer = (props: any) => {
   if (isFetchingUser) {
     return <ActivityIndicator size="large" color="#00ff00" />;
   }
-  //   console.log('user log ở drawer: ', user);
+
   return (
     <DrawerContentScrollView {...props}>
       <View style={styles.containerHeaderDrawer}>
         <Image source={require('../assets/iconAuth/logo.png')}></Image>
-        <>
+        {/* <>
           <View style={styles.contanierUser}>
             <MaterialCommunityIcons
               name="account-circle"
               size={80}></MaterialCommunityIcons>
             <Text style={styles.nameUser}>{user?.name}</Text>
           </View>
-        </>
+        </> */}
       </View>
       <DrawerItemList {...props} />
     </DrawerContentScrollView>

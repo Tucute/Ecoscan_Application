@@ -94,9 +94,9 @@ android {
         }
         release {
             storeFile file('my-upload-key.keystore')
-            storePassword 'ecoscan'
+            storePassword 'tuecoscan'
             keyAlias 'my-key-alias'
-            keyPassword 'ecoscan'
+            keyPassword 'tuecoscan'
         }
     }
     buildTypes {
