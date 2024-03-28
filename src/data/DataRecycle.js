@@ -1,4 +1,5 @@
-const dataRecycle = {
+const dataRecycle = 
+{
     "_id": {
       "$oid": "65fa4fadec53a9f3db343b80"
     },

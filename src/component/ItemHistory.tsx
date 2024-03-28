@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {ActivityIndicator, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import useGetProduct from '../hook/useGetProduct';
 import useDeleteHistory from '../hook/useDeleteHistory';
 import itemProduct from './itemProduct';
@@ -30,11 +30,19 @@ interface Item {
   method: () => void;
 }
 const ItemHistory = ({method, data, navigation}: Item) => {
-  const {handleBarcode} = useGetProduct({navigation});
+  const {handleBarcode, isLoading} = useGetProduct({navigation});
 
   const getDetail = () => {
     const barcode = {barcodeNumber: data.productData.barcode_number, condition: false}
     handleBarcode(barcode);
+  }
+  if (isLoading) {
+    return (
+      <View style={styles.containerLoading}>
+        <ActivityIndicator size="large" color="#00ff00" />
+        <Text>isLoading...</Text>
+      </View>
+    );
   }
   return (
     <TouchableOpacity key={data.historyId} style={styles.viewItem} onPress={getDetail}>
@@ -43,14 +51,14 @@ const ItemHistory = ({method, data, navigation}: Item) => {
         source={{uri: 'https://cdn-icons-png.flaticon.com/512/1233/1233234.png'}}
       />
       <View style={styles.viewInfo}>
-        <Text style={styles.name} numberOfLines={1}>{data.productData.name}</Text>
-        <Text style={styles.barCode}>{data.productData.barcode_number}</Text>
+        <Text style={styles.name} numberOfLines={1}>{data.productData?.name}</Text>
+        <Text style={styles.barCode}>{data.productData?.barcode_number}</Text>
       </View>
       <View style={styles.viewTime}>
         <TouchableOpacity style={styles.btnDelete} onPress={method}>
           <Image source={require('../assets/iconGeneral/IconDelete.png')} />
         </TouchableOpacity>
-        <Text style={styles.time}>{data.create_at}</Text>
+        <Text style={styles.time}>{data?.create_at}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -100,6 +108,12 @@ const styles = StyleSheet.create({
   time: {
     color: '#A4A4A4',
     fontSize: 12,
+  },
+  containerLoading: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    // backgroundColor: '#fff',
   },
 });
 export default ItemHistory;

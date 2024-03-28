@@ -37,12 +37,12 @@ const useLogout = ({navigation}: any) => {
       }
       await axios.post(`${Url}/user/logout`);
       await AsyncStorage.removeItem('user');
-      Alert.alert('Success', 'Logged out successfully', [
+      Alert.alert('Success', 'Đăng xuất thành công', [
         {text: 'OK', onPress: () => navigation.navigate('LandingPage')},
       ]);
     } catch (error) {
       console.log(error);
-      Alert.alert('Error', 'An error occurred while logging out');
+      Alert.alert('Error', 'Đã xảy ra lỗi, vui lòng thử lại!');
     }
   };
   return {Logout};

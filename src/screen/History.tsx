@@ -12,6 +12,7 @@ import {
 import ItemHistory from '../component/ItemHistory';
 import useGetHistory from '../hook/useGetHistory';
 import useDeleteHistory from '../hook/useDeleteHistory';
+import useGetProduct from '../hook/useGetProduct';
 
 interface History {
   historyId: string;
@@ -57,17 +58,17 @@ const History = ({navigation}: any) => {
       style={styles.container}
       source={require('../assets/image/Background_History.jpg')}>
       <View style={styles.viewTitle}>
-        <Text style={styles.title}>History</Text>
+        <Text style={styles.title}>Lịch sử quét</Text>
       </View>
       <View style={styles.viewListHistory}>
-        {isLoading ? (
+        {isLoading? (
           <ActivityIndicator size="large" color="#00ff00" />
         ) : isError ? (
           <Text style={styles.textError}>Đã xảy ra lỗi! Vui lòng thử lại</Text>
         ) : (
           <FlatList
           ListEmptyComponent={
-            <Text style={styles.textError}>List is empty</Text>
+            <Text style={styles.textError}>Chưa có sản phẩm nào được quét</Text>
           }
             data={itemHistory}
             keyExtractor={item => item.historyId}

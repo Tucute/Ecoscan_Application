@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import useLoginGoogle from './useLoginGoogle';
 
 const useGoogleSignin = ({navigation}: any) => {
-  const {handleLoginGoogle} = useLoginGoogle({navigation});
+  const {handleLoginGoogle, isLoading} = useLoginGoogle({navigation});
   
   useEffect(() => {
     GoogleSignin.configure({
@@ -23,9 +23,9 @@ const useGoogleSignin = ({navigation}: any) => {
       email: user.email,
       photo: user.photo,
     }
-    handleLoginGoogle(account);    
+    handleLoginGoogle(account);
   }
-    return {onGoogleButtonPress};
+    return {onGoogleButtonPress, isLoading};
 };
 
 export default useGoogleSignin;

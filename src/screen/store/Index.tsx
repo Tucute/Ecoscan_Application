@@ -29,7 +29,7 @@ export default function Store({ navigation, route }: any) {
             </View>
 
             <View style={styles.profile}>
-            <Image style={{ width: 100, height: 100, borderRadius: 100, }} source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1CKV1qQbHFwMNC86w5HKXruYHMEQip5rHYAgqfdSH732oRE8LIYLSF3VelgvVf0P8OtQ&usqp=CAU' }} />
+            <Image style={{ width: 100, height: 100, borderRadius: 100, }} source={{ uri: data.logo }} />
                 <Text style={styles.profileName}>{data.shopName}</Text>
                 <Text style={styles.itemNumber}>
                     <Text style={{fontWeight: 'bold'}}>Phone:</Text> {data.phone}

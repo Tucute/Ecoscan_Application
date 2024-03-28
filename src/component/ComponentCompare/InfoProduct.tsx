@@ -1,3 +1,4 @@
+import React from 'react';
 import { Image, View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 
 interface Ingredient {
@@ -19,6 +20,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     ingredient: {
+        textAlign: 'justify',
         flexDirection: 'row',
         flexWrap: 'wrap',
         marginVertical: 5,

@@ -4,6 +4,7 @@ import History from '../screen/History';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import HomeScreen from '../screen/HomeScreen';
+import React from 'react';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,7 +33,7 @@ export default function BottomTab() {
               ) : (
                 <MaterialCommunityIcons name='barcode-scan' color={'#fff'} size={30}></MaterialCommunityIcons>
               )}
-              <Text style={styles.textOption}>Generate</Text>
+              <Text style={styles.textOption}>Quét</Text>
             </View>
           ),
         }}
@@ -64,7 +65,7 @@ export default function BottomTab() {
               ) : (
                 <MaterialCommunityIcons name='history' color={'#fff'} size={30}></MaterialCommunityIcons>
               )}
-              <Text style={styles.textOption}>History</Text>
+              <Text style={styles.textOption}>Lịch sử</Text>
             </View>
           ),
         }}

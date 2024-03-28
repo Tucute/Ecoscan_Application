@@ -3,6 +3,7 @@ import DetailRecycle from "../component/ComponentRecycle/DetailRecycle";
 import data from '../data/DataProduct'
 import ComponentImage from "../component/ComponentRecycle/ComponentImage";
 import Carousel from "react-native-snap-carousel";
+import React from "react";
 
 const { width, height } = Dimensions.get('screen');
 

@@ -15,9 +15,9 @@ import React, {useEffect, useRef, useState} from 'react';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import {RNCamera} from 'react-native-camera';
 import {launchImageLibrary} from 'react-native-image-picker';
-import {QRreader} from 'react-native-qr-decode-image-camera';
 import useGetProduct from '../hook/useGetProduct';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import RNQRGenerator from 'rn-qr-generator';
 
 const HomeScreen = ({navigation}: any) => {
   const moveAnimation = useRef(new Animated.Value(70)).current;
@@ -82,20 +82,17 @@ const HomeScreen = ({navigation}: any) => {
       }
     });
   };
-  console.log(reader);
 
   const scanBarcode = async () => {
-    try {
-      QRreader(selectedImage)
-        .then(data => {
-          console.log('QR code data:', data);
-        })
-        .catch(err => {
-          console.log('Error reading QR code:', err);
-        });
-    } catch (e) {
-      console.log(e);
-    }
+    RNQRGenerator.detect({
+      uri: selectedImage
+    })
+      .then(response => {
+        const { values } = response;
+        console.log(values);
+      })
+      .catch(error => console.log('Cannot detect QR code in image', error));
+    // Alert.alert('Error', 'Barcode not found');
     setSelectedImage(null);
   };
 
@@ -122,7 +119,7 @@ const HomeScreen = ({navigation}: any) => {
               uri: 'https://cdn-icons-png.flaticon.com/512/6134/6134065.png',
             }}
           />
-          <Text style={styles.textNoResult}>No result</Text>
+          <Text style={styles.textNoResult}>Không tìm thấy kết quả</Text>
         </View>
       </View>
     );
@@ -141,7 +138,7 @@ const HomeScreen = ({navigation}: any) => {
           <View style={styles.modalView}>
             <View style={styles.upload}>
               <View style={styles.headerUpload}>
-                <Text style={styles.uploadText}>Upload Image</Text>
+                <Text style={styles.uploadText}>Tải hình ảnh</Text>
                 <TouchableOpacity
                   onPress={() => setModalVisible(!modalVisible)}>
                   <Image
@@ -166,11 +163,11 @@ const HomeScreen = ({navigation}: any) => {
                     <Text>
                       Drag & Drop or{' '}
                       <TouchableOpacity onPress={openImagePicker}>
-                        <Text style={styles.chooseLink}>choose</Text>
+                        <Text style={styles.chooseLink}>chọn</Text>
                       </TouchableOpacity>{' '}
-                      file to upload
+                      file để tải lên
                     </Text>
-                    <Text>image or pdf</Text>
+                    <Text>png, jpg hoặc pdf</Text>
                   </View>
                 )}
               </View>
@@ -180,11 +177,11 @@ const HomeScreen = ({navigation}: any) => {
                 <View style={styles.secondLine}></View>
               </View>
               <View style={styles.viewUploadUrl}>
-                <Text style={styles.importUrlText}>Import from URL</Text>
+                <Text style={styles.importUrlText}>Dán liên kết</Text>
                 <View style={styles.urlContainer}>
                   <TextInput
                     style={styles.urlInput}
-                    placeholder="Paste URL here"
+                    placeholder="Dán link tại đây"
                     value={url}
                     onChangeText={text => setUrl(text)}
                   />
@@ -195,18 +192,18 @@ const HomeScreen = ({navigation}: any) => {
                   <Image
                     style={styles.needHelpIcon}
                     source={require('../assets/iconUploadImage/message-question.png')}></Image>
-                  <Text>Still need help?</Text>
+                  <Text>Cần hỗ trợ?</Text>
                 </View>
                 <View style={styles.btnUpload}>
                   <TouchableOpacity
                     style={styles.cancelButton}
                     onPress={() => setModalVisible(!modalVisible)}>
-                    <Text style={styles.cancelText}>Cancel</Text>
+                    <Text style={styles.cancelText}>Hủy</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={styles.submitButton}
                     onPress={scanBarcode}>
-                    <Text style={styles.submitText}>Submit</Text>
+                    <Text style={styles.submitText}>Quét</Text>
                   </TouchableOpacity>
                 </View>
               </View>

@@ -22,22 +22,20 @@ import useLoginFacebook from '../../hook/useLoginFacebook';
 import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk-next';
 
 const Login = ({navigation}: any) => {
-  const [isLoading, setIsLoading] = useState(false);
   const [textEntry, setTextEntry] = useState(true);
   const passwordRef: any = useRef();
-  const {handleLogin} = useLogin({navigation});
-  const {onGoogleButtonPress} = useGoogleSignin({navigation});
+  const {handleLogin, isFetching} = useLogin({navigation});
+  const {onGoogleButtonPress, isLoading} = useGoogleSignin({navigation});
 
   const {onFacebookButtonPress} = useLoginFacebook({navigation});
 
   const handleGoogleSignin = async () => {
     await onGoogleButtonPress();
-    setIsLoading(true);
     navigation.navigate('Root');
   };
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return (
-      <View style={styles.container}>
+      <View style={styles.containerLoading}>
         <ActivityIndicator size="large" color="#00ff00" />
       </View>
     );
@@ -75,7 +73,7 @@ const Login = ({navigation}: any) => {
               <View style={styles.textInput}>
                 <TextInput
                   style={styles.input}
-                  placeholder="Enter Email"
+                  placeholder="Nhập Email"
                   placeholderTextColor={'black'}
                   enterKeyHint={'next'}
                   onSubmitEditing={() => passwordRef.current?.focus()}
@@ -89,7 +87,7 @@ const Login = ({navigation}: any) => {
                 <View style={styles.passwordContainer}>
                   <TextInput
                     ref={passwordRef}
-                    placeholder="Enter Password"
+                    placeholder="Nhập mật khẩu"
                     placeholderTextColor={'black'}
                     enterKeyHint={'done'}
                     onSubmitEditing={() => passwordRef.current?.focus()}
@@ -116,7 +114,7 @@ const Login = ({navigation}: any) => {
                 <Text style={styles.errorText}>
                   {errors.password && touched.password ? errors.password : null}
                 </Text>
-                <Text style={styles.otherOption}>Or Login With</Text>
+                <Text style={styles.otherOption}>Hoặ đăng nhập với</Text>
                 <View style={styles.viewAsocia}>
                   <TouchableOpacity
                     style={styles.viewIcon}
@@ -164,6 +162,11 @@ const Login = ({navigation}: any) => {
 };
 
 const styles = StyleSheet.create({
+  containerLoading: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center', 
+  },
   container: {
     flex: 1,
   },

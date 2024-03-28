@@ -99,26 +99,26 @@ const Profile = ({ navigation }: any) => {
       <View style={styles.componentInfo}>
         <TouchableOpacity style={styles.componentAccount}>
           <Entypo style={{ alignSelf: 'center' }} name='user' size={25} color={'#7052ff'} />
-          <Text style={{ color: '#fff', fontSize: 20, alignSelf: 'center', marginRight: 130 }}>Account</Text>
-          <MaterialIcons style={{ alignSelf: 'center' }} name='navigate-next' size={30} color='#fff' />
+          <Text style={{ color: '#fff', fontSize: 20, alignSelf: 'center', marginRight: 130 }}>Tài khoản</Text>
+          {/* <MaterialIcons style={{ alignSelf: 'center' }} name='navigate-next' size={30} color='#fff' /> */}
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.componentAccount}>
           <Feather style={{ alignSelf: 'center' }} name='settings' size={25} color={'#7052ff'} />
-          <Text style={{ color: '#fff', fontSize: 20, alignSelf: 'center', marginRight: 130 }}>Settings</Text>
-          <MaterialIcons style={{ alignSelf: 'center' }} name='navigate-next' size={30} color='#fff' />
+          <Text style={{ color: '#fff', fontSize: 20, alignSelf: 'center', marginRight: 130 }}>Cài đặt</Text>
+          {/* <MaterialIcons style={{ alignSelf: 'center' }} name='navigate-next' size={30} color='#fff' /> */}
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.componentAccount}>
           <Entypo style={{ alignSelf: 'center' }} name='users' size={25} color={'#7052ff'} />
-          <Text style={{ color: '#fff', fontSize: 20, alignSelf: 'center', marginRight: 130 }}>About Us</Text>
-          <MaterialIcons style={{ alignSelf: 'center' }} name='navigate-next' size={30} color='#fff' />
+          <Text style={{ color: '#fff', fontSize: 20, alignSelf: 'center', marginRight: 130 }}>Giới thiệu</Text>
+          {/* <MaterialIcons style={{ alignSelf: 'center' }} name='navigate-next' size={30} color='#fff' /> */}
         </TouchableOpacity>
       </View>
 
       <View style={styles.fcSignOut}>
         <TouchableOpacity onPress={Logout} style={{ flexDirection: 'row', alignSelf: 'center' }}>
-          <Text style={styles.textSignOut}>Sign out</Text>
+          <Text style={styles.textSignOut}>Đăng xuất</Text>
           <FontAwesome style={{ alignSelf: 'center', marginLeft: 10 }} name='sign-out' size={30} />
         </TouchableOpacity>
       </View>

@@ -14,6 +14,7 @@ interface Shop {
   latitude: number;
   longitude: number;
   price: string;
+  logo: string;
 }
 interface ItemStores {
   dataShop: Shop[];
@@ -30,7 +31,7 @@ export default function ItemShop({dataShop, navigation}: ItemStores) {
       <Image
         style={styles.imageItem}
         source={{
-          uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSthsTT59uezhPunF6nkvtoUxDRkT8iHMRPJKu7g94EOt5jYU_8_xUSCKIQRde7b2OP9jE&usqp=CAU',
+          uri: data.logo,
         }}
       />
       <Text style={styles.name}>{data.shopName}</Text>
@@ -55,24 +56,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingVertical: 10,
     justifyContent: 'flex-start',
-    width: '100%',
   },
   itemShow: {
-    // backgroundColor: '#fff',
     alignSelf: 'center',
     alignItems: 'center',
     padding: 10,
     minHeight: 100,
     borderRadius: 15,
     borderColor: '#F4F4F4',
-    // shadowColor: '#5A6CEA',
-    // shadowOffset: {
-    //     width: 12,
-    //     height: 26,
-    // },
-    // shadowRadius: 50,
-    // shadowOpacity: 0.07,
-    // elevation: 3,
     maxWidth: 160,
   },
   name: {
@@ -88,6 +79,8 @@ const styles = StyleSheet.create({
     height: 60,
     marginBottom: 2,
     borderRadius: 50,
+    objectFit: 'contain',
+    backgroundColor: '#fff',
   },
   price: {
     color: '#fff',

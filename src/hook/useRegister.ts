@@ -20,7 +20,7 @@ const useRegister = ({navigation}: any) => {
               {text: 'OK', onPress: () => navigation.navigate('Login')},
             ]);
           } else {
-            Alert.alert('Invalid information!');
+            Alert.alert('Error', 'Thông tin không hợp lệ!');
           }
         })
         .catch(e => {

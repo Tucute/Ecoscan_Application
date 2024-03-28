@@ -57,7 +57,7 @@ const EditProfile = ({navigation, route}:any) => {
             </View>
             <View style={styles.fcUpdate}>
                 <TouchableOpacity>
-                    <Text style={styles.textUpdate}>Update</Text>
+                    <Text style={styles.textUpdate}>Cập nhật</Text>
                 </TouchableOpacity>
             </View>
         </View>

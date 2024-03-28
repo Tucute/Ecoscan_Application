@@ -11,7 +11,7 @@ const useDeleteHistory = () => {
     })
     const handleDeleteHistory = (historyId: String) => {
         useDeleteHistory.mutate(historyId);
-        Alert.alert('Success', 'Delete history successfully')
+        Alert.alert('Success', 'Xóa thành công')
     }
     return {handleDeleteHistory}
 };

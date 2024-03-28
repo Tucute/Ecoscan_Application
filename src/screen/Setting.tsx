@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { View, StyleSheet, TouchableOpacity, Image, Dimensions, Text } from "react-native";
 import { Switch } from "react-native-gesture-handler";
@@ -18,7 +19,7 @@ const Setting = ({navigation, route}: any) => {
             </TouchableOpacity>
             <View>
                 <View>
-                    <Text style={styles.setting}>Setting</Text>
+                    <Text style={styles.setting}>Cài đặt</Text>
                 </View>
                 <View style={styles.componentVibrate}>
                     <Icon name="vibrate" style={styles.iconVibrate} />
@@ -46,13 +47,13 @@ const Setting = ({navigation, route}: any) => {
                         trackColor={{ false: '#767577', true: '#B3CB1D' }}
                         thumbColor={isBeepEnabled ? '#B3CB1D' : '#fff'}
                         ios_backgroundColor="#3e3e3e"
-                        onValue      Change={beepSwitch}
+                        onValueChange={beepSwitch}
                         value={isBeepEnabled}
                     />
                 </View>
             </View>
             <View>
-                <View style={styles.supportTitle}>
+                <View>
                     <Text style={{
                         color: '#B3CB1D',
                         fontWeight: 'bold',

@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Image,
   View,
@@ -25,7 +26,7 @@ const SimilarStore = ({navigation, data}: Item) => {
   return (
     <View style={styles.container}>
       <View style={styles.separator} />
-      <Text style={styles.textSale}>On sales: </Text>
+      <Text style={styles.textSale}>Đang bán tại: </Text>
       {data?.map((item, index: number) => (
         <TouchableOpacity
           key={index.toString()}

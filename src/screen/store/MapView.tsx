@@ -36,8 +36,8 @@ const MapsView = ({data}: MapsView) => {
   const [destination, setDestination] = useState({
     address: data.address,
     shopName: data.shopName,
-    latitude: parseInt(data.latitude),
-    longitude: parseInt(data.longitude),
+    latitude: parseFloat(data.latitude),
+    longitude: parseFloat(data.longitude),
   });
 
   const requestCameraPermission = async () => {
@@ -67,7 +67,6 @@ const MapsView = ({data}: MapsView) => {
     Geolocation.getCurrentPosition(
       (info: any) => {
         const {latitude, longitude} = info.coords;
-        console.log(info);
         setCurrentLocation({latitude, longitude});
       },
       (error: any) => Alert.alert('Error', error.message),

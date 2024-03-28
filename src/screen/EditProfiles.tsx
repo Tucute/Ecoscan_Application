@@ -39,7 +39,7 @@ const EditProfiles = ({ navigation }: any) => {
             </TouchableOpacity>
             <View style={styles.headerProfile}>
                 <View>
-                    <Text style={styles.profileText}>Account</Text>
+                    <Text style={styles.profileText}>Tài khoản</Text>
                 </View>
                 <View style={styles.profileImage}>
                     <Image
@@ -79,7 +79,7 @@ const EditProfiles = ({ navigation }: any) => {
                 </View>
                 <View style={styles.fcUpdate}>
                     <TouchableOpacity style={{ flexDirection: 'row', alignSelf: 'center' }}>
-                        <Text style={styles.textUpdate}>Update</Text>
+                        <Text style={styles.textUpdate}>Cập nhật</Text>
                     </TouchableOpacity>
                 </View>
             </View>

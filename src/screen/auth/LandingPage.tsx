@@ -36,11 +36,11 @@ const LandingPage = ({navigation}: any) => {
         </View>
         <View style={styles.viewFooter}>
           <View style={styles.viewText}>
-          <Text style={styles.textStart}>Get Started </Text>
-            <Text style={styles.textIntro}>Go and enjoy our features for free and make your life easy with us.</Text>
+          <Text style={styles.textStart}>Bắt đầu</Text>
+            <Text style={styles.textIntro}>Hãy truy cập và tận hưởng các tính năng của chúng tôi miễn phí và giúp cuộc sống của bạn trở nên dễ dàng với chúng tôi.</Text>
           </View>
             <TouchableOpacity style={styles.btnStart} onPress={handleGetStart}>
-                <Text style={styles.textStartBtn}>Let's Start</Text>
+                <Text style={styles.textStartBtn}>Bắt đầu</Text>
             </TouchableOpacity>
         </View>
       </ImageBackground>
